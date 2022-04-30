@@ -41,8 +41,7 @@ class AdminCategoryController extends Controller
     {
         $categories =$this->categoryService->getAllCategory();
         $user = $this->userService->getUserById(auth()->id());
-        $active = 3;
-
+        $active = 5;
         return view('admin.categories',compact('active','user','categories'));
     }
 
@@ -66,13 +65,6 @@ class AdminCategoryController extends Controller
         return redirect('/admin/categories');
     }
 
-
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-
     public function edit($id)
     {
         $user = $this->userService->getUserById(auth()->id());
@@ -91,7 +83,6 @@ class AdminCategoryController extends Controller
         $this->categoryService->updateCategory($data,$id);
         return redirect('/admin/categories');
     }
-
 
     public function destroy($id)
     {

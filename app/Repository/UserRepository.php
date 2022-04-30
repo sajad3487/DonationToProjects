@@ -33,4 +33,9 @@ class UserRepository extends Repository
             ->get();
     }
 
+    public function getAllUserByType ($type){
+        return User::where('user_type',$type)
+            ->get();
+    }
+
 }

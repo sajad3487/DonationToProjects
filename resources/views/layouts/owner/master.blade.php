@@ -51,12 +51,11 @@
 <!--end::Head-->
 
 <!--begin::Body-->
-<body id="kt_body"
-      class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading"  >
 
 <!--begin::Main-->
 <!--begin::Header Mobile-->
-<div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed ">
+<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed " >
     <!--begin::Logo-->
     <a href="{{url('/')}}">
         <img alt="Logo" src="{{asset('media/logo.png')}}" style="width: 40%"/>
@@ -90,11 +89,11 @@
         <!--end::Aside Mobile Toggle-->
 
 
-{{--        <!--begin::Header Menu Mobile Toggle-->--}}
-{{--        <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">--}}
-{{--            <span></span>--}}
-{{--        </button>--}}
-        <!--end::Header Menu Mobile Toggle-->
+    {{--        <!--begin::Header Menu Mobile Toggle-->--}}
+    {{--        <button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">--}}
+    {{--            <span></span>--}}
+    {{--        </button>--}}
+    <!--end::Header Menu Mobile Toggle-->
 
         <!--begin::Topbar Mobile Toggle-->
         <button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
@@ -121,18 +120,17 @@
     <!--begin::Page-->
     <div class="d-flex flex-row flex-column-fluid page">
 
-        @include('layouts.owner.Sidebar')
-
-
-
-
         <!--begin::Wrapper-->
-        <div class="d-flex flex-column flex-row-fluid wrapper pt-22" style="margin-left: -30px" id="kt_wrapper">
+        <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+
             @include('layouts.owner.Header')
+
+{{--            @include('layouts.owner.Subheader')--}}
 
             @yield('content')
 
             @include('layouts.owner.Footer')
+
         </div>
         <!--end::Wrapper-->
     </div>
@@ -141,21 +139,12 @@
 <!--end::Main-->
 
 
+
+
 @include('layouts.owner.rightSidebar')
 
 
 @include('layouts.admin.QuickUser')
-
-{{--@include('layouts.admin.QuickCart')--}}
-
-{{--@include('layouts.admin.QuickPanel')--}}
-
-{{--@include('layouts.admin.ChatPanel')--}}
-
-{{--@include('layouts.admin.ScrollTop')--}}
-
-
-{{--@include('layouts.admin.StickySidebar')--}}
 
 
 <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
@@ -241,7 +230,7 @@
 <script src="{{asset('js/pages/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 
-<!--end::Page Scripts-->
 </body>
 <!--end::Body-->
+
 </html>

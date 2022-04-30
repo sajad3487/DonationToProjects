@@ -21,18 +21,13 @@ class AdminController extends Controller
      * @var UserService
      */
     private $userService;
-    /**
-     * @var ProjectService
-     */
-    private $projectService;
+
 
     public function __construct(
-        UserService $userService,
-        ProjectService $projectService
+        UserService $userService
     )
     {
         $this->userService = $userService;
-        $this->projectService = $projectService;
     }
 
     public function index()
@@ -40,19 +35,4 @@ class AdminController extends Controller
         $active = 1;
         return view('admin.dashboard', compact('active'));
     }
-
-    public function customer()
-    {
-        $active = 2;
-        $customers = $this->userService->getAllCustomer();
-        return view('admin.users', compact('customers'));
-    }
-
-    public function project()
-    {
-        $active = 4;
-        $projects = $this->projectService->allActiveProject();
-        return view('admin.project', compact('projects','active'));
-    }
-
 }

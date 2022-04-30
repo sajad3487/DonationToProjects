@@ -6,5 +6,6 @@
     "Order": true,
     "Project": true,
     "Media": true,
-    "AdminCategoryController": true
+    "AdminCategoryController": true,
+    "Owner": true
 }

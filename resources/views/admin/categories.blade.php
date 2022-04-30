@@ -22,11 +22,93 @@
                             </div>
                             <div class="card-toolbar">
 
-                                <a href="{{url('/admin/categories/create')}}" class="btn btn-primary font-weight-bolder">
+                                <a href="" data-toggle="modal" data-target="#new_category" class="btn btn-primary font-weight-bolder">
                                     <i class="la la-plus p-0"></i>
                                     New Category
                                 </a>
+                            </div>
+                            <div class="modal fade" id="new_category" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Create a new category</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--begin::Form-->
+                                            <div class="card-body text-center p-0">
+                                                <!--begin::Form-->
+                                                <form class="form" action="{{url('/admin/categories/store')}}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="card-body row">
+                                                        <div class=" col-lg-12">
+                                                            @include('fragment.error')
+                                                            <input type="number" name="parent_id" value="0" class="d-none">
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-right">Title :</label>
+                                                                <div class="col-lg-4">
+                                                                    <input type="text" name="title" class="form-control" placeholder="Enter category title" value="{{old('title') ?? ''}}" required/>
+                                                                </div>
+                                                                <label class="col-lg-2 col-form-label text-right">Description :</label>
+                                                                <div class="col-lg-4">
+                                                                    <input type="text" name="description" class="form-control" placeholder="Enter category description" value="{{old('description') ?? ''}}"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-right">Picture :</label>
+                                                                <div class="col-lg-4">
+                                                                    <div class="input-group">
+                                                                        <input type="file" name="file" class="custom-file-input" id="customFile"/>
+                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                    </div>
+                                                                </div>
+                                                                <label class="col-lg-2 col-form-label text-right">Status :</label>
+                                                                <div class="col-lg-4">
+                                                                    <div class="input-group">
+                                                                        <select name="status" required class="form-control">
+                                                                            <option value="">Select</option>
+                                                                            <option value="1" selected>Active</option>
+                                                                            <option value="0">Inactive</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-right">Minimum Price :</label>
+                                                                <div class="col-lg-4">
+                                                                    <input type="number" name="min_price" class="form-control" placeholder="Enter min price" value="{{old('min_price') ?? ''}}"/>
+                                                                </div>
+                                                                <label class="col-lg-2 col-form-label text-right">Maximum Price :</label>
+                                                                <div class="col-lg-4">
+                                                                    <input type="number" name="max_price" class="form-control" placeholder="Enter max price" value="{{old('max_price') ?? ''}}"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-lg-2 col-form-label text-right">Commission (%) :</label>
+                                                                <div class="col-lg-4">
+                                                                    <input type="number" name="commission" class="form-control" placeholder="Enter percentage of commission" value="{{old('commission') ?? ''}}" required/>
+                                                                </div>
 
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="row">
+                                                            <div class="mx-auto">
+                                                                <button type="submit" class="btn btn-success ">Submit</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!--end::Form-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

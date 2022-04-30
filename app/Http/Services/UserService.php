@@ -48,4 +48,24 @@ class UserService
         return $this->userRepo->getCustomers ();
     }
 
+    public function getUserByType ($type){
+        return $this->userRepo->getAllUserByType ($type);
+    }
+
+    public function createNewUser ($data){
+        return $this->userRepo->create($data);
+    }
+
+    public function deleteUser ($id){
+        return $this->userRepo->delete($id);
+    }
+
+    public function uploadMedia ($file) {
+        $destination = base_path() . '/public_html/media/NIS/';
+        $filename = rand(1111111, 99999999);
+        $newFileName = $filename . $file->getClientOriginalName();
+        $file->move($destination, $newFileName);
+        return '/media/NIS/' . $newFileName;
+    }
+
 }

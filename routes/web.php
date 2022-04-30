@@ -34,14 +34,7 @@ Route::group(['middleware'=>'auth'],function (){
 
    });
 
-    Route::group(['prefix'=>'owner','middleware'=>'CheckOwner'],function (){
 
-        Route::get('/','HomeController@owner_index');
-        Route::group(['prefix'=>'profile'],function (){
-            Route::get('/','HomeController@owner_profile');
-            Route::post('/update','HomeController@updateProfile');
-        });
-    });
 });
 
 Route::get('/designer_register', function (){
@@ -52,5 +45,5 @@ Route::get('home',function (){
     return redirect('designer');
 });
 Route::get('/',function (){
-    return redirect('home');
+    return redirect('designer');
 });

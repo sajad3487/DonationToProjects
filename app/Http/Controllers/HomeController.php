@@ -6,7 +6,7 @@ use App\Http\Services\UserService;
 use Illuminate\Http\Request;
 use Modules\Category\Http\Service\CategoryService;
 use Modules\Media\Http\Service\MediaService;
-use Modules\Project\Http\Service\ProjectService;
+//use Modules\Project\Http\Service\ProjectService;
 
 class HomeController extends Controller
 {
@@ -28,14 +28,14 @@ class HomeController extends Controller
     private $categoryService;
 
     public function __construct(
-        ProjectService $projectService,
+//        ProjectService $projectService,
         UserService $userService,
         MediaService $mediaService,
         CategoryService $categoryService
     )
     {
         $this->middleware('auth');
-        $this->projectService = $projectService;
+//        $this->projectService = $projectService;
         $this->userService = $userService;
         $this->mediaService = $mediaService;
         $this->categoryService = $categoryService;
@@ -65,13 +65,6 @@ class HomeController extends Controller
         return view('customer.profile',compact('user','active'));
     }
 
-    public function owner_index (){
-        $user = $this->userService->getUserById(auth()->id());
-        $projects = $this->projectService->getOwnerActiveProject ($user->id);
-        $active = 1;
-        $categories = $this->categoryService->getAllCategory();
-        return view('owner.index',compact('active','user','projects','categories'));
-    }
 
     public function owner_profile (){
         $user = auth()->user();
