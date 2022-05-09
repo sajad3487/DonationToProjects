@@ -75,23 +75,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-lg-2 col-form-label text-right">Minimum Price :</label>
-                                                                <div class="col-lg-4">
-                                                                    <input type="number" name="min_price" class="form-control" placeholder="Enter min price" value="{{old('min_price') ?? ''}}"/>
-                                                                </div>
-                                                                <label class="col-lg-2 col-form-label text-right">Maximum Price :</label>
-                                                                <div class="col-lg-4">
-                                                                    <input type="number" name="max_price" class="form-control" placeholder="Enter max price" value="{{old('max_price') ?? ''}}"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-lg-2 col-form-label text-right">Commission (%) :</label>
-                                                                <div class="col-lg-4">
-                                                                    <input type="number" name="commission" class="form-control" placeholder="Enter percentage of commission" value="{{old('commission') ?? ''}}" required/>
-                                                                </div>
-
-                                                            </div>
 
                                                         </div>
                                                     </div>
@@ -140,25 +123,185 @@
                                                 <div class="btn-group">
 
                                                     <form  method="post">
-                                                        <a href="{{url("/admin/categories/$category->id/subCategory")}}" class="btn btn-outline-success font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
+                                                        <a href="" data-toggle="modal" data-target="#new_subCategory_{{$category->id}}" class="btn btn-outline-success font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
                                                             <i class="la la-plus p-0"></i></a>
-                                                        <a href="{{url("/admin/categories/$category->id/edit")}}" class="btn btn-outline-warning font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
+                                                        <a href="" data-toggle="modal" data-target="#edit_category_{{$category->id}}" class="btn btn-outline-warning font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
                                                             <i class="la la-edit p-0"></i></a>
-                                                        <a href="{{url("/admin/categories/$category->id/delete")}}" class="btn btn-outline-danger font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
+                                                        <a href="" data-toggle="modal" data-target="#delete_category_{{$category->id}}" class="btn btn-outline-danger font-weight-bolder p-1 mb-2 mr-3 d-inline-block">
                                                             <i class="la la-trash p-0"></i></a>
                                                     </form>
+                                                    <div class="modal fade" id="delete_category_{{$category->id}}" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Remove user from course</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!--begin::Form-->
+                                                                    <div class="text-center">
+                                                                        <h3 class="mb-4">Are you sure you want to delete this category ?</h3>
+                                                                        <p class="my-4">This user will be remove category</p>
+
+                                                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                            Cancel
+                                                                        </button>
+                                                                        <a href="{{url("/admin/categories/$category->id/delete")}}" class="btn btn-danger font-weight-bolder">
+                                                                            Delete
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <table class="table table-bordered table-checkable" id="kt_datatable">
+                                                    <div class="modal fade" id="new_subCategory_{{$category->id}}" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Create a new category</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!--begin::Form-->
+                                                                    <div class="text-center p-0">
+                                                                        <!--begin::Form-->
+                                                                        <form class="form" action="{{url('/admin/categories/store')}}" method="post" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div class="row">
+                                                                                <div class=" col-lg-12">
+                                                                                    @include('fragment.error')
+                                                                                    <input type="number" name="parent_id" value="0" class="d-none">
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-lg-2 col-form-label text-right">Title :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <input type="text" name="title" class="form-control" placeholder="Enter category title"  required/>
+                                                                                        </div>
+                                                                                        <label class="col-lg-2 col-form-label text-right">Description :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <input type="text" name="description" class="form-control" placeholder="Enter category description" />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-lg-2 col-form-label text-right">Picture :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <div class="input-group">
+                                                                                                <input type="file" name="file" class="custom-file-input" id="customFile_1"/>
+                                                                                                <label class="custom-file-label" for="customFile_1">Choose file</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label class="col-lg-2 col-form-label text-right">Status :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <div class="input-group">
+                                                                                                <select name="status" required class="form-control">
+                                                                                                    <option value="">Select</option>
+                                                                                                    <option value="1" selected>Active</option>
+                                                                                                    <option value="0">Inactive</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <input type="number" class="d-none" name="parent_id" value="{{$category->id}}">
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-footer">
+                                                                                <div class="row">
+                                                                                    <div class="mx-auto">
+                                                                                        <button type="submit" class="btn btn-success ">Submit</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <!--end::Form-->
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal fade" id="edit_category_{{$category->id}}" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Edit the category:</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!--begin::Form-->
+                                                                    <div class="text-center p-0">
+                                                                        <!--begin::Form-->
+                                                                        <form class="form" action="{{url("/admin/categories/$category->id/update")}}" method="post" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            @method('PUT')
+                                                                            <div class=" row">
+                                                                                <div class=" col-lg-12">
+                                                                                    @include('fragment.error')
+                                                                                    <input type="number" name="parent_id" value="0" class="d-none">
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-lg-2 col-form-label text-right">Title :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <input type="text" name="title" class="form-control" placeholder="Enter category title" value="{{$category->title ?? ''}}" required/>
+                                                                                        </div>
+                                                                                        <label class="col-lg-2 col-form-label text-right">Description :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <input type="text" name="description" class="form-control" placeholder="Enter category description" value="{{$category->description ?? ''}}"/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-lg-2 col-form-label text-right">Picture :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <div class="input-group">
+                                                                                                <input type="file" name="file" class="custom-file-input" id="customFile_edit_1"/>
+                                                                                                <label class="custom-file-label" for="customFile_edit_1">Choose file</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label class="col-lg-2 col-form-label text-right">Status :</label>
+                                                                                        <div class="col-lg-4">
+                                                                                            <div class="input-group">
+                                                                                                <select name="status" required class="form-control">
+                                                                                                    <option value="">Select</option>
+                                                                                                    <option @if($category->status == 1) selected @endif value="1" selected>Active</option>
+                                                                                                    <option @if($category->status == 0) selected @endif value="0">Inactive</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-footer">
+                                                                                <div class="row">
+                                                                                    <div class="mx-auto">
+                                                                                        <button type="submit" class="btn btn-success ">Submit</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                        <!--end::Form-->
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <table class="table table-bordered table-checkable" id="kt_datatable">
                                                     <thead>
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>Title</th>
-                                                        <th>Description</th>
-                                                        <th>Min Price</th>
-                                                        <th>Max Price</th>
-                                                        <th>Image</th>
-                                                        <th>status</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">#</th>
+                                                        <th class="text-center">Title</th>
+                                                        <th class="text-center">Description</th>
+                                                        <th class="text-center">Image</th>
+                                                        <th class="text-center">status</th>
+                                                        <th class="text-center">Action</th>
                                                     </tr>
                                                     </thead>
 
@@ -166,27 +309,120 @@
                                                     @if($category->subCategory != null)
                                                     @foreach($category->subCategory as $subCat)
                                                         <tr>
-                                                            <td>{{$subCat->id ?? ''}}</td>
-                                                            <td>{{$subCat->title ?? ''}}</td>
-                                                            <td>{{$subCat->description ?? ''}}</td>
-                                                            <td>{{$subCat->min_price.'$' ?? ''}}</td>
-                                                            <td>{{$subCat->max_price.'$' ?? ''}}</td>
+                                                            <td class="text-center">{{$subCat->id ?? ''}}</td>
+                                                            <td class="text-center">{{$subCat->title ?? ''}}</td>
+                                                            <td class="text-center">{{$subCat->description ?? ''}}</td>
                                                             <td class="text-center">
                                                                 <a href="{{$subCat->image_path ?? ''}}" target="_blank"><img src="{{$subCat->image_path ?? ''}}" style="width: 50px;height: 50px" alt=""></a>
                                                             </td>
-                                                            <td>
+                                                            <td class="text-center">
                                                                 @if(isset($subCat->status) && $subCat->status == 1)
                                                                     <span class="label font-weight-bold label-lg label-light-success label-inline">Active</span>
                                                                 @else
                                                                     <span class="label font-weight-bold label-lg label-light-danger label-inline">Inactive</span>
                                                                 @endif
                                                             </td>
-                                                            <td style='white-space: nowrap'>
-                                                                <a href="{{url("/admin/categories/$subCat->id/edit")}}"><i class="far fa-edit text-warning mr-5"></i></a>
-                                                                <a href="{{url("/admin/categories/$subCat->id/delete")}}"><i class="fas fa-trash-alt text-danger mr-5"></i></a>
+                                                            <td class="text-center" style='white-space: nowrap'>
+                                                                <a  href="" data-toggle="modal" data-target="#edit_subCategory_{{$subCat->id}}"><i class="far fa-edit text-warning mr-5"></i></a>
+                                                                <a href="" data-toggle="modal" data-target="#delete_category_{{$subCat->id}}"><i class="fas fa-trash-alt text-danger mr-5"></i></a>
                                                             </td>
                                                          </tr>
-                                                     @endforeach
+                                                        <div class="modal fade" id="edit_subCategory_{{$subCat->id}}" role="dialog"  aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Edit the category</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!--begin::Form-->
+                                                                        <div class="text-center p-0">
+                                                                            <!--begin::Form-->
+                                                                            <form class="form" action="{{url("/admin/categories/$subCat->id/update")}}" method="post" enctype="multipart/form-data">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="row">
+                                                                                    <div class=" col-lg-12">
+                                                                                        @include('fragment.error')
+                                                                                        <input type="number" name="parent_id" value="0" class="d-none">
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-lg-2 col-form-label text-right">Title :</label>
+                                                                                            <div class="col-lg-4">
+                                                                                                <input type="text" name="title" class="form-control" placeholder="Enter category title" value="{{$subCat->title ?? ''}}" required/>
+                                                                                            </div>
+                                                                                            <label class="col-lg-2 col-form-label text-right">Description :</label>
+                                                                                            <div class="col-lg-4">
+                                                                                                <input type="text" name="description" class="form-control" placeholder="Enter category description" value="{{$subCat->description ?? ''}}"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label class="col-lg-2 col-form-label text-right">Picture :</label>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-group">
+                                                                                                    <input type="file" name="file" class="custom-file-input" id="customFile_edit_2"/>
+                                                                                                    <label class="custom-file-label" for="customFile_edit_2">Choose file</label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <label class="col-lg-2 col-form-label text-right">Status :</label>
+                                                                                            <div class="col-lg-4">
+                                                                                                <div class="input-group">
+                                                                                                    <select name="status" required class="form-control">
+                                                                                                        <option value="">Select</option>
+                                                                                                        <option @if($subCat->status == 1) selected @endif value="1" >Active</option>
+                                                                                                        <option @if($subCat->status == 0) selected @endif value="0">Inactive</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <input type="number" name="parent_id" value="{{$subCat->parent_id}}" class="d-none">
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card-footer">
+                                                                                    <div class="row">
+                                                                                        <div class="mx-auto">
+                                                                                            <button type="submit" class="btn btn-success ">Submit</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                            <!--end::Form-->
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="delete_category_{{$subCat->id}}" role="dialog"  aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Remove user from course</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <!--begin::Form-->
+                                                                        <div class=" text-center">
+                                                                            <h3 class="mb-4">Are you sure you want to delete this category ?</h3>
+                                                                            <p class="my-4">This user will be remove category</p>
+
+                                                                            <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                                Cancel
+                                                                            </button>
+                                                                            <a href="{{url("/admin/categories/$subCat->id/delete")}}" class="btn btn-danger font-weight-bolder">
+                                                                                Delete
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    @endforeach
                                                         @endif
                                                     </tbody>
 

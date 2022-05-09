@@ -24,7 +24,7 @@ class AdminFinancialController extends Controller
     public function index()
     {
         $active = 8;
-        $customers = $this->userService->getAllCustomer();
+        $customers = $this->userService->getAllOwner();
         return view('admin.financial', compact('customers','active'));
     }
 

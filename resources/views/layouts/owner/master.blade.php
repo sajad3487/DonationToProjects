@@ -126,7 +126,7 @@
             @include('layouts.owner.Header')
 
 {{--            @include('layouts.owner.Subheader')--}}
-
+            @include('layouts.owner.Subheader')
             @yield('content')
 
             @include('layouts.owner.Footer')

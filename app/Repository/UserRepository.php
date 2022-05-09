@@ -29,7 +29,7 @@ class UserRepository extends Repository
     }
 
     public function getCustomers (){
-        return User::where('user_type','!=',3)
+        return User::where('user_type',2)
             ->get();
     }
 

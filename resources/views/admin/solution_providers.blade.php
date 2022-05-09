@@ -186,7 +186,7 @@
                                                     <div class="modal-body">
                                                         <!--begin::Form-->
                                                         <div class="card-body text-center p-0">
-                                                            <form class="form mt-5" action="{{url("/admin/solution_provider/$solution_provider->id/update")}}" method="post" enctype="multipart/form-data">\
+                                                            <form class="form mt-5" action="{{url("/admin/solution_provider/$solution_provider->id/update")}}" method="post" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="">

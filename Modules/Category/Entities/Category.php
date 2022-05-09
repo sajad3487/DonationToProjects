@@ -20,4 +20,7 @@ class category extends Model
     public function subCategory (){
         return $this->hasMany(Category::class,'parent_id','id');
     }
+    public function activeSubCat (){
+        return $this->hasMany(Category::class,'parent_id','id')->where('status',1);
+    }
 }

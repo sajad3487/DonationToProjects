@@ -36,6 +36,10 @@ class MediaService
         return $this->mediaRepository->getMediaOfProject ($project_id);
     }
 
+    public function updateMedia ($data,$id){
+        return $this->mediaRepository->update($data,$id);
+    }
+
     public function deleteMedia ($id){
         return $this->mediaRepository->delete($id);
     }

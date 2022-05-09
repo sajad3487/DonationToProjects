@@ -21,6 +21,12 @@ Route::group(['middleware'=>'auth'],function (){
 
         Route::group(['prefix'=>'solutions'],function (){
             Route::get('/','OwnerSolutionController@index');
+            Route::get('/create','OwnerSolutionController@create');
+            Route::post('/store','OwnerSolutionController@store');
+            Route::get('/{solution_id}/edit','OwnerSolutionController@edit');
+            Route::post('/media/store','OwnerSolutionController@upload_media');
+            Route::post('/media/{media_id}/delete','OwnerSolutionController@destroy_media');
+            Route::put('/media/{media_id}/update','OwnerSolutionController@update_media');
         });
 
         Route::group(['prefix'=>'profile'],function (){

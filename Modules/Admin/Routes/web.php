@@ -33,10 +33,16 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
         Route::group(['prefix'=>'solutions'],function (){
             Route::get('/','AdminSolutionController@index');
+            Route::post('/store','AdminSolutionController@store');
+            Route::put('/{solution_id}/update','AdminSolutionController@update');
+            Route::post('/{solution_id}/delete','AdminSolutionController@destroy');
         });
 
         Route::group(['prefix'=>'levels'],function (){
             Route::get('/','AdminLevelController@index');
+            Route::post('/owner_store','AdminLevelController@store_owner_level');
+            Route::post('/customer_store','AdminLevelController@store_customer_level');
+            Route::post('/{level_id}/delete','AdminLevelController@destroy');
         });
 
         Route::group(['prefix'=>'messages'],function (){

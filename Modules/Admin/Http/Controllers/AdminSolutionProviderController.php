@@ -6,6 +6,7 @@ use App\Http\Services\UserService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSolutionProviderController extends Controller
 {
@@ -32,6 +33,7 @@ class AdminSolutionProviderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
         $solution_provider = $this->userService->createNewUser($data);
         return back();
     }
@@ -39,6 +41,7 @@ class AdminSolutionProviderController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
         $user = $this->userService->updateUser($data, $id);
         return back();
     }

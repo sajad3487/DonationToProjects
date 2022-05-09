@@ -18,6 +18,7 @@ class CreateMediaTable extends Migration
             $table->string('type');
             $table->integer('owner_id');
             $table->string('media_path');
+            $table->string('media_type');
             $table->string('alternative_text')->nullable();
             $table->string('title')->nullable();
             $table->string('caption')->nullable();

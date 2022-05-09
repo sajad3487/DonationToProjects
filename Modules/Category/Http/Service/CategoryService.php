@@ -42,4 +42,8 @@ class CategoryService
         return $this->categoryRepository->update($data,$id);
     }
 
+    public function getActiveCategories (){
+        return $this->categoryRepository->getAllActiveCategories ();
+    }
+
 }

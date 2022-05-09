@@ -25,4 +25,11 @@ class CategoryRepository extends Repository
             ->get();
     }
 
+    public function getAllActiveCategories (){
+        return category::where('parent_id',0)
+            ->where('status',1)
+            ->with('activeSubCat')
+            ->get();
+    }
+
 }

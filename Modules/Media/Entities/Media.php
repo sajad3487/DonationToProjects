@@ -10,6 +10,7 @@ class media extends Model
         'type',
         'owner_id',
         'media_path',
+        'media_type',
         'alternative_text',
         'title',
         'caption',

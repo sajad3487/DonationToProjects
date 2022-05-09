@@ -24,7 +24,7 @@ class AdminSupportsController extends Controller
     public function index()
     {
         $active = 7;
-        $customers = $this->userService->getAllCustomer();
+        $customers = $this->userService->getAllOwner();
         return view('admin.supports', compact('customers','active'));
     }
 

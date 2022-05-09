@@ -6,6 +6,8 @@ use App\Http\Services\UserService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Service\SolutionService;
+use Modules\Category\Http\Service\CategoryService;
 
 class AdminSolutionController extends Controller
 {
@@ -13,78 +15,52 @@ class AdminSolutionController extends Controller
      * @var UserService
      */
     private $userService;
+    /**
+     * @var CategoryService
+     */
+    private $categoryService;
+    /**
+     * @var SolutionService
+     */
+    private $solutionService;
 
     public function __construct(
-        UserService $userService
+        UserService $userService,
+        CategoryService $categoryService,
+        SolutionService $solutionService
     )
     {
         $this->userService = $userService;
+        $this->categoryService = $categoryService;
+        $this->solutionService = $solutionService;
     }
 
     public function index()
     {
         $active = 4;
-        $customers = $this->userService->getAllCustomer();
-        return view('admin.solutions', compact('customers','active'));
+        $owners = $this->userService->getAllOwner();
+        $categories = $this->categoryService->getActiveCategories();
+        $solutions = $this->solutionService->getSolutionsWithStatus (1);
+        return view('admin.solutions', compact('owners','active','categories','solutions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('admin::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $solution = $this->solutionService->create($data);
+        return back();
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $this->solutionService->updateSolution ($data,$id);
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
     public function destroy($id)
     {
-        //
+        $this->solutionService->deleteSolution ($id);
+        return back();
     }
 }

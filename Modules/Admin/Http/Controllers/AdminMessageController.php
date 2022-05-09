@@ -24,7 +24,7 @@ class AdminMessageController extends Controller
     public function index()
     {
         $active = 9;
-        $customers = $this->userService->getAllCustomer();
+        $customers = $this->userService->getAllOwner();
         return view('admin.messages', compact('customers','active'));
     }
 
