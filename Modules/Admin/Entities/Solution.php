@@ -43,4 +43,12 @@ class Solution extends Model
     public function main_image (){
         return $this->hasOne(media::class,'owner_id','id')->where('type','solution_main_image');
     }
+
+    public function comments (){
+        return $this->hasMany(Note::class,'owner_id','id')->where('type','solution_comment');
+    }
+
+    public function reports (){
+        return $this->hasMany(Note::class,'owner_id','id')->where('type','solution_report');
+    }
 }

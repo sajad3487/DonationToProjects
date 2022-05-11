@@ -30,7 +30,23 @@ class SolutionRepository extends Repository
             ->with('medias')
             ->with('main_image')
             ->with('images')
+            ->with('comments')
+            ->with('comments.user')
+            ->with('reports')
+            ->with('reports.media_report')
             ->first();
+    }
+
+    public function getAllSolutionsOfUser ($user_id){
+        return Solution::where('user_id',$user_id)
+            ->with('medias')
+            ->with('main_image')
+            ->with('images')
+            ->with('comments')
+            ->with('comments.user')
+            ->with('reports')
+            ->with('reports.media_report')
+            ->get();
     }
 
 

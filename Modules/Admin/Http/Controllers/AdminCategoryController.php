@@ -57,9 +57,9 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        unset($data['file']);
         if (isset($request->file)){
             $data['image_path'] =$this->mediaService->uploadMedia($request->file);
+            unset($data['file']);
         }
         $this->categoryService->createCategory($data);
         return redirect('/admin/categories');

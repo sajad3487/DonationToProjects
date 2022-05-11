@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="navi mt-2">
-                    <a href="{{url('/home')}}" class="navi-item">
+                    <a href="{{url('/owner')}}" class="navi-item">
                         <span class="navi-link p-0 pb-2">
                             <span class="navi-icon mr-1">
 								<span class="svg-icon svg-icon-lg svg-icon-primary"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg--><svg
@@ -60,7 +60,7 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
             <!--begin::Item-->
-            <a href="http://dominicanpodcast.com/" class="navi-item">
+            <a href="{{url('owner')}}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">

@@ -47,7 +47,9 @@ class OwnerSolutionController extends Controller
         $user = $this->userService->getUserById(auth()->id());
         $active = 2;
         $categories = $this->categoryService->getAllCategory();
-        return view('owner.solutions', compact('active', 'user', 'categories'));
+        $solutions = $this->solutionService->getSolutionsOfUser (auth()->id());
+//        dd($solutions);
+        return view('owner.solutions', compact('active', 'user', 'categories','solutions'));
     }
 
     public function create()
@@ -74,6 +76,12 @@ class OwnerSolutionController extends Controller
         return view('owner.edit_solution', compact('active', 'user', 'categories','solution'));
     }
 
+    public function update (Request $request,$id){
+        $data = $request->all();
+        $this->solutionService->updateSolution($data,$id);
+        return back();
+    }
+
     public function upload_media (Request $request){
         $data = $request->all();
         if (isset($request->file)){
@@ -96,6 +104,12 @@ class OwnerSolutionController extends Controller
             unset($data['file']);
         }
         $this->mediaService->updateMedia ($data,$id);
+        return back();
+    }
+
+    public function publish ($id){
+        $data['status'] = 2;
+        $this->solutionService->updateSolution($data,$id);
         return back();
     }
 

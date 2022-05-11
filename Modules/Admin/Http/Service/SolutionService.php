@@ -41,4 +41,8 @@ class SolutionService
         return $this->solutionRepo->getSolutionById ($id);
     }
 
+    public function getSolutionsOfUser ($user_id){
+        return $this->solutionRepo->getAllSolutionsOfUser ($user_id);
+    }
+
 }

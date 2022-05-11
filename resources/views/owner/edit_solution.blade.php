@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
     <!--begin::Content-->
     <div class="content  d-flex flex-column flex-column-fluid" >
         <!--begin::Entry-->
@@ -42,18 +40,29 @@
                                     <!--end::Breadcrumb-->
                                 </div>
                                 <div class="card-toolbar">
-                                    <div class="example-tools justify-content-center">
-                                        <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                                        <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                                    </div>
+                                    @if($solution->status == 1 )
+                                        @if(isset($solution->main_image) && $solution->main_image != null)
+                                        <a href="{{url("owner/solutions/$solution->id/publish")}}" class="btn btn-warning font-weight-bold mr-2">Publish the Solution</a>
+                                            @else
+                                            <button type="button" class="btn btn-warning" data-toggle="popover" data-trigger="click" title="Requirement for publishing" data-content="You should upload a photo for your solution before publishing that">
+                                                Publish the Solution
+                                            </button>
+                                        @endif
+                                        @elseif ($solution->status == 2 )
+                                        <span class="bg-light-danger btn-sm text-danger font-weight-bold btn-upper btn-text">Waiting to confirm</span>
+                                        @elseif ($solution->status == 3)
+                                        <span class="bg-light-success btn-sm text-success font-weight-bold btn-upper btn-text">Published</span>
+                                        @endif
                                 </div>
+
                             </div>
+
                             <div class="card">
                                 <div class="card-header card-header-tabs-line">
                                     <div class="card-toolbar">
                                         <ul class="nav nav-tabs nav-tabs-space-lg nav-tabs-line nav-bold nav-tabs-line-3x" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#kt_apps_contacts_view_tab_1" >
+                                                <a class="nav-link mx-2 active" data-toggle="tab" href="#kt_apps_contacts_view_tab_1" >
                                                     <span class="nav-icon ">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -61,14 +70,15 @@
                                                                     <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000"/>
                                                                     <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5"/>
                                                                 </g>
-                                                            </svg><!--end::Svg Icon--></span>                                </span>
-                                                                    <span class="nav-text">
+                                                            </svg><!--end::Svg Icon--></span>
+                                                    </span>
+                                                    <span class="nav-text">
                                                         Solution Information
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="nav-item ">
-                                                <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_2" >
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_2" >
                                                     <span class="nav-icon ">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Chat-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -85,7 +95,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item ">
-                                                <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_3" >
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_3" >
                                                     <span class="nav-icon">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Devices/Display1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -101,7 +111,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item ">
-                                                <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_4" >
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_4" >
                                                     <span class="nav-icon ">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -119,7 +129,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item ">
-                                                <a class="nav-link" data-toggle="tab" href="#kt_apps_contacts_view_tab_5" >
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_5" >
                                                     <span class="nav-icon ">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -135,6 +145,42 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                            @if($solution->status == 3)
+                                            <li class="nav-item ">
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_6" >
+                                                    <span class="nav-icon ">
+                                                        <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                                    <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5"/>
+                                                                    <path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000"/>
+                                                                </g>
+                                                            </svg><!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                    <span class="nav-text">
+                                                        Report
+                                                    </span>
+                                                </a>
+                                            </li>
+                                                <li class="nav-item ">
+                                                    <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_7" >
+                                                    <span class="nav-icon ">
+                                                        <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <rect x="0" y="0" width="24" height="24"/>
+                                                                    <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5"/>
+                                                                    <path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000"/>
+                                                                </g>
+                                                            </svg><!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                    <span class="nav-text">
+                                                        Progress
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                                @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -146,8 +192,9 @@
                                         <!--begin::Tab Content-->
                                         <div class="tab-pane active" id="kt_apps_contacts_view_tab_1" role="tabpanel">
                                             <div class="container">
-                                                <form  action="{{url("/owner/solutions/store")}}" method="post" class="p-5" enctype="multipart/form-data">
+                                                <form  action="{{url("/owner/solutions/$solution->id/update")}}" method="post" class="p-5" enctype="multipart/form-data">
                                                     @csrf
+                                                    @method('PUT')
                                                     <div class="card-body p-3">
                                                         @include('fragment.error')
                                                         <div class="form-group mt-1">
@@ -350,7 +397,7 @@
                                                     <div class="">
                                                         <!--begin::Image-->
                                                         <a href="{{url($solution->main_image->media_path)}}" target="_blank" class="mt-2">
-                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url({{asset($solution->main_image->media_path)}})"></div>
+                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px mt-5" style="background-image: url({{asset($solution->main_image->media_path)}})"></div>
                                                         </a>
                                                         <!--end::Image-->
 
@@ -649,70 +696,285 @@
                                         <!--begin::Tab Content-->
                                         <div class="tab-pane" id="kt_apps_contacts_view_tab_5" role="tabpanel">
                                             <!--begin::Body-->
-                                            <div class="card-body">
-
+                                            <div class="card-body pt-0">
+                                            @foreach($solution->comments as $comment)
                                                 <!--begin::Bottom-->
-                                                <div class="pt-3">
-                                                    <!--begin::Text-->
-                                                    <p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-6">
-                                                        Outlines keep you honest. They stop you from indulging in
-                                                        poorly thought-out metaphors
-                                                    </p>
-                                                    <!--end::Text-->
-
-                                                    <!--begin::Image-->
-                                                    <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url(assets/media/stock-600x400/img-39.jpg)"></div>
-                                                    <!--end::Image-->
-
-                                                    <!--begin::Item-->
-                                                    <div class="d-flex pt-5">
-                                                        <!--begin::Symbol-->
-                                                        <div class="symbol symbol-40 symbol-light-success mr-5 mt-1">
-                                                            <span class="symbol-label">
-                                                                <img src="assets/media/svg/avatars/009-boy-4.svg" class="h-75 align-self-end" alt=""/>
-                                                            </span>
-                                                        </div>
-                                                        <!--end::Symbol-->
-
-                                                        <!--begin::Info-->
-                                                        <div class="d-flex flex-column flex-row-fluid">
-                                                            <!--begin::Info-->
-                                                            <div class="d-flex align-items-center flex-wrap">
-                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">Mr. Anderson</a>
-                                                                <span class="text-muted font-weight-normal flex-grow-1 font-size-sm">1 Day ago</span>
-                                                                <span class="text-muted font-weight-normal font-size-sm">Reply</span>
+                                                    <div class="">
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex pt-5">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-40 symbol-light-success mr-5 mt-1">
+                                                                <span class="symbol-label">
+                                                                    <img src="{{asset($comment->user->profile_picture)}}" class="h-100 align-self-end" alt=""/>
+                                                                </span>
                                                             </div>
+                                                            <!--end::Symbol-->
 
-                                                            <span class="text-dark-75 font-size-sm font-weight-normal pt-1">
-                                                                Long before you sit dow to put digital pen to
-                                                                paper you need to make sure you have to sit down and write.
-                                                            </span>
+                                                            <!--begin::Info-->
+                                                            <div class="d-flex flex-column flex-row-fluid">
+                                                                <!--begin::Info-->
+                                                                <div class="d-flex align-items-center flex-wrap">
+                                                                    <div class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">{{$comment->user->name ?? ''}}</div>
+                                                                </div>
+
+                                                                <span class="text-dark-75 font-size-sm font-weight-normal pt-1">
+                                                                    {{$comment->body ?? ''}}
+                                                                </span>
+                                                                <!--end::Info-->
+                                                            </div>
                                                             <!--end::Info-->
                                                         </div>
-                                                        <!--end::Info-->
+                                                        <!--end::Item-->
                                                     </div>
-                                                    <!--end::Item-->
-                                                </div>
-                                                <!--end::Bottom-->
+                                                    <!--end::Bottom-->
+                                            @endforeach
 
-                                                <!--begin::Separator-->
+                                            <!--begin::Separator-->
                                                 <div class="separator separator-solid mt-9 mb-4"></div>
                                                 <!--end::Separator-->
 
                                                 <!--begin::Editor-->
-                                                <form class="position-relative">
-                                                    <textarea id="kt_forms_widget_11_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Any Question?"></textarea>
-
+                                                <form class="position-relative" action="{{url("owner/solutions/comments/store")}}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Comment" required></textarea>
+                                                    <input type="number" name="owner_id" value="{{$solution->id}}" class="d-none">
+                                                    <input type="text" name="type" value="solution_comment" class="d-none">
                                                     <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
-                                                        <span class="btn btn-icon btn-sm btn-hover-icon-primary">
-                                                            <i class="flaticon2-clip-symbol icon-ms"></i>
-                                                        </span>
+                                                        <button type="submit" class="btn btn-icon btn-sm btn-hover-icon-primary mr-5">
+                                                            <i class="flaticon2-send-1 icon-lg"></i>
+                                                        </button>
                                                     </div>
                                                 </form>
                                                 <!--edit::Editor-->
                                             </div>
                                             <!--end::Body-->
 
+                                        </div>
+                                        <!--end::Tab Content-->
+
+
+                                        <!--begin::Tab Content-->
+                                        <div class="tab-pane p-5" id="kt_apps_contacts_view_tab_6" role="tabpanel">
+                                            <div class="row">
+                                                <a href="" data-toggle="modal" data-target="#new_report" class="btn btn-light-warning font-weight-bold ml-auto mr-5">New Report</a>
+                                            </div>
+                                            <div class="modal fade" id="new_report" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog modal-xl" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">New Report</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body row">
+
+                                                            <div class="col-md-12">
+                                                                <form action="{{url('owner/solutions/reports/store')}}" method="post" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <div class="card-body p-0">
+                                                                        <div class="form-group">
+                                                                            <label>Report title:</label>
+                                                                            <input type="text" name="title" class="form-control"  placeholder="Enter file title"/>
+                                                                        </div>
+                                                                        <div class="form-group mb-1">
+                                                                            <label for="exampleTextarea">Report body:</label>
+                                                                            <textarea class="form-control" type="text" name="body" id="exampleTextarea" rows="6"></textarea>
+                                                                        </div>
+                                                                        <div class="form-group mt-5 row">
+                                                                            <div class="col-md-4">
+                                                                                <label>File Browser:</label>
+                                                                                <div></div>
+                                                                                <div class="custom-file">
+                                                                                    <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <label for="exampleSelect1">Type of file:</label>
+                                                                                <select class="form-control" id="exampleSelect1" name="media_type">
+                                                                                    <option value="image">Image</option>
+                                                                                    <option value="video">Video</option>
+                                                                                    <option value="wordDocument">Word Document</option>
+                                                                                    <option value="PDF">PDF</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <input type="text" name="type" value="solution_report" class="d-none">
+                                                                        <input type="text" name="media_of_report" value="report_media" class="d-none">
+                                                                        <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
+                                                                    </div>
+                                                                    <div class="card-footer text-center">
+                                                                        <button type="submit" class="btn btn-primary px-10">Save</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($solution->reports as $report_key=>$report)
+                                                    <tr>
+                                                        <th scope="row">{{$report_key +1 }}</th>
+                                                        <td>{{$report->title ?? ''}}</td>
+                                                        <td>{{$report->created_at ?? ''}}</td>
+                                                        <td>
+                                                            <a href="" data-toggle="modal" data-target="#edit_report_{{$report->id ?? ''}}">
+                                                                <i class="flaticon-edit text-success mr-5"></i>
+                                                            </a>
+                                                            <div class="modal fade" id="edit_report_{{$report->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                                <div class="modal-dialog modal-xl" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">New Report</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row">
+
+                                                                            <div class="col-md-12">
+                                                                                <form action="{{url("owner/solutions/reports/$report->id/update")}}" method="post" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    @method('Put')
+                                                                                    <div class="card-body p-0 row">
+                                                                                        <div class="col-8">
+                                                                                            <div class="form-group">
+                                                                                                <label>Report title:</label>
+                                                                                                <input type="text" name="title" class="form-control"  placeholder="Enter file title" value="{{$report->title ?? ''}}"/>
+                                                                                            </div>
+                                                                                            <div class="form-group mb-1">
+                                                                                                <label for="exampleTextarea">Report body:</label>
+                                                                                                <textarea class="form-control" type="text" name="body" id="exampleTextarea" rows="6">{{$report->body ?? ''}}</textarea>
+                                                                                            </div>
+                                                                                            <div class="form-group mt-5 row">
+                                                                                                <div class="col-md-4">
+                                                                                                    <label>File Browser:</label>
+                                                                                                    <div></div>
+                                                                                                    <div class="custom-file">
+                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-4">
+                                                                                                    <label for="exampleSelect1">Type of file:</label>
+                                                                                                    <select class="form-control" id="exampleSelect1" name="media_type">
+                                                                                                        <option  value="image">Image</option>
+                                                                                                        <option  value="video">Video</option>
+                                                                                                        <option  value="wordDocument">Word Document</option>
+                                                                                                        <option  value="PDF">PDF</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <input type="text" name="type" value="solution_report" class="d-none">
+                                                                                            <input type="text" name="media_of_report" value="report_media" class="d-none">
+                                                                                            <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
+                                                                                        </div>
+                                                                                        <div class="col-4">
+                                                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url({{asset($report->media_report->media_path)}})"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card-footer text-center">
+                                                                                        <button type="submit" class="btn btn-primary px-10">Save</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <a href="" data-toggle="modal" data-target="#delete_report_{{$report->id ?? ''}}">
+                                                                <i class="fas fa-trash-alt text-danger mr-5"></i>
+                                                            </a>
+                                                            <div class="modal fade" id="delete_report_{{$report->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Remove user from course</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <!--begin::Form-->
+                                                                            <div class="card-body text-center">
+                                                                                <h3 class="mb-4">Are you sure you want to delete "{{$report->title ?? ''}}" ?</h3>
+                                                                                <p class="my-4">This solution will be remove immediately</p>
+
+                                                                                <form action="{{url("owner/solutions/reports/$report->id/delete")}}" method="post">
+                                                                                    @csrf
+                                                                                    <input type="number" class="d-none" name="user_id" value="{{$solution->id ?? ''}}">
+                                                                                    <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                                        Cancel
+                                                                                    </button>
+                                                                                    <button type="submit" class="btn btn-danger font-weight-bolder">
+                                                                                        Delete
+                                                                                    </button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        <!--end::Tab Content-->
+                                        <!--begin::Tab Content-->
+                                        <div class="tab-pane p-5" id="kt_apps_contacts_view_tab_7" role="tabpanel">
+                                            <div class="row">
+                                                <form class="form mt-5 col-12" action="{{url("/owner/solutions/$solution->id/update")}}" method="post" enctype="multipart/form-data">
+
+                                                    @csrf
+                                                    @method('PUT')
+                                                        @include('fragment.error')
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-4 col-form-label text-right">Progress percentage:</label>
+                                                            <div class="col-lg-2">
+                                                                <input type="number" min="0" max="100" name="progress" class="form-control" required />
+                                                            </div>
+
+                                                            <div class=" col-4 text-center">
+                                                                <button type="submit" class="btn btn-primary col-md-6">Save</button>
+                                                            </div>
+                                                        </div>
+
+
+                                                </form>
+
+                                            </div>
+                                            <hr>
+                                            <div class="row my-5 pt-5">
+                                                <div class="mx-auto d-flex mt-4 mt-sm-0">
+                                                    <span class="font-weight-bold mr-4">Progress</span>
+                                                    <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-150px w-xl-350px">
+                                                        <div class="progress-bar @if($solution->progress == 100) bg-success @else bg-warning @endif" role="progressbar" style="width: {{$solution->progress ?? 0}}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <span class="font-weight-bolder text-dark ml-4">{{$solution->progress ?? 0}}%</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--end::Tab Content-->
                                     </div>
@@ -740,7 +1002,11 @@
     </div>
     <!--end::Content-->
 
-
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
 
 
 
