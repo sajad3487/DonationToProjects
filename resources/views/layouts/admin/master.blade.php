@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <head>
     <base href="{{url('/')}}">
     <meta charset="utf-8"/>
-    <title>Glordyg</title>
+    <title>Ivan</title>
     <meta name="description" content="Updates and statistics"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -44,7 +44,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{asset('css/upload.css')}}" rel="stylesheet" type="text/css"/>
     <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{asset('/media/logos/favicon.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('/media/logos/logo.jpg')}}"/>
 
     <link href="{{asset('plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 

@@ -4,7 +4,7 @@
 <head>
     <base href="{{url('/')}}">
     <meta charset="utf-8"/>
-    <title>Glordyg</title>
+    <title>Ivan</title>
     <meta name="description" content="Aside light theme example"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -33,7 +33,7 @@
 
     <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{asset('media/logos/fav.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('media/logos/logo.jpg')}}"/>
     <link href="{{asset('css/pages/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/pages/wizard/wizard-3.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/comment.css')}}" rel="stylesheet" type="text/css"/>

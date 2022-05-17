@@ -30,7 +30,10 @@ class LevelRepository extends Repository
 
     public function getAllLevelsWithType ($type) {
         return Level::where('type',$type)
+            ->orderBy('first_requirement','DESC')
             ->get();
     }
+
+
 
 }

@@ -71,6 +71,14 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group mt-1">
+                                                <label for="example-number-input" class="">Goal:</label>
+                                                <div class="">
+                                                    <input class="form-control" type="number" name="goal_amount" id="example-number-input"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleInputPassword1">Brief description:</label>

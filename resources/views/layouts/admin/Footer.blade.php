@@ -5,9 +5,9 @@
     <div class=" container-fluid  d-flex flex-column flex-md-row align-items-center justify-content-between">
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
-            <span class="text-muted font-weight-bold mr-2">2020&copy;</span>
+            <span class="text-muted font-weight-bold mr-2">2022&copy;</span>
             <a href="{{url('/')}}" target="_blank"
-               class="text-dark-75 text-hover-primary">e-packz</a>
+               class="text-dark-75 text-hover-primary">Ivan</a>
         </div>
         <!--end::Copyright-->
 

@@ -43,26 +43,6 @@
                                         </div>
                                         <!--end::Description-->
 
-                                        <!--begin::Data-->
-{{--                                        <div class="d-flex mb-5">--}}
-{{--                                            <div class="d-flex align-items-center mr-7">--}}
-
-
-{{--                                                <a href="#" class="btn btn-light-success font-weight-bold mr-2">Success</a>--}}
-{{--                                                <a href="#" class="btn btn-light-primary font-weight-bold mr-2">Primary</a>--}}
-{{--                                                <a href="#" class="btn btn-light-danger font-weight-bold mr-2">Danger</a>--}}
-{{--                                                <a href="#" class="btn btn-light-warning font-weight-bold mr-2">Warning</a>--}}
-
-
-{{--                                            </div>--}}
-{{--                                            <div class="d-flex align-items-center">--}}
-{{--                                                <span class="font-weight-bold mr-4">--}}
-{{--                                                    Due--}}
-{{--                                                </span>--}}
-{{--                                                <span class="btn btn-light-danger btn-sm font-weight-bold btn-upper btn-text">15 Oct, 18</span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-                                        <!--end::Data-->
                                         <!--begin::Progress-->
                                         <div class="d-flex mb-5 align-items-cente">
                                             <span class="d-block font-weight-bold mr-5">Progress</span>

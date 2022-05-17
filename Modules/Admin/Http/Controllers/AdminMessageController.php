@@ -6,6 +6,8 @@ use App\Http\Services\UserService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Service\MessageService;
+use Modules\Admin\Http\Service\NoteService;
 
 class AdminMessageController extends Controller
 {
@@ -13,38 +15,45 @@ class AdminMessageController extends Controller
      * @var UserService
      */
     private $userService;
+    /**
+     * @var NoteService
+     */
+    private $noteService;
+    /**
+     * @var MessageService
+     */
+    private $messageService;
 
     public function __construct(
-        UserService $userService
+        UserService $userService,
+        NoteService $noteService,
+        MessageService $messageService
     )
     {
         $this->userService = $userService;
+        $this->noteService = $noteService;
+        $this->messageService = $messageService;
     }
 
     public function index()
     {
         $active = 9;
         $customers = $this->userService->getAllOwner();
-        return view('admin.messages', compact('customers','active'));
+        $messages = $this->messageService->getMessagesOfAdmin (auth()->id());
+//        dd($messages);
+        return view('admin.messages', compact('customers','active','messages'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
     public function create()
     {
         return view('admin::create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $message = $this->messageService->create($data);
+        return redirect("admin/messages");
     }
 
     /**

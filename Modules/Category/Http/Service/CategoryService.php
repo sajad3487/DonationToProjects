@@ -46,4 +46,5 @@ class CategoryService
         return $this->categoryRepository->getAllActiveCategories ();
     }
 
+
 }

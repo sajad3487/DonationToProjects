@@ -4,7 +4,7 @@
 <head>
     <base href="{{url('/')}}">
     <meta charset="utf-8"/>
-    <title>Glordyg</title>
+    <title>Ivan</title>
     <meta name="description" content="Aside light theme example"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -33,7 +33,7 @@
 
     <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{asset('media/logos/fav.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('media/logos/logo.jpg')}}"/>
     <link href="{{asset('css/pages/wizard/wizard-1.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/pages/wizard/wizard-3.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('css/comment.css')}}" rel="stylesheet" type="text/css"/>
@@ -51,7 +51,7 @@
 <!--end::Head-->
 
 <!--begin::Body-->
-<body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading"  >
+<body  id="kt_body"  class="header-fixed header-mobile-fixed page-loading"  >
 
 <!--begin::Main-->
 <!--begin::Header Mobile-->
@@ -126,7 +126,7 @@
             @include('layouts.owner.Header')
 
 {{--            @include('layouts.owner.Subheader')--}}
-            @include('layouts.owner.Subheader')
+{{--            @include('layouts.owner.Subheader')--}}
             @yield('content')
 
             @include('layouts.owner.Footer')

@@ -37,7 +37,7 @@
                                                             <div class="list list-hover">
                                                                 <!--begin::Item-->
                                                                 <div class="d-flex align-items-start justify-content-between list-item p-2" >
-                                                                    <div class="symbol symbol-circle symbol-50 mr-3">
+                                                                    <div class="symbol symbol-circle symbol-50 mr-3" style="width: 50px;height: 50px">
                                                                         <img alt="Pic" src="{{asset($message->sender->profile_picture)}}"/>
                                                                     </div>
                                                                     <!--begin::Info-->
@@ -88,13 +88,29 @@
                                                     <div class="scroll scroll-pull" data-mobile-height="350">
                                                         <!--begin::Messages-->
                                                         <div class="messages">
+                                                            <!--begin::Message In-->
+                                                            <div class="d-flex flex-column mb-5 align-items-start">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="symbol symbol-circle symbol-40 mr-3" style="width: 50px;height: 50px">
+                                                                        <img alt="Pic" src="{{asset($message_detail->sender->profile_picture)}}"/>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="text-dark-75 text-hover-primary font-weight-bold ">{{$message_detail->sender->name ?? ''}}</div>
+                                                                        <span class="text-muted font-size-sm">{{$message_detail->created_at ?? ''}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">
+                                                                    {{$message_detail->body ?? ''}}
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Message In-->
                                                             @foreach($message_detail->texts as $text_key=>$text)
 
                                                                 @if($text->sender->id != auth()->id())
                                                             <!--begin::Message In-->
                                                             <div class="d-flex flex-column mb-5 align-items-start">
                                                                 <div class="d-flex align-items-center">
-                                                                    <div class="symbol symbol-circle symbol-40 mr-3">
+                                                                    <div class="symbol symbol-circle symbol-40 mr-3" style="width: 50px;height: 50px">
                                                                         <img alt="Pic" src="{{asset($message_detail->sender->profile_picture)}}"/>
                                                                     </div>
                                                                     <div>
@@ -115,7 +131,7 @@
                                                                         <span class="text-muted font-size-sm">{{$text->created_at ?? ''}}</span>
                                                                         <a class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
                                                                     </div>
-                                                                    <div class="symbol symbol-circle symbol-40 ml-3">
+                                                                    <div class="symbol symbol-circle symbol-40 ml-3" style="width: 50px;height: 50px">
                                                                         <img alt="Pic" src="{{asset($message_detail->sender->profile_picture)}}"/>
                                                                     </div>
                                                                 </div>

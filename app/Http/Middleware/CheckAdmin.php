@@ -32,6 +32,8 @@ class CheckAdmin
         $user = $this->userService->getUserById(auth()->id());
         if ($user->user_type == 3){
             return $next($request);
+        }elseif ($user->user_type == 1){
+            return redirect('/customer');
         }else{
             return redirect('/');
         }

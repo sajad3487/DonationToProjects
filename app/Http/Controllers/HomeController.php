@@ -52,11 +52,7 @@ class HomeController extends Controller
      */
     public function designer_index()
     {
-        $user = $this->userService->getUserById(auth()->id());
-        $projects = $this->projectService->allActiveProject();
-        $active = 1;
-        $categories = $this->categoryService->getAllCategory();
-        return view('customer.index',compact('active','user','projects','categories'));
+
     }
 
     public function designer_profile (){

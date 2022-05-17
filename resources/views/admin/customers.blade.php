@@ -170,10 +170,61 @@
                                         </td>
 
                                         <td class="text-center">
+                                            <a href="" data-toggle="modal" data-target="#new_message_{{$customer->id ?? ''}}">
+                                                <i class="flaticon-chat-2 text-success mr-5"></i>
+                                            </a>
+                                            <div class="modal fade" id="new_message_{{$customer->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">New Conversation With {{$customer->name ?? ''}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body p-0">
+                                                            <!--begin::Body-->
+                                                            <div class="card-body py-6 px-10 min-h-200px" >
+                                                                <!--begin::Scroll-->
+                                                                <div class="scroll scroll-pull" data-mobile-height="350">
+                                                                    <!--begin::Messages-->
+                                                                    <div class="messages">
+                                                                    </div>
+                                                                    <!--end::Messages-->
+                                                                </div>
+                                                                <!--end::Scroll-->
+
+                                                            </div>
+                                                            <!--end::Body-->
+                                                            <!--begin::Footer-->
+                                                            <div class="card-footer align-items-center">
+                                                                <form action="{{url("admin/messages/store")}}" method="post" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <!--begin::Compose-->
+                                                                    <input type="number" name="owner_id" value="{{auth()->id()}}" class="d-none">
+                                                                    <input type="number" name="destination_id" value="{{$customer->id ?? ''}}" class="d-none">
+                                                                    <textarea name="body" class="form-control border-0 p-0" rows="2" placeholder="Type a message"></textarea>
+                                                                    <div class="d-flex align-items-center justify-content-between mt-5">
+                                                                        <div class="mr-3">
+
+                                                                        </div>
+                                                                        <div>
+                                                                            <button type="submit" class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6">Send</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--begin::Compose-->
+                                                                </form>
+                                                            </div>
+                                                            <!--end::Footer-->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <a href="" data-toggle="modal" data-target="#edit_user_{{$customer->id ?? ''}}">
                                                 <i class="fas fa-user-edit text-warning mr-5"></i>
                                             </a>
-
                                             <div class="modal fade" id="edit_user_{{$customer->id ?? ''}}" role="dialog"  aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
@@ -242,7 +293,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Remove user from course</h5>
+                                                            <h5 class="modal-title">Remove user</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                             </button>
@@ -251,7 +302,7 @@
                                                             <!--begin::Form-->
                                                             <div class="card-body text-center">
                                                                 <h3 class="mb-4">Are you sure you want to delete "{{$customer->name ?? ''}}" ?</h3>
-                                                                <p class="my-4">This user will be remove the customer</p>
+                                                                <p class="my-4">This user will be remove permanently</p>
 
                                                                 <form action="{{url("admin/customers/$customer->id/delete")}}" method="post">
                                                                     @csrf

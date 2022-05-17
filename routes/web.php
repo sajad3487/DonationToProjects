@@ -21,29 +21,19 @@ Route::get('/run-migrations', function () {
     return Artisan::call('migrate', ["--force" => true ]);
 });
 
-Route::group(['middleware'=>'auth'],function (){
-   Route::group(['prefix'=>'designer','middleware'=>'CheckUser'],function (){
 
-       Route::get('/', 'HomeController@designer_index')->name('home');
-       Route::group(['prefix'=>'profile'],function (){
-           Route::get('/','HomeController@designer_profile');
-           Route::post('/update','HomeController@updateProfile');
-       });
-
-//       Route::get('/category/{category_id}', 'HomeController@indexCategory');
-
-   });
-
-
-});
 
 Route::get('/designer_register', function (){
     return view('auth.designer_register');
 });
 
 Route::get('home',function (){
-    return redirect('designer');
+    return redirect('customer');
 });
+
 Route::get('/',function (){
-    return redirect('designer');
+    return redirect('customer');
 });
+
+
+Route::get('solution/{solution_id}/view','SolutionController@view');

@@ -24,8 +24,16 @@ class MessageService
         return $this->messageRepo->create($data);
     }
 
-    public function getMessagesOfOwner ($user_id){
-        return $this->messageRepo->getMessagesOfOwnerById ($user_id);
+    public function getMessagesOfOwner ($owner_id){
+        return $this->messageRepo->getMessagesOfOwnerById ($owner_id);
+    }
+
+    public function getMessagesOfCustomer ($customer_id){
+        return $this->messageRepo->getMessagesOfCustomerById ($customer_id);
+    }
+
+    public function getMessagesOfAdmin ($admin_id){
+        return $this->messageRepo->getMessageOfAdminById ($admin_id);
     }
 
 }

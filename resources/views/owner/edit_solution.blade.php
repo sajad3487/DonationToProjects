@@ -163,23 +163,6 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                                <li class="nav-item ">
-                                                    <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_7" >
-                                                    <span class="nav-icon ">
-                                                        <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                    <rect x="0" y="0" width="24" height="24"/>
-                                                                    <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5"/>
-                                                                    <path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000"/>
-                                                                </g>
-                                                            </svg><!--end::Svg Icon-->
-                                                        </span>
-                                                    </span>
-                                                    <span class="nav-text">
-                                                        Progress
-                                                    </span>
-                                                    </a>
-                                                </li>
                                                 @endif
                                         </ul>
                                     </div>
@@ -421,7 +404,7 @@
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title">Files of comment</h5>
+                                                                        <h5 class="modal-title">Main image</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <i aria-hidden="true" class="ki ki-close"></i>
                                                                         </button>
@@ -495,7 +478,7 @@
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Files of comment</h5>
+                                                                            <h5 class="modal-title">Upload more image</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
@@ -506,9 +489,6 @@
                                                                                 <form action="{{url('owner/solutions/media/store')}}" method="post" enctype="multipart/form-data">
                                                                                     @csrf
                                                                                     <div class="card-body p-0">
-                                                                                        <h3 class="mb-5">
-                                                                                            Upload new document:
-                                                                                        </h3>
                                                                                         <div class="form-group">
                                                                                             <label>File title:</label>
                                                                                             <input type="text" name="title" class="form-control"  placeholder="Enter file title"/>
@@ -689,8 +669,38 @@
 
                                         <!--begin::Tab Content-->
                                         <div class="tab-pane" id="kt_apps_contacts_view_tab_4" role="tabpanel">
+                                            <div class="overflow-auto px-20">
+                                                <!--begin: Datatable-->
+                                                <table class="table table-separate table-head-custom table-checkable" id="kt_datatable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Solution</th>
+                                                        <th>Customer</th>
+                                                        <th>Solution_provider</th>
+                                                        <th>Amount</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($solution->donations as $donation_key=>$donation)
+                                                        <tr>
+                                                            <td>{{$donation_key +1  ?? ''}}</td>
+                                                            <td>{{$donation->solution->title ?? ''}} {{$donation->lname ?? ''}}</td>
+                                                            <td>{{$donation->customer->name ?? ''}}</td>
+                                                            <td>{{$donation->solution_provider->name ?? ''}}</td>
+                                                            <td>{{$donation->amount ?? ''}}</td>
+                                                            <td>
+                                                                <a href="{{url("customer/solutions/$donation->solution_id/show")}}" class="btn btn-light-info font-weight-bold mr-2" target="_blank">View</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
 
+                                                    </tbody>
 
+                                                </table>
+                                                <!--end: Datatable-->
+                                            </div>
                                         </div>
                                         <!--end::Tab Content-->
                                         <!--begin::Tab Content-->
@@ -705,7 +715,7 @@
                                                             <!--begin::Symbol-->
                                                             <div class="symbol symbol-40 symbol-light-success mr-5 mt-1">
                                                                 <span class="symbol-label">
-                                                                    <img src="{{asset($comment->user->profile_picture)}}" class="h-100 align-self-end" alt=""/>
+                                                                    <img src="{{asset($comment->user->profile_picture)}}" class="h-100 w-100 align-self-end" alt=""/>
                                                                 </span>
                                                             </div>
                                                             <!--end::Symbol-->
@@ -942,41 +952,7 @@
 
                                         </div>
                                         <!--end::Tab Content-->
-                                        <!--begin::Tab Content-->
-                                        <div class="tab-pane p-5" id="kt_apps_contacts_view_tab_7" role="tabpanel">
-                                            <div class="row">
-                                                <form class="form mt-5 col-12" action="{{url("/owner/solutions/$solution->id/update")}}" method="post" enctype="multipart/form-data">
 
-                                                    @csrf
-                                                    @method('PUT')
-                                                        @include('fragment.error')
-                                                        <div class="form-group row">
-                                                            <label class="col-lg-4 col-form-label text-right">Progress percentage:</label>
-                                                            <div class="col-lg-2">
-                                                                <input type="number" min="0" max="100" name="progress" class="form-control" required />
-                                                            </div>
-
-                                                            <div class=" col-4 text-center">
-                                                                <button type="submit" class="btn btn-primary col-md-6">Save</button>
-                                                            </div>
-                                                        </div>
-
-
-                                                </form>
-
-                                            </div>
-                                            <hr>
-                                            <div class="row my-5 pt-5">
-                                                <div class="mx-auto d-flex mt-4 mt-sm-0">
-                                                    <span class="font-weight-bold mr-4">Progress</span>
-                                                    <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-150px w-xl-350px">
-                                                        <div class="progress-bar @if($solution->progress == 100) bg-success @else bg-warning @endif" role="progressbar" style="width: {{$solution->progress ?? 0}}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <span class="font-weight-bolder text-dark ml-4">{{$solution->progress ?? 0}}%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Tab Content-->
                                     </div>
                                 </div>
                                 <!--end::Body-->

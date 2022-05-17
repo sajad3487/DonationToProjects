@@ -36,6 +36,20 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
             Route::post('/store','AdminSolutionController@store');
             Route::put('/{solution_id}/update','AdminSolutionController@update');
             Route::post('/{solution_id}/delete','AdminSolutionController@destroy');
+            Route::get('/{solution_id}/edit','AdminSolutionController@edit');
+
+            Route::get('/{solution_id}/publish','AdminSolutionController@publish_solution');
+            Route::get('/{solution_id}/confirm','AdminSolutionController@confirm_solution');
+
+            Route::post('/media/store','AdminSolutionController@upload_media');
+            Route::post('/media/{media_id}/delete','AdminSolutionController@destroy_media');
+            Route::put('/media/{media_id}/update','AdminSolutionController@update_media');
+
+            Route::group(['prefix'=>'comments'],function (){
+                Route::post('/store','AdminCommentController@store');
+                Route::post('/{user_id}/delete','AdminCommentController@destroy');
+            });
+
         });
 
         Route::group(['prefix'=>'levels'],function (){
@@ -47,14 +61,18 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
         Route::group(['prefix'=>'messages'],function (){
             Route::get('/','AdminMessageController@index');
+            Route::post('/store','AdminMessageController@store');
+
         });
 
         Route::group(['prefix'=>'supports'],function (){
-            Route::get('/','AdminSupportsController@index');
+            Route::get('/','AdminDonationController@index');
         });
 
         Route::group(['prefix'=>'financial'],function (){
             Route::get('/','AdminFinancialController@index');
         });
     });
+
+    Route::get("solutions/{solutions_id}/view","AdminSolutionController@view");
 });

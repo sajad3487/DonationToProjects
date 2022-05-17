@@ -26,7 +26,7 @@ class SolutionService
     }
 
     public function getSolutionsWithStatus ($status){
-        return $this->solutionRepo->getAllSolutions ($status);
+        return $this->solutionRepo->getAllSolutionsWithStatus ($status);
     }
 
     public function deleteSolution ($id){
@@ -43,6 +43,18 @@ class SolutionService
 
     public function getSolutionsOfUser ($user_id){
         return $this->solutionRepo->getAllSolutionsOfUser ($user_id);
+    }
+
+    public function getSolutionsOfCategoryWithStatus ($status,$category_id){
+        return $this->solutionRepo->getAllSolutionsOfCategoryWithStatus ($status,$category_id);
+    }
+
+    public function getAllSolutions (){
+        return $this->solutionRepo->getSolutions();
+    }
+
+    public function calculate_progress ($goal_amount, $achieved_amount){
+        return round(($achieved_amount/$goal_amount)*100);
     }
 
 }

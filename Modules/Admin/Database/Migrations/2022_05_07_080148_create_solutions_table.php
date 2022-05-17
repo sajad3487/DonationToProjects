@@ -17,6 +17,8 @@ class CreateSolutionsTable extends Migration
             $table->id();
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->integer('goal_amount');
+            $table->integer('achieved_amount')->default(0);
             $table->string('title');
             $table->string('brief_description')->nullable();
             $table->text('description')->nullable();
