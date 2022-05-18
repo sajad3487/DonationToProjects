@@ -81,6 +81,14 @@
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group input-group-lg input-group-solid">
+                                                        <textarea class="form-control form-control-solid" name="description" rows="3">{{$user->description ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                                <div class="col-lg-9 col-xl-6">
+                                                    <div class="input-group input-group-lg input-group-solid">
                                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
                                                         <input type="text" class="form-control form-control-lg form-control-solid " disabled value="{{$user->email ?? ''}}" />
                                                     </div>
@@ -92,7 +100,7 @@
                                     <!--end::Form-->
                                     <div class="separator separator-solid mb-10"></div>
 
-                                    <h3 class="px-20">
+                                    <h3 class="px-20 pb-5">
                                         Levels :
                                     </h3>
                                     <div class="px-10">

@@ -72,6 +72,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
         Route::group(['prefix'=>'financial'],function (){
             Route::get('/','AdminFinancialController@index');
         });
+
+        Route::group(['prefix'=>'profile'],function (){
+            Route::get('/','AdminController@profile');
+            Route::put('/{user_id}/update','AdminController@update_profile');
+        });
+
     });
 
     Route::get("solutions/{solutions_id}/view","AdminSolutionController@view");

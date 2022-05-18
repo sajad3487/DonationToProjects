@@ -216,20 +216,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                     4
                                 </h1>
                                 <p class="text-white">
-                                    DONATIONS
+                                    SUPPORTED
                                 </p>
                             </div>
                             <div class="col-auto">
                                 <a href="" data-toggle="modal" data-target="#donate" class="btn btn-white my-3" style="border-radius: 0px">
                                     <p class="m-0">
-                                        DONATE NOW
+                                        SUPPORT NOW
                                     </p>
                                 </a>
                                 <div class="modal fade" id="donate" role="dialog"  aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Donate Now</h5>
+                                                <h5 class="modal-title">Support Now</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <i aria-hidden="true" class="ki ki-close"></i>
                                                 </button>
@@ -399,7 +399,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {{--                                            </li>--}}
                                             <li class="nav-item mx-2">
                                                 <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4">
-                                                    <h5>Donations</h5>
+                                                    <h5>Supports</h5>
                                                 </a>
                                             </li>
                                             <li class="nav-item mx-2">
@@ -494,7 +494,7 @@ License: You must have a valid license purchased only from themeforest(the above
 {{--                                            <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">Tab content 3</div>--}}
                                             <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_4">
                                                 <h6>
-                                                    List of donations :
+                                                    List of supports :
                                                 </h6>
                                                 <div class="overflow-auto">
                                                     <!--begin: Datatable-->

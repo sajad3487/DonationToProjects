@@ -145,9 +145,9 @@
                                         </thead>
 
                                         <tbody>
-                                        @foreach($customer_levels as $customer_level)
+                                        @foreach($customer_levels as $customer_level_key=>$customer_level)
                                             <tr>
-                                                <td class="text-center">{{$customer_level->id ?? ''}}</td>
+                                                <td class="text-center">{{$customer_level_key +1 ?? ''}}</td>
                                                 <td class="text-center">{{$customer_level->name ?? ''}}</td>
                                                 <td class="text-center">{{$customer_level->first_requirement ?? ''}}</td>
                                                 <td class="text-center">
@@ -205,9 +205,9 @@
                                         </thead>
 
                                         <tbody>
-                                        @foreach($owner_levels as $owner_level)
+                                        @foreach($owner_levels as $owner_level_key=>$owner_level)
                                             <tr>
-                                                <td class="text-center">{{$owner_level->id ?? ''}}</td>
+                                                <td class="text-center">{{$owner_level_key +1 ?? ''}}</td>
                                                 <td class="text-center">{{$owner_level->name ?? ''}}</td>
                                                 <td class="text-center">{{$owner_level->first_requirement ?? ''}}</td>
                                                 <td class="text-center">{{$owner_level->second_requirement ?? ''}}</td>

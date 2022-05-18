@@ -61,50 +61,72 @@
                                 <div class="row justify-content-between">
                                     <div class="col-auto font-size-h4  mt-4 ml-4">
                                         @if($category_id == 0)
-                                            All Solutions
+                                            @if(isset($sort) && $sort == 'date')
+                                                    Sort by : Date
+                                                @elseif(isset($sort) && $sort == 'support')
+                                                    Sort by : Most Support
+                                                @else
+                                                    All Solutions
+                                                @endif
                                             @else
                                             {{$category_name ?? ''}}
                                         @endif
                                     </div>
-                                    <div class=" mt-2 mr-4 col-auto">Categories:
-                                        @if($category_id == 0)
-                                            <a href="{{url("customer/solutions")}}" class="btn btn-primary mx-2">All</a>
-                                        @else
-                                            <a href="{{url("customer/solutions")}}" class="btn btn-outline-primary mx-2">All</a>
-                                        @endif
-
-                                        @if(isset($categories))
-                                            @foreach($categories as $category)
-                                                @if($category->activeSubCat->count() != 0)
-                                                    <div class="btn-group">
-                                                        @if($category->id == $category_id)
-                                                            <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$category->title ?? ''}}</a>
-                                                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <span class="sr-only">Toggle Dropdown</span>
-                                                            </button>
-                                                        @else
-                                                            <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$category->title ?? ''}}</a>
-                                                            <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <span class="sr-only">Toggle Dropdown</span>
-                                                            </button>
-                                                        @endif
-
-                                                        <div class="dropdown-menu">
-                                                            @foreach($category->activeSubCat as $subCat)
-                                                                <a class="dropdown-item" href="{{url("customer/solutions/categories/$subCat->id/index")}}">{{$subCat->title}}</a>
-                                                            @endforeach
-                                                        </div>
+                                    <div class="col-auto">
+                                        <div class="row">
+                                            <div class=" mt-2 mr-4 col-auto">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Sort by:
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item"  href="{{url("customer/solutions/sort_by/date")}}">Date</a>
+                                                        <a class="dropdown-item"  href="{{url("customer/solutions/sort_by/support")}}">Most support</a>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class=" mt-2 mr-4 col-auto">Categories:
+                                                @if($category_id == 0)
+                                                    <a href="{{url("customer/solutions")}}" class="btn btn-primary mx-2">All</a>
                                                 @else
-                                                    @if($category->id == $category_id)
-                                                        <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$subCat->title ?? ''}}</a>
-                                                    @else
-                                                        <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$subCat->title ?? ''}}</a>
-                                                    @endif
+                                                    <a href="{{url("customer/solutions")}}" class="btn btn-outline-primary mx-2">All</a>
                                                 @endif
-                                                {{--                                            <a href="" class="btn btn-outline-primary mr-2"></a>--}}
-                                            @endforeach
-                                        @endif
+
+                                                @if(isset($categories))
+                                                    @foreach($categories as $category)
+                                                        @if($category->activeSubCat->count() != 0)
+                                                            <div class="btn-group">
+                                                                @if($category->id == $category_id)
+                                                                    <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$category->title ?? ''}}</a>
+                                                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                                    </button>
+                                                                @else
+                                                                    <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$category->title ?? ''}}</a>
+                                                                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                                    </button>
+                                                                @endif
+
+                                                                <div class="dropdown-menu">
+                                                                    @foreach($category->activeSubCat as $subCat)
+                                                                        <a class="dropdown-item" href="{{url("customer/solutions/categories/$subCat->id/index")}}">{{$subCat->title}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            @if($category->id == $category_id)
+                                                                <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$subCat->title ?? ''}}</a>
+                                                            @else
+                                                                <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$subCat->title ?? ''}}</a>
+                                                            @endif
+                                                        @endif
+                                                        {{--                                            <a href="" class="btn btn-outline-primary mr-2"></a>--}}
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>

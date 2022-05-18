@@ -307,9 +307,9 @@
 
                                                     <tbody>
                                                     @if($category->subCategory != null)
-                                                    @foreach($category->subCategory as $subCat)
+                                                    @foreach($category->subCategory as $subCat_key=>$subCat)
                                                         <tr>
-                                                            <td class="text-center">{{$subCat->id ?? ''}}</td>
+                                                            <td class="text-center">{{$subCat_key +1 ?? ''}}</td>
                                                             <td class="text-center">{{$subCat->title ?? ''}}</td>
                                                             <td class="text-center">{{$subCat->description ?? ''}}</td>
                                                             <td class="text-center">

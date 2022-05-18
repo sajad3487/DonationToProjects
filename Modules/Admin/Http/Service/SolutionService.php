@@ -57,4 +57,12 @@ class SolutionService
         return round(($achieved_amount/$goal_amount)*100);
     }
 
+    public function getSolutionWithDateSorting (){
+        return $this->solutionRepo->getAllSolutionWithDateSorting ();
+    }
+
+    public function getSolutionWithSupportSorting (){
+        return $this->solutionRepo->getAllSolutionWithSupportSorting ();
+    }
+
 }

@@ -20,12 +20,12 @@
                     <div class="card-header flex-wrap py-5">
                         <div class="card-title">
                             <h3 class="card-label">
-                                Your Donations
+                                Your Supports
                                 <span class="d-block text-muted pt-2 font-size-sm"></span>
                             </h3>
                         </div>
                         <div class="card-toolbar">
-                            <a href="" data-toggle="modal" data-target="#new_user" class="btn btn-light-primary font-weight-bold mr-2">New Customer</a>
+{{--                            <a href="" data-toggle="modal" data-target="#new_user" class="btn btn-light-primary font-weight-bold mr-2">New Customer</a>--}}
                         </div>
                     </div>
 
@@ -105,7 +105,7 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Solution</th>
                                     <th class="text-center">Amount</th>
-                                    <th class="text-center">Solution_provider</th>
+                                    <th class="text-center">Solution provider</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                                 </thead>

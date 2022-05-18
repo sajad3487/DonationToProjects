@@ -72,7 +72,7 @@
                                                     </g>
                                                 </svg><!--end::Svg Icon--></span>
                                             <a href="{{url("customer/solutions/your_donations")}}" class="text-danger font-weight-bold font-size-h6 mt-2">
-                                                Your Donations
+                                                Your Supports
                                             </a>
                                         </div>
                                         <div class="col bg-light-success px-6 py-8 rounded-xl">
@@ -138,7 +138,7 @@
                                     <div class="card-body d-flex flex-column">
                                         <!--begin::Stats-->
                                         <div class="flex-grow-1">
-                                            <div class="text-dark-50 font-weight-bold">Your donations</div>
+                                            <div class="text-dark-50 font-weight-bold">Your Supports</div>
                                             <div class="font-weight-bolder font-size-h3">{{$donations->count() ?? 0}}</div>
                                         </div>
                                         <!--end::Stats-->
@@ -197,7 +197,7 @@
                                     <p class="text-muted font-size-lg mb-7">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                                     </p>
-                                    <a href='#' class="btn btn-danger font-weight-bold px-6 py-3">Contact</a>
+                                    <a href='{{url("customer/messages/$admin_id/create")}}' class="btn btn-danger font-weight-bold px-6 py-3">Contact</a>
                                 </div>
                             </div>
                             <!--end::Body-->

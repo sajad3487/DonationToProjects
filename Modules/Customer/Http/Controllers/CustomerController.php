@@ -51,7 +51,8 @@ class CustomerController extends Controller
         $active = 1;
         $categories = $this->categoryService->getAllCategory();
         $donations = $this->donationService->getDonationsOfUser($user->id);
-        return view('customer.index',compact('active','user','categories','donations'));
+        $admin_id = $this->userService->getAdminUsers()->first()->id;
+        return view('customer.index',compact('active','user','categories','donations','admin_id'));
     }
 
     public function edit($id)

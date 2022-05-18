@@ -48,6 +48,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right px-0">Description:</label>
+                                            <div class="col-lg-8">
+                                                <textarea class="form-control" name="description" id="exampleTextarea" rows="3">{{$user->description ?? ''}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-lg-2 col-form-label text-right px-0">Address:</label>
                                             <div class="col-lg-8">
                                                 <input type="text" name="address" class="form-control" placeholder="Enter your address" value="{{$user->address  ?? ''}}" />

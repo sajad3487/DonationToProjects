@@ -79,4 +79,24 @@ class CustomerSolutionController extends Controller
         $category_name = $category->title;
         return view('customer.solutions',compact('active','user','solutions','categories','category_id','category_name'));
     }
+
+    public function sort_by_date (){
+        $active = 2;
+        $user = $this->userService->getUserById(auth()->id());
+        $solutions = $this->solutionService->getSolutionWithDateSorting();
+        $categories = $this->categoryService->getActiveCategories();
+        $category_id = 0;
+        $sort = "date";
+        return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
+    }
+
+    public function sort_by_support (){
+        $active = 2;
+        $user = $this->userService->getUserById(auth()->id());
+        $solutions = $this->solutionService->getSolutionWithSupportSorting();
+        $categories = $this->categoryService->getActiveCategories();
+        $category_id = 0;
+        $sort = "support";
+        return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
+    }
 }

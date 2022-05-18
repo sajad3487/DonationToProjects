@@ -102,5 +102,37 @@ class SolutionRepository extends Repository
             ->get();
     }
 
+    public function getAllSolutionWithDateSorting (){
+        return Solution::orderBy('created_at','DESC')
+            ->with('medias')
+            ->with('category')
+            ->with('main_image')
+            ->with('images')
+            ->with('comments')
+            ->with('comments.user')
+            ->with('reports')
+            ->with('reports.media_report')
+            ->with('donations')
+            ->with('donations.solution_provider')
+            ->with('donations.customer')
+            ->get();
+    }
+
+
+    public function getAllSolutionWithSupportSorting (){
+        return Solution::orderBy('achieved_amount','DESC')
+            ->with('medias')
+            ->with('category')
+            ->with('main_image')
+            ->with('images')
+            ->with('comments')
+            ->with('comments.user')
+            ->with('reports')
+            ->with('reports.media_report')
+            ->with('donations')
+            ->with('donations.solution_provider')
+            ->with('donations.customer')
+            ->get();
+    }
 
 }

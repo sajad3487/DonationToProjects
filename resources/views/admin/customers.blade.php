@@ -71,6 +71,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <label class="col-lg-2 col-form-label text-right">Description</label>
+                                                    <div class="col-lg-10">
+                                                        <textarea class="form-control" name="description" id="exampleTextarea" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
                                                     <label class="col-lg-2 col-form-label text-right">Address</label>
                                                     <div class="col-lg-10">
                                                         <input type="text" name="address" class="form-control" placeholder="Enter the address of user" required value="{{ old('address') ?? ''}}" />
@@ -104,6 +110,7 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Name</th>
+                                    <th class="text-center">Description</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
@@ -117,6 +124,7 @@
                                     <tr>
                                         <td class="text-center">{{$customer_key +1 ?? ''}}</td>
                                         <td class="text-center">{{$customer->name ?? ''}} {{$customer->lname ?? ''}}</td>
+                                        <td class="text-center">{{$customer->description ?? ''}}</td>
                                         <td class="text-center">{{$customer->email ?? ''}}</td>
                                         <td class="text-center">{{$customer->tel ?? ''}}</td>
                                         <td class="text-center">{{$customer->address ?? ''}}</td>
@@ -260,6 +268,13 @@
                                                                             <label class="col-lg-2 col-form-label text-right">Password:</label>
                                                                             <div class="col-lg-4">
                                                                                 <input type="password" name="password" class="form-control" placeholder="Enter password for the user account" required/>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
+                                                                            <label class="col-lg-2 col-form-label text-right">Description</label>
+                                                                            <div class="col-lg-10">
+                                                                                <textarea class="form-control" name="description" id="exampleTextarea" rows="3">{{$customer->description ?? ''}}</textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">

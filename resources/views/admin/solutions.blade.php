@@ -102,9 +102,13 @@
                                                     <label for="exampleTextarea5">Effect:</label>
                                                     <textarea class="form-control" id="exampleTextarea5" name="effect" rows="2"></textarea>
                                                 </div>
-                                                <div class="form-group mt-1">
-                                                    <label for="address">Address:</label>
-                                                    <input type="text" name="address" class="form-control" id="address" placeholder="Enter the address"/>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group mt-1">
+                                                            <label for="exampleSelect1">Goal amount</label>
+                                                            <input type="number" name="goal_amount" class="form-control" required />
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>

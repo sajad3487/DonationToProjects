@@ -108,10 +108,6 @@
                                         <label for="exampleTextarea5">Effect:</label>
                                         <textarea class="form-control" name="effect" rows="2"></textarea>
                                     </div>
-                                    <div class="form-group mt-1">
-                                        <label for="address">Address:</label>
-                                        <input type="text" name="address" class="form-control" id="address" placeholder="Enter the address"/>
-                                    </div>
                                     <input type="number" name="user_id" value="{{$user->id}}" class="d-none">
                                 </div>
                                 <div class="card-footer text-center">

@@ -25,6 +25,9 @@ Route::group(['middleware'=>'auth'],function (){
                 Route::get('/{category_id}/index','CustomerSolutionController@category_solutions');
             });
 
+            Route::get('sort_by/date','CustomerSolutionController@sort_by_date');
+            Route::get('sort_by/support','CustomerSolutionController@sort_by_support');
+
             Route::group(['prefix'=>'comments'],function (){
                 Route::post('/store','CustomerCommentController@store');
             });
@@ -47,7 +50,6 @@ Route::group(['middleware'=>'auth'],function (){
         Route::group(['prefix'=>'profile'],function (){
             Route::get('/','CustomerProfileController@index');
             Route::put('/{user_id}/update','CustomerProfileController@update');
-
         });
 
     });

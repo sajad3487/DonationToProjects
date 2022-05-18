@@ -121,7 +121,7 @@
                                                         </span>
                                                     </span>
                                                     <span class="nav-text">
-                                                        Donations
+                                                        Supports
                                                     </span>
                                                 </a>
                                             </li>
@@ -671,7 +671,7 @@
                                                             <th>#</th>
                                                             <th>Solution</th>
                                                             <th>Customer</th>
-                                                            <th>Solution_provider</th>
+                                                            <th>Solution provider</th>
                                                             <th>Amount</th>
                                                             <th>Action</th>
                                                         </tr>
