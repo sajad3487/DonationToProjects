@@ -67,7 +67,7 @@
                                                         </span>
                                                         <div class="text-inverse-success font-weight-bolder font-size-h2 mt-3">{{$solutions->count() ?? 0}}</div>
 
-                                                        <a href="#" class="text-inverse-success font-weight-bold font-size-lg mt-1">You have created</a>
+                                                        <a href="{{url("owner/solutions")}}" class="text-inverse-success font-weight-bold font-size-lg mt-1">You have created</a>
                                                     </div>
                                                 </div>
                                                 <!--end::Tiles Widget 11-->
@@ -100,7 +100,7 @@
                                             <div class="card-body d-flex align-items-center">
                                                 <div>
                                                     <h3 class="text-white font-weight-bolder line-height-lg mb-5">Messages</h3>
-                                                    <a href='#' class="btn btn-success font-weight-bold px-6 py-3">View</a>
+                                                    <a href='{{url("owner/messages")}}' class="btn btn-success font-weight-bold px-6 py-3">View</a>
                                                 </div>
                                             </div>
                                             <!--end::Body-->

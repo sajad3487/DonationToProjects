@@ -63,7 +63,7 @@ class UserService
     public function uploadMedia ($file) {
         $destination = base_path() . '/public_html/media/NIS/';
         $filename = rand(1111111, 99999999);
-        $newFileName = $filename . $file->getClientOriginalName();
+        $newFileName = $filename . time().".".$file->extension();
         $file->move($destination, $newFileName);
         return '/media/NIS/' . $newFileName;
     }

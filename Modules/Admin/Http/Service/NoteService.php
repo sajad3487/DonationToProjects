@@ -28,4 +28,8 @@ class NoteService
         return $this->noteRepo->delete($id);
     }
 
+    public function update ($data,$id){
+        return $this->noteRepo->update($data,$id);
+    }
+
 }

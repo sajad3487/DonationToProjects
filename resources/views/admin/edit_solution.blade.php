@@ -103,7 +103,7 @@
                                                         </span>
                                                     </span>
                                                     <span class="nav-text">
-                                                        Images
+                                                        Media
                                                     </span>
                                                 </a>
                                             </li>
@@ -517,7 +517,30 @@
                                                             @foreach($solution->images as $images_key=>$image)
                                                                 <!--begin::Item-->
                                                                 <div class="d-flex align-items-center mt-5 pb-9">
-                                                                        <!--begin::Symbol-->
+                                                                    @if($image->media_type == "video")
+                                                                        <a  href="{{url($image->media_path)}}" target="_blank" class="row">
+                                                                            <!--begin::Symbol-->
+                                                                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4 border ml-4">
+                                                                                <div class="symbol-label" style="background-image: url({{asset('media/icon/video.jpg')}})"></div>
+                                                                            </div>
+                                                                            <!--end::Symbol-->
+
+                                                                            <!--begin::Section-->
+                                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                                <!--begin::Title-->
+                                                                                <div class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</div>
+                                                                                <!--end::Title-->
+                                                                                <!--begin::Desc-->
+                                                                                <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                    {{$image->caption ?? ''}}
+                                                                                </span>
+                                                                                <!--begin::Desc-->
+                                                                            </div>
+                                                                            <!--end::Section-->
+                                                                        </a>
+
+                                                                    @else
+                                                                    <!--begin::Symbol-->
                                                                         <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                                                                             <div class="symbol-label" style="background-image: url({{asset($image->media_path)}})"></div>
                                                                         </div>
@@ -528,7 +551,6 @@
                                                                             <!--begin::Title-->
                                                                             <a href="{{url($image->media_path)}}" target="_blank" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</a>
                                                                             <!--end::Title-->
-
                                                                             <!--begin::Desc-->
                                                                             <span class="text-dark-50 font-weight-normal font-size-sm">
                                                                                 {{$image->caption ?? ''}}
@@ -536,7 +558,8 @@
                                                                             <!--begin::Desc-->
                                                                         </div>
                                                                         <!--end::Section-->
-                                                                        <div>
+                                                                    @endif
+                                                                        <div class="ml-auto">
                                                                             <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}">
                                                                                 <i class="fas fa-trash-alt text-danger mr-5"></i>
                                                                             </a>
@@ -544,7 +567,7 @@
                                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                                     <div class="modal-content">
                                                                                         <div class="modal-header">
-                                                                                            <h5 class="modal-title">Remove the image</h5>
+                                                                                            <h5 class="modal-title">Remove the media</h5>
                                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                                             </button>
@@ -808,7 +831,7 @@
                                                         <div class="modal-body row">
 
                                                             <div class="col-md-12">
-                                                                <form action="{{url('owner/solutions/reports/store')}}" method="post" enctype="multipart/form-data">
+                                                                <form action="{{url('admin/solutions/reports/store')}}" method="post" enctype="multipart/form-data">
                                                                     @csrf
                                                                     <div class="card-body p-0">
                                                                         <div class="form-group">
@@ -886,7 +909,7 @@
                                                                         <div class="modal-body row">
 
                                                                             <div class="col-md-12">
-                                                                                <form action="{{url("owner/solutions/reports/$report->id/update")}}" method="post" enctype="multipart/form-data">
+                                                                                <form action="{{url("admin/solutions/reports/$report->id/update")}}" method="post" enctype="multipart/form-data">
                                                                                     @csrf
                                                                                     @method('Put')
                                                                                     <div class="card-body p-0 row">
@@ -904,7 +927,7 @@
                                                                                                     <label>File Browser:</label>
                                                                                                     <div></div>
                                                                                                     <div class="custom-file">
-                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile"/>
                                                                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                                     </div>
                                                                                                 </div>
@@ -945,7 +968,7 @@
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Remove user from course</h5>
+                                                                            <h5 class="modal-title">Remove Report</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>

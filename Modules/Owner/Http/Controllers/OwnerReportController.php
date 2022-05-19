@@ -53,7 +53,21 @@ class OwnerReportController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all(),$id);
+        $data = $request->all();
+        unset($data['media_type']);
+        $this->noteService->update ($data,$id);
+        if (isset($request->file)){
+            $media_data['media_path'] =$this->mediaService->uploadMedia($request->file);
+            $media_data['type'] = $request->media_of_report;
+            $media_data['owner_id'] = $id;
+            if (isset($request->media_type)){
+                $media_data['media_type'] = $request->media_type;
+            }else{
+                $media_data['media_type'] = "image";
+            }
+            $media = $this->mediaService->createMedia($media_data);
+        }
+        return back();
     }
 
     public function destroy($id)

@@ -46,6 +46,7 @@
                                                 <div class="form-group mt-1">
                                                     <label>Title</label>
                                                     <input type="text" name="title" class="form-control"  placeholder="Enter title of the solution"/>
+                                                    <span class="form-text text-muted">Enter less than 250 characters.</span>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 col-md-6">
@@ -77,6 +78,8 @@
                                                 <div class="form-group mt-1">
                                                     <label for="exampleInputPassword1">Brief description:</label>
                                                     <input type="text" name="brief_description" class="form-control" id="exampleInputPassword1" placeholder="Enter the brief description of the solution"/>
+                                                    <span class="form-text text-muted">Enter less than 250 characters.</span>
+
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea">Description:</label>
@@ -85,22 +88,28 @@
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea1">Issue:</label>
                                                     <textarea class="form-control" id="exampleTextarea1" name="issue" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
+
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea2">Solution:</label>
                                                     <textarea class="form-control" id="exampleTextarea2" name="solution" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea3">The Function:</label>
                                                     <textarea class="form-control" id="exampleTextarea3" name="our_function" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea4">Reason:</label>
                                                     <textarea class="form-control"  id="exampleTextarea4" name="reason" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
                                                     <label for="exampleTextarea5">Effect:</label>
                                                     <textarea class="form-control" id="exampleTextarea5" name="effect" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 col-md-4">
@@ -166,6 +175,9 @@
                                     <td>{{$solution->progress ?? ''}}</td>
                                     <td>{{$solution->donors ?? ''}}</td>
                                     <td>
+                                        <a href="{{url("admin/solutions/$solution->id/view")}}" target="_blank">
+                                            <i class="flaticon-eye text-success mr-5"></i>
+                                        </a>
                                         <a href="{{url("admin/solutions/$solution->id/edit")}}" >
                                             <i class="flaticon-edit text-warning mr-5"></i>
                                         </a>

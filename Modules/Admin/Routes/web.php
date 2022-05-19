@@ -50,6 +50,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
                 Route::post('/{user_id}/delete','AdminCommentController@destroy');
             });
 
+            Route::group(['prefix'=>'reports'],function (){
+                Route::post('/store','AdminReportController@store');
+                Route::put('/{report_id}/update','AdminReportController@update');
+                Route::post('/{report_id}/delete','AdminReportController@destroy');
+            });
+
         });
 
         Route::group(['prefix'=>'levels'],function (){

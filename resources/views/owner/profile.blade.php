@@ -65,7 +65,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="name" value="{{$user->lname ?? ''}}"/>
+                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="lname" value="{{$user->lname ?? ''}}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">

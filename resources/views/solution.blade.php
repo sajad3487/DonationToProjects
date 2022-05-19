@@ -314,7 +314,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                             @if($solution->images->count() != 0)
                                             <div class="overlay-layer">
-                                                <a href="" data-toggle="modal" data-target="#new_report" class="btn font-weight-bolder btn-sm btn-success mr-2 py-2 px-5" style="border-radius: 0px">More images</a>
+                                                <a href="" data-toggle="modal" data-target="#new_report" class="btn font-weight-bolder btn-sm btn-success mr-2 py-2 px-5" style="border-radius: 0px">More media</a>
 {{--                                                <a href="#" class="btn font-weight-bolder btn-sm btn-light-primary">Purchase</a>--}}
                                             </div>
                                             @endif
@@ -322,7 +322,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <div class="modal-dialog modal-xl" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Images</h5>
+                                                            <h5 class="modal-title">Media</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                             </button>
@@ -331,9 +331,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                 @foreach($solution->images as $image_key=>$image)
                                                                     <div class="col-12 col-md-4">
                                                                         <div class="d-flex flex-column flex-center">
+                                                                            @if($image->media_type == "video")
+                                                                                <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                                @else
                                                                             <a href="{{url($image->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset($image->media_path)}})">
-
                                                                             </a>
+                                                                            @endif
                                                                             <!--begin::Title-->
                                                                             <a href="{{url($image->media_path)}}" target="_blank" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$image->title ?? ''}}</a>
                                                                             <!--end::Title-->

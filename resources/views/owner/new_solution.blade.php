@@ -55,6 +55,8 @@
                                     <div class="form-group mt-1">
                                         <label>Title</label>
                                         <input type="text" name="title" class="form-control"  placeholder="Enter title of the solution"/>
+                                        <span class="form-text text-muted">Enter less than 250 character.</span>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-md-6">
@@ -83,30 +85,39 @@
                                     <div class="form-group mt-1">
                                         <label for="exampleInputPassword1">Brief description:</label>
                                         <input type="text" name="brief_description" class="form-control" id="exampleInputPassword1" placeholder="Enter the brief description of the solution"/>
+                                        <span class="form-text text-muted">Enter less than 250 character.</span>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea">Description:</label>
                                         <textarea class="form-control" name="description" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
+
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea1">Issue:</label>
                                         <textarea class="form-control" name="issue" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
+
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea2">Solution:</label>
                                         <textarea class="form-control" name="solution" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea3">The Function:</label>
                                         <textarea class="form-control" name="our_function" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea4">Reason:</label>
                                         <textarea class="form-control"  name="reason" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="exampleTextarea5">Effect:</label>
                                         <textarea class="form-control" name="effect" rows="2"></textarea>
+                                        <span class="form-text text-muted">Enter less than 5000 character.</span>
                                     </div>
                                     <input type="number" name="user_id" value="{{$user->id}}" class="d-none">
                                 </div>

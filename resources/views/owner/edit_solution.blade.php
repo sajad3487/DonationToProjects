@@ -106,7 +106,7 @@
                                                         </span>
                                                     </span>
                                                     <span class="nav-text">
-                                                        Images
+                                                        Media
                                                     </span>
                                                 </a>
                                             </li>
@@ -183,6 +183,7 @@
                                                         <div class="form-group mt-1">
                                                             <label>Title</label>
                                                             <input type="text" name="title" class="form-control"  placeholder="Enter title of the solution" value="{{$solution->title ?? ''}}"/>
+                                                            <span class="form-text text-muted">Enter less than 250 character.</span>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-12 col-md-6">
@@ -199,38 +200,49 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group mt-1">
+                                                                    <label for="example-number-input" class="">Goal:</label>
+                                                                    <div class="">
+                                                                        <input class="form-control" type="number" name="goal_amount" id="example-number-input" value="{{$solution->goal_amount ?? ''}}"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleInputPassword1">Brief description:</label>
                                                             <input type="text" name="brief_description" class="form-control" value="{{$solution->brief_description ?? ''}}" placeholder="Enter the brief description of the solution"/>
+                                                            <span class="form-text text-muted">Enter less than 250 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea">Description:</label>
                                                             <textarea class="form-control" name="description" rows="2">{{$solution->description ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea1">Issue:</label>
                                                             <textarea class="form-control" name="issue" rows="2">{{$solution->issue ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea2">Solution:</label>
                                                             <textarea class="form-control" name="solution" rows="2">{{$solution->solution ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea3">The Function:</label>
                                                             <textarea class="form-control" name="our_function" rows="2">{{$solution->our_function ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea4">Reason:</label>
                                                             <textarea class="form-control"  name="reason" rows="2">{{$solution->reason ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea5">Effect:</label>
                                                             <textarea class="form-control" name="effect" rows="2">{{$solution->effect ?? ''}}</textarea>
-                                                        </div>
-                                                        <div class="form-group mt-1">
-                                                            <label for="address">Address:</label>
-                                                            <input type="text" name="address" class="form-control" id="address" placeholder="Enter the address" value="{{$solution->address ?? ''}}"/>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer text-center">
@@ -251,7 +263,7 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Files of comment</h5>
+                                                            <h5 class="modal-title">Upload new document</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                             </button>
@@ -262,9 +274,6 @@
                                                                 <form action="{{url('owner/solutions/media/store')}}" method="post" enctype="multipart/form-data">
                                                                     @csrf
                                                                     <div class="card-body p-0">
-                                                                        <h3 class="mb-5">
-                                                                            Upload new document:
-                                                                        </h3>
                                                                         <div class="form-group">
                                                                             <label>File title:</label>
                                                                             <input type="text" name="title" class="form-control"  placeholder="Enter file title"/>
@@ -276,8 +285,6 @@
                                                                         <div class="form-group mt-5">
                                                                             <label for="exampleSelect1">Type of file:</label>
                                                                             <select class="form-control" id="exampleSelect1" name="media_type">
-                                                                                <option value="image">Image</option>
-                                                                                <option value="video">Video</option>
                                                                                 <option value="wordDocument">Word Document</option>
                                                                                 <option value="PDF">PDF</option>
                                                                             </select>
@@ -333,7 +340,7 @@
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title">Remove user from course</h5>
+                                                                                <h5 class="modal-title">Remove the document</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <i aria-hidden="true" class="ki ki-close"></i>
                                                                                 </button>
@@ -416,9 +423,6 @@
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 <div class="card-body p-0">
-                                                                                    <h3 class="mb-5">
-                                                                                        Upload new document:
-                                                                                    </h3>
                                                                                     <div class="form-group">
                                                                                         <label>File title:</label>
                                                                                         <input type="text" name="title" class="form-control"  placeholder="Enter file title" value="{{$solution->main_image->title ?? ''}}"/>
@@ -428,6 +432,7 @@
                                                                                         <textarea class="form-control" type="text" name="caption" id="exampleTextarea" rows="3">{{$solution->main_image->caption ?? ''}}</textarea>
                                                                                     </div>
                                                                                     <input type="text" name="media_type" value="image" class="d-none">
+
                                                                                     <div class="form-group mt-5">
                                                                                         <label>File Browser:</label>
                                                                                         <div></div>
@@ -497,15 +502,28 @@
                                                                                             <label for="exampleTextarea">Caption:</label>
                                                                                             <textarea class="form-control" type="text" name="caption" id="exampleTextarea" rows="3"></textarea>
                                                                                         </div>
-                                                                                        <input type="text" name="media_type" value="image" class="d-none">
                                                                                         <div class="form-group mt-5">
+                                                                                            <label for="exampleSelect1">Type of file:</label>
+                                                                                            <select class="form-control" id="media_type_selector" onchange="changeTypeOfMedia()" name="media_type">
+                                                                                                <option value="image">Image</option>
+                                                                                                <option value="video">Video</option>
+                                                                                                <option value="wordDocument">Word Document</option>
+                                                                                                <option value="PDF">PDF</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                        <div class="form-group mt-5" id="input_file">
                                                                                             <label>File Browser:</label>
                                                                                             <div></div>
-                                                                                            <div class="custom-file">
-                                                                                                <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                            <div class="custom-file col-6">
+                                                                                                <input type="file" class="custom-file-input" name="file" id="customFile"/>
                                                                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <div class="form-group" id="input_video" style="display: none">
+                                                                                            <label>Video link:</label>
+                                                                                            <input type="text" name="video_link" class="form-control"  placeholder="Enter your video link"/>
+                                                                                        </div>
+
                                                                                         <input type="text" name="type" value="solution_image" class="d-none">
                                                                                         <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
                                                                                     </div>
@@ -523,6 +541,29 @@
                                                             @foreach($solution->images as $images_key=>$image)
                                                                 <!--begin::Item-->
                                                                 <div class="d-flex align-items-center mt-5 pb-9">
+                                                                @if($image->media_type == "video")
+                                                                        <a  href="{{url($image->media_path)}}" target="_blank" class="row">
+                                                                            <!--begin::Symbol-->
+                                                                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4 border ml-4">
+                                                                                <div class="symbol-label" style="background-image: url({{asset('media/icon/video.jpg')}})"></div>
+                                                                            </div>
+                                                                            <!--end::Symbol-->
+
+                                                                            <!--begin::Section-->
+                                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                                <!--begin::Title-->
+                                                                                <div class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</div>
+                                                                                <!--end::Title-->
+                                                                                <!--begin::Desc-->
+                                                                                <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                    {{$image->caption ?? ''}}
+                                                                                </span>
+                                                                                <!--begin::Desc-->
+                                                                            </div>
+                                                                            <!--end::Section-->
+                                                                        </a>
+
+                                                                    @else
                                                                         <!--begin::Symbol-->
                                                                         <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
                                                                             <div class="symbol-label" style="background-image: url({{asset($image->media_path)}})"></div>
@@ -534,7 +575,6 @@
                                                                             <!--begin::Title-->
                                                                             <a href="{{url($image->media_path)}}" target="_blank" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</a>
                                                                             <!--end::Title-->
-
                                                                             <!--begin::Desc-->
                                                                             <span class="text-dark-50 font-weight-normal font-size-sm">
                                                                                 {{$image->caption ?? ''}}
@@ -542,7 +582,8 @@
                                                                             <!--begin::Desc-->
                                                                         </div>
                                                                         <!--end::Section-->
-                                                                        <div>
+                                                                    @endif
+                                                                        <div class="ml-auto">
                                                                             <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}">
                                                                                 <i class="fas fa-trash-alt text-danger mr-5"></i>
                                                                             </a>
@@ -550,7 +591,7 @@
                                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                                     <div class="modal-content">
                                                                                         <div class="modal-header">
-                                                                                            <h5 class="modal-title">Remove user from course</h5>
+                                                                                            <h5 class="modal-title">Remove the media</h5>
                                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                                             </button>
@@ -604,7 +645,7 @@
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title">Files of comment</h5>
+                                                                                <h5 class="modal-title">Upload main image</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <i aria-hidden="true" class="ki ki-close"></i>
                                                                                 </button>
@@ -615,9 +656,6 @@
                                                                                     <form action="{{url('owner/solutions/media/store')}}" method="post" enctype="multipart/form-data">
                                                                                         @csrf
                                                                                         <div class="card-body p-0">
-                                                                                            <h3 class="mb-5">
-                                                                                                Upload new document:
-                                                                                            </h3>
                                                                                             <div class="form-group">
                                                                                                 <label>File title:</label>
                                                                                                 <input type="text" name="title" class="form-control"  placeholder="Enter file title"/>
@@ -850,7 +888,7 @@
                                                                 <div class="modal-dialog modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">New Report</h5>
+                                                                            <h5 class="modal-title">Edit Report</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
@@ -876,7 +914,7 @@
                                                                                                     <label>File Browser:</label>
                                                                                                     <div></div>
                                                                                                     <div class="custom-file">
-                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile"/>
                                                                                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                                     </div>
                                                                                                 </div>
@@ -917,7 +955,7 @@
                                                                 <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Remove user from course</h5>
+                                                                            <h5 class="modal-title">Remove the report</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
@@ -982,6 +1020,17 @@
         $(function () {
             $('[data-toggle="popover"]').popover()
         })
+
+        function changeTypeOfMedia() {
+            var type = document.getElementById('media_type_selector').value ;
+            if(type == "video"){
+                document.getElementById('input_video').style.display = 'block';
+                document.getElementById('input_file').style.display = 'none';
+            }else{
+                document.getElementById('input_file').style.display = 'block';
+                document.getElementById('input_video').style.display = 'none';
+            }
+        }
     </script>
 
 
