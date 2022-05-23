@@ -28,6 +28,7 @@ Route::group(['middleware'=>'auth'],function (){
             Route::put('/{solution_id}/update','OwnerSolutionController@update');
             Route::post('/media/store','OwnerSolutionController@upload_media');
             Route::post('/media/{media_id}/delete','OwnerSolutionController@destroy_media');
+            Route::get('/media/{media_id}/delete_media','OwnerSolutionController@destroy_media');
             Route::put('/media/{media_id}/update','OwnerSolutionController@update_media');
 
             Route::get('/{solution_id}/publish','OwnerSolutionController@publish');
@@ -50,3 +51,5 @@ Route::group(['middleware'=>'auth'],function (){
 
     });
 });
+
+Route::get('test','OwnerSolutionController@get_location');

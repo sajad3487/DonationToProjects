@@ -97,8 +97,11 @@ class AdminSolutionController extends Controller
     public function upload_media(Request $request)
     {
         $data = $request->all();
-        if (isset($request->file)) {
-            $data['media_path'] = $this->mediaService->uploadMedia($request->file);
+        if (isset($request->video_link) && $request->video_link != null){
+            $data['media_path'] = $request->video_link;
+            unset($data['video_link']);
+        }elseif (isset($request->file)){
+            $data['media_path'] =$this->mediaService->uploadMedia($request->file);
             unset($data['file']);
         }
         $media = $this->mediaService->createMedia($data);

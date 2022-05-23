@@ -314,11 +314,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                             </div>
                                             @if($solution->images->count() != 0)
                                             <div class="overlay-layer">
-                                                <a href="" data-toggle="modal" data-target="#new_report" class="btn font-weight-bolder btn-sm btn-success mr-2 py-2 px-5" style="border-radius: 0px">More media</a>
+                                                <a href="" data-toggle="modal" data-target="#more_media" class="btn font-weight-bolder btn-sm btn-success mr-2 py-2 px-5" style="border-radius: 0px">More media</a>
 {{--                                                <a href="#" class="btn font-weight-bolder btn-sm btn-light-primary">Purchase</a>--}}
                                             </div>
                                             @endif
-                                            <div class="modal fade" id="new_report" role="dialog"  aria-hidden="true">
+                                            <div class="modal fade" id="more_media" role="dialog"  aria-hidden="true">
                                                 <div class="modal-dialog modal-xl" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -602,11 +602,54 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                 <td class="text-center">{{$report->body ?? ''}}</td>
                                                                 <td class="text-center">{{$report->created_at ?? ''}}</td>
                                                                 <td class="text-center">
-                                                                    <a href="{{asset($report->media_report->media_path)}}" download="{{$report->title ?? ''}}">
+                                                                    <a href="" data-toggle="modal" data-target="#report_media_{{$report->id}}" >
                                                                         <i class="flaticon-download text-success mr-5"></i>
                                                                     </a>
                                                                 </td>
                                                             </tr>
+                                                            <div class="modal fade" id="report_media_{{$report->id}}" role="dialog"  aria-hidden="true">
+                                                                <div class="modal-dialog modal-xl" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Media</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body row mt-5">
+                                                                            @foreach($report->media_report as $media_report)
+                                                                                <div class="col-12 col-md-4">
+                                                                                    <div class="d-flex flex-column flex-center ">
+                                                                                        @if($media_report->media_type == "video")
+                                                                                            <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                                        @elseif($media_report->media_type == "PDF")
+                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 border" style="background-image: url({{asset('media/icon/pdf.jpg')}})">
+                                                                                            </a>
+                                                                                        @elseif($media_report->media_type == "wordDocument")
+                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 border" style="background-image: url({{asset('media/icon/word.jpg')}})">
+                                                                                            </a>
+                                                                                        @else
+                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100" style="background-image: url({{asset($media_report->media_path)}})">
+                                                                                            </a>
+                                                                                    @endif
+                                                                                    <!--begin::Title-->
+                                                                                        <a href="{{url($media_report->media_path)}}" target="_blank" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$media_report->title ?? ''}}</a>
+                                                                                        <!--end::Title-->
+
+                                                                                        <!--begin::Text-->
+                                                                                        <div class="font-weight-bold text-dark-50 font-size-sm pb-7">
+                                                                                            {{$media_report->caption ?? ''}}
+                                                                                        </div>
+                                                                                        <!--end::Text-->
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         @endforeach
                                                         </tbody>
                                                     </table>

@@ -85,11 +85,10 @@ class OwnerSolutionController extends Controller
     public function upload_media (Request $request){
 //        dd($request->file->extension());
         $data = $request->all();
-        if (isset($request->video_link)){
+        if (isset($request->video_link) && $request->video_link != null){
             $data['media_path'] = $request->video_link;
             unset($data['video_link']);
-        }
-        if (isset($request->file)){
+        }elseif (isset($request->file)){
             $data['media_path'] =$this->mediaService->uploadMedia($request->file);
             unset($data['file']);
         }
@@ -116,6 +115,10 @@ class OwnerSolutionController extends Controller
         $data['status'] = 2;
         $this->solutionService->updateSolution($data,$id);
         return back();
+    }
+
+    public function get_location (){
+        return view('test');
     }
 
 }

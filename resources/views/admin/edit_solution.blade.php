@@ -493,12 +493,23 @@
                                                                                         </div>
                                                                                         <input type="text" name="media_type" value="image" class="d-none">
                                                                                         <div class="form-group mt-5">
+                                                                                            <label for="media_type_selector">Type of file:</label>
+                                                                                            <select class="form-control" id="media_type_selector" onchange="changeTypeOfMedia()" name="media_type">
+                                                                                                <option value="image">Image</option>
+                                                                                                <option value="video">Video</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                        <div class="form-group mt-5" id="input_file">
                                                                                             <label>File Browser:</label>
                                                                                             <div></div>
-                                                                                            <div class="custom-file">
-                                                                                                <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                                                            <div class="custom-file col-6">
+                                                                                                <input type="file" class="custom-file-input" name="file" id="customFile"/>
                                                                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                             </div>
+                                                                                        </div>
+                                                                                        <div class="form-group" id="input_video" style="display: none">
+                                                                                            <label>Video link:</label>
+                                                                                            <input type="text" name="video_link" class="form-control"  placeholder="Enter your video link"/>
                                                                                         </div>
                                                                                         <input type="text" name="type" value="solution_image" class="d-none">
                                                                                         <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
@@ -514,88 +525,78 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            @foreach($solution->images as $images_key=>$image)
-                                                                <!--begin::Item-->
-                                                                <div class="d-flex align-items-center mt-5 pb-9">
+                                                            <div class="row mt-5">
+                                                                @foreach($solution->images as $images_key=>$image)
                                                                     @if($image->media_type == "video")
-                                                                        <a  href="{{url($image->media_path)}}" target="_blank" class="row">
-                                                                            <!--begin::Symbol-->
-                                                                            <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4 border ml-4">
-                                                                                <div class="symbol-label" style="background-image: url({{asset('media/icon/video.jpg')}})"></div>
+                                                                        <div class="col-3 mb-3">
+                                                                            <div class="card card-custom overlay border">
+                                                                                <div class="card-body p-0">
+                                                                                    <div class="overlay-wrapper">
+                                                                                        <img src="{{asset('media/icon/video.jpg')}}" alt="" class="w-100 h-130px rounded"/>
+                                                                                    </div>
+                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                        <a href="{{$image->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                        <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-                                                                            <!--end::Symbol-->
-
-                                                                            <!--begin::Section-->
-                                                                            <div class="d-flex flex-column flex-grow-1">
-                                                                                <!--begin::Title-->
-                                                                                <div class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</div>
-                                                                                <!--end::Title-->
-                                                                                <!--begin::Desc-->
-                                                                                <span class="text-dark-50 font-weight-normal font-size-sm">
-                                                                                    {{$image->caption ?? ''}}
-                                                                                </span>
-                                                                                <!--begin::Desc-->
-                                                                            </div>
-                                                                            <!--end::Section-->
-                                                                        </a>
-
-                                                                    @else
-                                                                    <!--begin::Symbol-->
-                                                                        <div class="symbol symbol-60 symbol-2by3 flex-shrink-0 mr-4">
-                                                                            <div class="symbol-label" style="background-image: url({{asset($image->media_path)}})"></div>
-                                                                        </div>
-                                                                        <!--end::Symbol-->
-
-                                                                        <!--begin::Section-->
-                                                                        <div class="d-flex flex-column flex-grow-1">
-                                                                            <!--begin::Title-->
-                                                                            <a href="{{url($image->media_path)}}" target="_blank" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-1">{{$image->title ?? ''}}</a>
-                                                                            <!--end::Title-->
-                                                                            <!--begin::Desc-->
+                                                                            <h6 class="mt-3">{{$image->title ?? ''}}</h6>
                                                                             <span class="text-dark-50 font-weight-normal font-size-sm">
                                                                                 {{$image->caption ?? ''}}
                                                                             </span>
-                                                                            <!--begin::Desc-->
                                                                         </div>
-                                                                        <!--end::Section-->
+                                                                    @else
+                                                                        <div class="col-3 mb-3">
+                                                                            <div class="card card-custom overlay">
+                                                                                <div class="card-body p-0">
+                                                                                    <div class="overlay-wrapper">
+                                                                                        <img src="{{asset($image->media_path)}}" alt="" class="w-100 h-130px rounded"/>
+                                                                                    </div>
+                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                        <a href="{{url($image->media_path)}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                        <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <h6 class="mt-3">{{$image->title ?? ''}}</h6>
+                                                                            <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                {{$image->caption ?? ''}}
+                                                                            </span>
+                                                                        </div>
                                                                     @endif
-                                                                        <div class="ml-auto">
-                                                                            <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}">
-                                                                                <i class="fas fa-trash-alt text-danger mr-5"></i>
-                                                                            </a>
-                                                                            <div class="modal fade" id="delete_image{{$image->id ?? ''}}" role="dialog"  aria-hidden="true">
-                                                                                <div class="modal-dialog modal-lg" role="document">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h5 class="modal-title">Remove the media</h5>
-                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                <i aria-hidden="true" class="ki ki-close"></i>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                        <div class="modal-body">
-                                                                                            <!--begin::Form-->
-                                                                                            <div class="card-body text-center">
-                                                                                                <h3 class="mb-4">Are you sure you want to delete "{{$image->title ?? ''}}" ?</h3>
-                                                                                                <p class="my-4">This solution will be remove immediately</p>
+                                                                    <div class="modal fade" id="delete_image{{$image->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                                        <div class="modal-dialog modal-lg" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Remove the media</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <!--begin::Form-->
+                                                                                    <div class="card-body text-center">
+                                                                                        <h3 class="mb-4">Are you sure you want to delete "{{$image->title ?? ''}}" ?</h3>
+                                                                                        <p class="my-4">This solution will be remove immediately</p>
 
-                                                                                                <form action="{{url("admin/solutions/media/$image->id/delete")}}" method="post">
-                                                                                                    @csrf
-                                                                                                    <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
-                                                                                                        Cancel
-                                                                                                    </button>
-                                                                                                    <button type="submit" class="btn btn-danger font-weight-bolder">
-                                                                                                        Delete
-                                                                                                    </button>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                        <form action="{{url("admin/solutions/media/$image->id/delete")}}" method="post">
+                                                                                            @csrf
+                                                                                            <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                                                Cancel
+                                                                                            </button>
+                                                                                            <button type="submit" class="btn btn-danger font-weight-bolder">
+                                                                                                Delete
+                                                                                            </button>
+                                                                                        </form>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                <!--end::Item-->
+
                                                                 @endforeach
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <!--end::Bottom-->
@@ -843,24 +844,30 @@
                                                                             <textarea class="form-control" type="text" name="body" id="exampleTextarea" rows="6"></textarea>
                                                                         </div>
                                                                         <div class="form-group mt-5 row">
-                                                                            <div class="col-md-4">
-                                                                                <label>File Browser:</label>
-                                                                                <div></div>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" name="file" id="customFile" required/>
-                                                                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="exampleSelect1">Type of file:</label>
-                                                                                <select class="form-control" id="exampleSelect1" name="media_type">
+
+                                                                            <div class="form-group col-md-4">
+                                                                                <label for="report_media">Type of file:</label>
+                                                                                <select class="form-control" id="report_media" onchange="changeMediaOfReport()" name="media_type">
                                                                                     <option value="image">Image</option>
                                                                                     <option value="video">Video</option>
                                                                                     <option value="wordDocument">Word Document</option>
                                                                                     <option value="PDF">PDF</option>
                                                                                 </select>
                                                                             </div>
-
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group" id="report_input_file">
+                                                                                    <label>File Browser:</label>
+                                                                                    <div></div>
+                                                                                    <div class="custom-file">
+                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile"/>
+                                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group" id="report_input_video" style="display: none">
+                                                                                    <label>Video link:</label>
+                                                                                    <input type="text" name="video_link" class="form-control"  placeholder="Enter your video link"/>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                         <input type="text" name="type" value="solution_report" class="d-none">
                                                                         <input type="text" name="media_of_report" value="report_media" class="d-none">
@@ -901,7 +908,7 @@
                                                                 <div class="modal-dialog modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">New Report</h5>
+                                                                            <h5 class="modal-title">Edit Report</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
@@ -923,22 +930,28 @@
                                                                                                 <textarea class="form-control" type="text" name="body" id="exampleTextarea" rows="6">{{$report->body ?? ''}}</textarea>
                                                                                             </div>
                                                                                             <div class="form-group mt-5 row">
-                                                                                                <div class="col-md-4">
-                                                                                                    <label>File Browser:</label>
-                                                                                                    <div></div>
-                                                                                                    <div class="custom-file">
-                                                                                                        <input type="file" class="custom-file-input" name="file" id="customFile"/>
-                                                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="col-md-4">
-                                                                                                    <label for="exampleSelect1">Type of file:</label>
-                                                                                                    <select class="form-control" id="exampleSelect1" name="media_type">
-                                                                                                        <option  value="image">Image</option>
-                                                                                                        <option  value="video">Video</option>
-                                                                                                        <option  value="wordDocument">Word Document</option>
-                                                                                                        <option  value="PDF">PDF</option>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label for="report_add_media">Type of file:</label>
+                                                                                                    <select class="form-control" id="report_add_media_{{$report->id}}" onchange="changeEditMediaOfReport({{$report->id}})" name="media_type">
+                                                                                                        <option value="image">Image</option>
+                                                                                                        <option value="video">Video</option>
+                                                                                                        <option value="wordDocument">Word Document</option>
+                                                                                                        <option value="PDF">PDF</option>
                                                                                                     </select>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="form-group" id="report_add_input_file_{{$report->id}}">
+                                                                                                        <label>File Browser:</label>
+                                                                                                        <div></div>
+                                                                                                        <div class="custom-file">
+                                                                                                            <input type="file" class="custom-file-input" name="file" id="customFile"/>
+                                                                                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="form-group" id="report_add_input_video_{{$report->id}}" style="display: none">
+                                                                                                        <label>Video link:</label>
+                                                                                                        <input type="text" name="video_link" class="form-control"  placeholder="Enter your video link"/>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <input type="text" name="type" value="solution_report" class="d-none">
@@ -946,8 +959,110 @@
                                                                                             <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
                                                                                         </div>
                                                                                         <div class="col-4">
-                                                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url({{asset($report->media_report->media_path)}})"></div>
-                                                                                        </div>
+
+                                                                                            <div class="row">
+                                                                                                @foreach($report->media_report as $media_report)
+                                                                                                    @if($media_report->media_type == "video")
+                                                                                                        <div class="col-6 mb-3">
+                                                                                                            <div class="card card-custom overlay border">
+                                                                                                                <div class="card-body p-0">
+                                                                                                                    <div class="overlay-wrapper">
+                                                                                                                        <img src="{{asset('media/icon/video.jpg')}}" alt="" class="w-100 h-100px rounded"/>
+                                                                                                                    </div>
+                                                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                                                        <a href="{{$media_report->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                                                        <a href="" data-toggle="modal" data-target="#delete_report_media_{{$media_report->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <h6 class="mt-3">{{$media_report->title ?? ''}}</h6>
+                                                                                                            <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                                            {{$media_report->caption ?? ''}}
+                                                                                                        </span>
+                                                                                                        </div>
+                                                                                                    @elseif($media_report->media_type == "PDF")
+                                                                                                        <div class="col-6 mb-3">
+                                                                                                            <div class="card card-custom overlay border">
+                                                                                                                <div class="card-body p-0">
+                                                                                                                    <div class="overlay-wrapper">
+                                                                                                                        <img src="{{asset('media/icon/pdf.jpg')}}" alt="" class="w-100 h-100px rounded"/>
+                                                                                                                    </div>
+                                                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                                                        <a href="{{$media_report->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                                                        <a href="" data-toggle="modal" data-target="#delete_report_media_{{$media_report->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <h6 class="mt-3">{{$media_report->title ?? ''}}</h6>
+                                                                                                            <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                                                {{$media_report->caption ?? ''}}
+                                                                                                            </span>
+                                                                                                        </div>
+                                                                                                    @elseif($media_report->media_type == "wordDocument")
+                                                                                                        <div class="col-6 mb-3">
+                                                                                                            <div class="card card-custom overlay border">
+                                                                                                                <div class="card-body p-0">
+                                                                                                                    <div class="overlay-wrapper">
+                                                                                                                        <img src="{{asset('media/icon/word.jpg')}}" alt="" class="w-100 h-100px rounded"/>
+                                                                                                                    </div>
+                                                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                                                        <a href="{{$media_report->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                                                        <a href="" data-toggle="modal" data-target="#delete_report_media_{{$media_report->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <h6 class="mt-3">{{$media_report->title ?? ''}}</h6>
+                                                                                                            <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                                                {{$media_report->caption ?? ''}}
+                                                                                                            </span>
+                                                                                                        </div>
+                                                                                                    @else
+                                                                                                        <div class="col-6 mb-3">
+                                                                                                            <div class="card card-custom overlay">
+                                                                                                                <div class="card-body p-0">
+                                                                                                                    <div class="overlay-wrapper">
+                                                                                                                        <img src="{{asset($media_report->media_path)}}" alt="" class="w-100 h-100px rounded"/>
+                                                                                                                    </div>
+                                                                                                                    <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
+                                                                                                                        <a href="{{url($media_report->media_path)}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                                                        <a href="" data-toggle="modal" data-target="#delete_report_media_{{$media_report->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <h6 class="mt-3">{{$media_report->title ?? ''}}</h6>
+                                                                                                            <span class="text-dark-50 font-weight-normal font-size-sm">
+                                                                                                            {{$media_report->caption ?? ''}}
+                                                                                                        </span>
+                                                                                                        </div>
+                                                                                                    @endif
+                                                                                                    <div class="modal fade" id="delete_report_media_{{$media_report->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-lg" role="document">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title">Remove the media</h5>
+                                                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                                                                                                    </button>
+                                                                                                                </div>
+                                                                                                                <div class="modal-body">
+                                                                                                                    <!--begin::Form-->
+                                                                                                                    <div class="card-body text-center">
+                                                                                                                        <h3 class="mb-4">Are you sure you want to delete the media ?</h3>
+                                                                                                                        <p class="my-4">This solution will be remove immediately</p>
+                                                                                                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                                                                            Cancel
+                                                                                                                        </button>
+                                                                                                                        <a href="{{url("admin/solutions/media/$media_report->id/delete_media")}}" class="btn btn-danger font-weight-bolder">
+                                                                                                                            Delete
+                                                                                                                        </a>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                @endforeach
+                                                                                            </div>                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="card-footer text-center">
                                                                                         <button type="submit" class="btn btn-primary px-10">Save</button>
@@ -1033,6 +1148,36 @@
         $(function () {
             $('[data-toggle="popover"]').popover()
         })
+        function changeTypeOfMedia() {
+            var type = document.getElementById('media_type_selector').value ;
+            if(type == "video"){
+                document.getElementById('input_video').style.display = 'block';
+                document.getElementById('input_file').style.display = 'none';
+            }else{
+                document.getElementById('input_file').style.display = 'block';
+                document.getElementById('input_video').style.display = 'none';
+            }
+        }
+        function changeMediaOfReport() {
+            var type = document.getElementById('report_media').value ;
+            if(type == "video"){
+                document.getElementById('report_input_video').style.display = 'block';
+                document.getElementById('report_input_file').style.display = 'none';
+            }else{
+                document.getElementById('report_input_file').style.display = 'block';
+                document.getElementById('report_input_video').style.display = 'none';
+            }
+        }
+        function changeEditMediaOfReport(id) {
+            var type = document.getElementById('report_add_media_'+id).value ;
+            if(type == "video"){
+                document.getElementById('report_add_input_video_'+id).style.display = 'block';
+                document.getElementById('report_add_input_file_'+id).style.display = 'none';
+            }else{
+                document.getElementById('report_add_input_file_'+id).style.display = 'block';
+                document.getElementById('report_add_input_video_'+id).style.display = 'none';
+            }
+        }
     </script>
 
 

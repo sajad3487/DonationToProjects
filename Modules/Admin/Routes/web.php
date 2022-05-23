@@ -43,6 +43,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
 
             Route::post('/media/store','AdminSolutionController@upload_media');
             Route::post('/media/{media_id}/delete','AdminSolutionController@destroy_media');
+            Route::get('/media/{media_id}/delete_media','AdminSolutionController@destroy_media');
             Route::put('/media/{media_id}/update','AdminSolutionController@update_media');
 
             Route::group(['prefix'=>'comments'],function (){

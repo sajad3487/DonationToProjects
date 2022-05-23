@@ -23,6 +23,6 @@ class Note extends Model
     }
 
     public function media_report (){
-        return $this->hasOne(media::class,'owner_id','id')->where('type','report_media');
+        return $this->hasMany(media::class,'owner_id','id')->where('type','report_media');
     }
 }

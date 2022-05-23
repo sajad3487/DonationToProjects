@@ -100,9 +100,9 @@
                                     <!--end::Form-->
                                     <div class="separator separator-solid mb-10"></div>
 
-                                    <h3 class="px-20 pb-5">
-                                        Levels :
-                                    </h3>
+                                    <h6 class="px-20 pb-5">
+                                        Minimums to reach each level :
+                                    </h6>
                                     <div class="px-10">
                                     @foreach($levels as $level)
                                         <!--begin::Separator-->

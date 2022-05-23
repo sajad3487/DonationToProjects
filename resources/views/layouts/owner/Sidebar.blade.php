@@ -17,8 +17,9 @@
                     {{$user->position ?? ''}}
                 </div>
                 <div class="mt-2">
+                    <span class="label label-info label-inline font-weight-boldest mr-2">{{$user->level ?? ''}}</span>
 {{--                    <a href="#" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>--}}
-                    <a href="{{url("owner/profile")}}" class="btn btn-sm btn-info font-weight-bold py-2 px-3 px-xxl-5 my-1">{{$user->level ?? ''}}</a>
+{{--                    <a class="btn btn-sm btn-info font-weight-bold py-2 px-3 px-xxl-5 my-1">{{$user->level ?? ''}}</a>--}}
                 </div>
             </div>
         </div>

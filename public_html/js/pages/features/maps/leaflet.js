@@ -204,7 +204,8 @@ var KTLeaflet = function () {
 				}
 				markerLayer.clearLayers(); // remove this line to allow multi-markers on click
 				L.marker(result.latlng, { icon: leafletIcon }).addTo(markerLayer).bindPopup(result.address.Match_addr, { closeButton: false }).openPopup();
-				alert(`You've clicked on the following address: ${result.address.Match_addr}`);
+                console.log(result);
+                alert(`You've clicked on the following address: ${result.latlng.lat}`);
 			});
 		});
 	}
