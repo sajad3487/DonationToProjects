@@ -20,8 +20,8 @@
                     <div class="card-header flex-wrap py-5">
                         <div class="card-title">
                             <h3 class="card-label">
-                                Donations
-                                <span class="d-block text-muted pt-2 font-size-sm">This page shows donations info</span>
+                                Supports
+                                <span class="d-block text-muted pt-2 font-size-sm">This page shows supports info</span>
                             </h3>
                         </div>
                         <div class="card-toolbar">

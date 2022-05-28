@@ -60,7 +60,7 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
             <!--begin::Item-->
-            <a href="http://dominicanpodcast.com/" class="navi-item">
+            <a href="{{url('customer')}}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">
@@ -85,7 +85,7 @@
 
                 </div>
             </a>
-            <a href="{{url('designer/profile')}}" class="navi-item">
+            <a href="{{url('customer/profile')}}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">

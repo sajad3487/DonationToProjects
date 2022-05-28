@@ -23,7 +23,7 @@
                                         <div class="ribbon-target px-8" style="top: 12px;">
                                             <span class="ribbon-inner bg-info"></span>{{$user->level ?? ''}}
                                         </div>
-                                        <h3 class="card-title ml-25">
+                                        <h3 class="card-title ml-40">
                                             Personal Information
                                         </h3>
                                         <div class="card-toolbar">
@@ -59,13 +59,13 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="name" value="{{$user->name ?? ''}}"/>
+                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="name" value="{{$user->name ?? ''}}" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                 <div class="col-lg-9 col-xl-6">
-                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="lname" value="{{$user->lname ?? ''}}"/>
+                                                    <input class="form-control form-control-lg form-control-solid" type="text" name="lname" value="{{$user->lname ?? ''}}" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -78,10 +78,10 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Description:</label>
                                                 <div class="col-lg-9 col-xl-6">
                                                     <div class="input-group input-group-lg input-group-solid">
-                                                        <textarea class="form-control form-control-solid" name="description" rows="3">{{$user->description ?? ''}}</textarea>
+                                                        <textarea class="form-control form-control-solid" name="description" rows="3" required>{{$user->description ?? ''}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,40 @@
                                         <!--end::Body-->
                                     </form>
                                     <!--end::Form-->
-                                    <div class="separator separator-solid mb-10"></div>
+                                    <div class="separator separator-solid mb-5"></div>
+                                    <!--begin::Bottom-->
+                                    <div class="d-flex align-items-center flex-wrap ml-10 px-10 pb-5">
+                                        <h6 class="col-3 text-success">
+                                            You have reached :
+                                        </h6>
+                                        <!--begin: Item-->
+                                        <div class="d-flex align-items-center flex-lg-fill mr-5 my-1 ">
+                                                    <span class="mr-4">
+                                                        <i class="flaticon-pie-chart icon-2x  text-success font-weight-bold"></i>
+                                                    </span>
+                                            <div class="d-flex flex-column text-dark-75">
+                                                <span class="font-weight-bolder font-size-sm text-success">Solutions</span>
+                                                <span class="font-weight-bolder font-size-h5 text-success">{{$solution_number ?? ''}}</span>
+                                            </div>
+                                        </div>
+                                        <!--end: Item-->
+
+                                        <!--begin: Item-->
+                                        <div class="d-flex align-items-center flex-lg-fill mr-5 my-1 ">
+                                                    <span class="mr-4">
+                                                        <i class="flaticon-piggy-bank icon-2x font-weight-bold text-success"></i>
+                                                    </span>
+                                            <div class="d-flex flex-column text-dark-75">
+                                                <span class="font-weight-bolder font-size-sm text-success">Supports</span>
+                                                <span class="font-weight-bolder font-size-h5 text-success"><span class="font-weight-bold text-success">$</span>{{$total_donation ?? ''}}</span>
+                                            </div>
+                                        </div>
+                                        <!--end: Item-->
+
+                                    </div>
+                                    <!--end::Bottom-->
+
+                                    <div class="separator separator-solid mb-5"></div>
 
                                     <h6 class="px-20 pb-5">
                                         Minimums to reach each level :
@@ -106,14 +139,14 @@
                                     <div class="px-10">
                                     @foreach($levels as $level)
                                         <!--begin::Separator-->
-                                            <div class="separator separator-solid my-3"></div>
+{{--                                            <div class="separator separator-solid my-3"></div>--}}
                                             <!--end::Separator-->
 
                                             <!--begin::Bottom-->
-                                            <div class="d-flex align-items-center flex-wrap ml-10 px-10 pb-5">
-                                                <h4 class="col-3">
+                                            <div class="d-flex align-items-center flex-wrap ml-10 pb-5">
+                                                <h6 class="col-3">
                                                     {{$level->name ?? ''}}
-                                                </h4>
+                                                </h6>
                                                 <!--begin: Item-->
                                                 <div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
                                                     <span class="mr-4">
@@ -132,12 +165,11 @@
                                                         <i class="flaticon-piggy-bank icon-2x text-muted font-weight-bold"></i>
                                                     </span>
                                                     <div class="d-flex flex-column text-dark-75">
-                                                        <span class="font-weight-bolder font-size-sm">Donations</span>
+                                                        <span class="font-weight-bolder font-size-sm">Supports</span>
                                                         <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">$</span>{{$level->second_requirement ?? ''}}</span>
                                                     </div>
                                                 </div>
                                                 <!--end: Item-->
-
                                             </div>
                                             <!--end::Bottom-->
                                         @endforeach

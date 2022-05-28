@@ -134,7 +134,8 @@ class AdminSolutionController extends Controller
         }
         $user = $this->userService->getUserById(auth()->id());
         $solution = $this->solutionService->getSolutionWithId($id);
-        return view('solution', compact('solution', 'user'));
+        $supporter = 1;
+        return view('solution', compact('solution', 'user','supporter'));
     }
 
 }

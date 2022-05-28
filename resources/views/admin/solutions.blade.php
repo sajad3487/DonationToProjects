@@ -86,35 +86,40 @@
                                                     <textarea class="form-control" id="exampleTextarea" name="description" rows="2"></textarea>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
-                                                    <label for="exampleTextarea1">Issue:</label>
+                                                    <label for="exampleTextarea1">What is the problem that we would like to solve?</label>
                                                     <textarea class="form-control" id="exampleTextarea1" name="issue" rows="2"></textarea>
                                                     <span class="form-text text-muted">Enter less than 5000 characters.</span>
 
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
-                                                    <label for="exampleTextarea2">Solution:</label>
+                                                    <label for="exampleTextarea2">What is our solution ?</label>
                                                     <textarea class="form-control" id="exampleTextarea2" name="solution" rows="2"></textarea>
                                                     <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
-                                                    <label for="exampleTextarea3">The Function:</label>
+                                                    <label for="exampleTextarea3">What is our action?</label>
                                                     <textarea class="form-control" id="exampleTextarea3" name="our_function" rows="2"></textarea>
                                                     <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
-                                                    <label for="exampleTextarea4">Reason:</label>
+                                                    <label for="exampleTextarea4">Why do we choose the above solution? </label>
                                                     <textarea class="form-control"  id="exampleTextarea4" name="reason" rows="2"></textarea>
                                                     <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="form-group mt-1 mb-1">
-                                                    <label for="exampleTextarea5">Effect:</label>
+                                                    <label for="exampleTextarea5">What kind of impacts do we want to see? </label>
                                                     <textarea class="form-control" id="exampleTextarea5" name="effect" rows="2"></textarea>
+                                                    <span class="form-text text-muted">Enter less than 5000 characters.</span>
+                                                </div>
+                                                <div class="form-group mt-1 mb-1">
+                                                    <label for="exampleTextarea5">Other Note:</label>
+                                                    <textarea class="form-control" id="exampleTextarea5" name="other_note" rows="2"></textarea>
                                                     <span class="form-text text-muted">Enter less than 5000 characters.</span>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 col-md-4">
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleSelect1">Goal amount</label>
+                                                            <label for="exampleSelect1">What is the cost of these solutions? </label>
                                                             <input type="number" name="goal_amount" class="form-control" required />
                                                         </div>
                                                     </div>

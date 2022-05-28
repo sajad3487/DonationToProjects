@@ -15,7 +15,7 @@
                                 <div class="ribbon-target px-8" style="top: 12px;">
                                     <span class="ribbon-inner bg-info"></span>{{$user->level ?? ''}}
                                 </div>
-                                <h3 class="card-title ml-25">
+                                <h3 class="card-title ml-40">
                                     Personal Information
                                 </h3>
                             </div>
@@ -56,7 +56,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-2 col-form-label text-right px-0">Address:</label>
                                             <div class="col-lg-8">
-                                                <input type="text" name="address" class="form-control" placeholder="Enter your address" value="{{$user->address  ?? ''}}" />
+                                                <input type="text" name="address" class="form-control" placeholder="Enter your address" value="{{$user->address  ?? ''}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -67,39 +67,6 @@
                                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="separator separator-solid mb-10"></div>
-
-                                        <h6 class="px-20">
-                                            Minimums to reach each level :
-                                        </h6>
-                                        <div class="px-10">
-                                        @foreach($levels as $level)
-                                            <!--begin::Separator-->
-                                                <div class="separator separator-solid my-3"></div>
-                                                <!--end::Separator-->
-
-                                                <!--begin::Bottom-->
-                                                <div class="d-flex align-items-center flex-wrap ml-10 px-10 pb-5">
-                                                    <h4 class="col-3">
-                                                        {{$level->name ?? ''}}
-                                                    </h4>
-
-                                                    <!--begin: Item-->
-                                                    <div class="d-flex align-items-center flex-lg-fill mr-5 my-1 ml-20">
-                                                    <span class="mr-4">
-                                                        <i class="flaticon-piggy-bank icon-2x text-muted font-weight-bold"></i>
-                                                    </span>
-                                                        <div class="d-flex flex-column text-dark-75">
-                                                            <span class="font-weight-bolder font-size-sm">Donated</span>
-                                                            <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">$</span>{{$level->first_requirement ?? ''}}</span>
-                                                        </div>
-                                                    </div>
-                                                    <!--end: Item-->
-
-                                                </div>
-                                                <!--end::Bottom-->
-                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="col-lg-3 p-0">
@@ -116,10 +83,83 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </form>
                             <!--end::Form-->
                         </div>
-                        <!--end::Card-->
+
+
+                        <div class="card card-custom gutter-b mt-7">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3 class="card-label">
+                                        Levels
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!--begin::Bottom-->
+                                        <div class="d-flex align-items-center flex-wrap ml-10 px-10 pb-5">
+                                            <h6 class="col-3 text-success">
+                                                You have reached:
+                                            </h6>
+
+                                            <!--begin: Item-->
+                                            <div class="d-flex align-items-center flex-lg-fill mr-5 my-1 ml-20">
+                                                    <span class="mr-4">
+                                                        <i class="flaticon-piggy-bank icon-2x text-success font-weight-bold"></i>
+                                                    </span>
+                                                <div class="d-flex flex-column text-dark-75">
+                                                    <span class="font-weight-bolder font-size-sm text-success">Supported</span>
+                                                    <span class="font-weight-bolder font-size-h5 text-success"><span class="text-success font-weight-bold">$</span>{{$total_donation ?? ''}}</span>
+                                                </div>
+                                            </div>
+                                            <!--end: Item-->
+
+                                        </div>
+                                        <!--end::Bottom-->
+                                    </div>
+                                    <div class="col-12">
+
+                                        <div class="separator separator-solid mb-10"></div>
+                                        <h6 class="px-20">
+                                            Minimums to reach each level :
+                                        </h6>
+                                        <div class="px-10">
+                                        @foreach($levels as $level)
+                                            <!--begin::Separator-->
+                                                <div class="separator separator-solid my-3"></div>
+                                                <!--end::Separator-->
+
+                                                <!--begin::Bottom-->
+                                                <div class="d-flex align-items-center flex-wrap ml-10  pb-5">
+                                                    <h6 class="col-3">
+                                                        {{$level->name ?? ''}}
+                                                    </h6>
+
+                                                    <!--begin: Item-->
+                                                    <div class="d-flex align-items-center flex-lg-fill mr-5 my-1 ml-20">
+                                                    <span class="mr-4">
+                                                        <i class="flaticon-piggy-bank icon-2x text-muted font-weight-bold"></i>
+                                                    </span>
+                                                        <div class="d-flex flex-column text-dark-75">
+                                                            <span class="font-weight-bolder font-size-sm">Supported</span>
+                                                            <span class="font-weight-bolder font-size-h5"><span class="text-dark-50 font-weight-bold">$</span>{{$level->first_requirement ?? ''}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end: Item-->
+
+                                                </div>
+                                                <!--end::Bottom-->
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>

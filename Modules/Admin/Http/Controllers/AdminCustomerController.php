@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Modules\Media\Http\Service\MediaService;
 
 class AdminCustomerController extends Controller
 {
@@ -14,12 +15,18 @@ class AdminCustomerController extends Controller
      * @var UserService
      */
     private $userService;
+    /**
+     * @var MediaService
+     */
+    private $mediaService;
 
     public function __construct(
-        UserService $userService
+        UserService $userService,
+        MediaService $mediaService
     )
     {
         $this->userService = $userService;
+        $this->mediaService = $mediaService;
     }
 
     public function index()
@@ -34,7 +41,11 @@ class AdminCustomerController extends Controller
     {
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
-        $solution_provider = $this->userService->createNewUser($data);
+        if (isset($request->file)){
+            $data['profile_picture'] =$this->mediaService->uploadMedia($request->file);
+        }
+
+        $customer = $this->userService->createNewUser($data);
         return back();
     }
 

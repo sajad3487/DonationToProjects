@@ -16,11 +16,11 @@
                         <div class="card card-custom ">
                             <div class="card-body rounded p-0 d-flex bg-light justify-content-between">
                                 <div
-                                    class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-20 pr-lg-0">
+                                    class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-650px py-10 py-md-6 px-6 px-md-10 pr-lg-0">
                                     <h1 class="font-weight-bolder text-dark mb-3">Search Solution</h1>
                                 {{--                                    <div class="font-size-h4 mb-8">Get Amazing Gadgets</div>--}}
                                 <!--begin::Form-->
-                                    <form action="{{url('designer/project/search')}}" method="get" class="d-flex flex-center py-2 px-6 bg-white rounded">
+                                    <form action="{{url('customer/solutions/search')}}" method="get" class="d-flex flex-center py-2 px-6 bg-white rounded">
                                         @csrf
                                                         <span class="svg-icon svg-icon-lg svg-icon-primary"><!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg--><svg
                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@
                                                                     </g>
                                                                 </svg>
                                                          </span>
-                                        <input type="text" name="search" class="form-control border-0 font-weight-bold pl-2" placeholder="Search Goods"/>
+                                        <input type="text" name="search" class="form-control border-0 font-weight-bold pl-2" placeholder="Search Solutions"/>
                                     </form>
                                     <!--end::Form-->
                                 </div>
@@ -57,20 +57,20 @@
 
                         <!--begin::Engage Widget 15-->
                         <div class="card card-custom ">
-                            <div class="card-body rounded px-6 py-4 bg-light">
+                            <div class="card-body rounded px-6 py-2 bg-light">
                                 <div class="row justify-content-between">
-                                    <div class="col-auto font-size-h4  mt-4 ml-4">
-                                        @if($category_id == 0)
-                                            @if(isset($sort) && $sort == 'date')
-                                                    Sort by : Date
-                                                @elseif(isset($sort) && $sort == 'support')
-                                                    Sort by : Most Support
-                                                @else
-                                                    All Solutions
+                                    <div class="col-auto font-size-h6  mt-4 ml-4">
+                                            @if(isset($sort))
+                                                @if($sort[0] == 'sorting')
+                                                    Sort by : {{$sort[1] ?? ''}}
+                                                @elseif($sort[0] == 'search')
+                                                    Search : {{$sort[1] ?? ''}}
+                                                @elseif($sort[0] == 'all')
+                                                    {{$sort[1] ?? ''}}
+                                                @elseif($sort[0] == 'category')
+                                                    Category : {{$sort[1] ?? ''}}
                                                 @endif
-                                            @else
-                                            {{$category_name ?? ''}}
-                                        @endif
+                                            @endif
                                     </div>
                                     <div class="col-auto">
                                         <div class="row">
@@ -87,43 +87,29 @@
                                             </div>
 
                                             <div class=" mt-2 mr-4 col-auto">Categories:
-                                                @if($category_id == 0)
+                                                @if($category_id == 0 && isset($sort) && $sort[0] == 'all')
                                                     <a href="{{url("customer/solutions")}}" class="btn btn-primary mx-2">All</a>
                                                 @else
-                                                    <a href="{{url("customer/solutions")}}" class="btn btn-outline-primary mx-2">All</a>
+                                                    <a href="{{url("customer/solutions")}}" class="btn btn-light-primary mx-2">All</a>
                                                 @endif
 
                                                 @if(isset($categories))
-                                                    @foreach($categories as $category)
-                                                        @if($category->activeSubCat->count() != 0)
-                                                            <div class="btn-group">
-                                                                @if($category->id == $category_id)
-                                                                    <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$category->title ?? ''}}</a>
-                                                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                                    </button>
-                                                                @else
-                                                                    <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$category->title ?? ''}}</a>
-                                                                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                                    </button>
-                                                                @endif
 
-                                                                <div class="dropdown-menu">
-                                                                    @foreach($category->activeSubCat as $subCat)
-                                                                        <a class="dropdown-item" href="{{url("customer/solutions/categories/$subCat->id/index")}}">{{$subCat->title}}</a>
-                                                                    @endforeach
-                                                                </div>
+
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-light-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</button>
+                                                            <div class="dropdown-menu">
+
+                                                            @foreach($categories as $category)
+                                                                <a class="dropdown-item" href="{{url("customer/solutions/categories/$category->id/index")}}">{{$category->title ?? ''}}</a>
+                                                                @foreach($category->activeSubCat as $subCat)
+                                                                    <a class="dropdown-item" href="{{url("customer/solutions/categories/$subCat->id/index")}}">--- {{$subCat->title ?? ''}}</a>
+                                                                @endforeach
+                                                                <div class="dropdown-divider"></div>
+                                                            @endforeach
                                                             </div>
-                                                        @else
-                                                            @if($category->id == $category_id)
-                                                                <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-primary">{{$subCat->title ?? ''}}</a>
-                                                            @else
-                                                                <a href="{{url("customer/solutions/categories/$category->id/index")}}" class="btn btn-outline-primary">{{$subCat->title ?? ''}}</a>
-                                                            @endif
-                                                        @endif
-                                                        {{--                                            <a href="" class="btn btn-outline-primary mr-2"></a>--}}
-                                                    @endforeach
+
+                                                        </div>
                                                 @endif
                                             </div>
                                         </div>

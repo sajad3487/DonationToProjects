@@ -49,7 +49,9 @@ class CustomerSolutionController extends Controller
         $solutions = $this->solutionService->getSolutionsWithStatus(3);
         $categories = $this->categoryService->getActiveCategories();
         $category_id = 0;
-        return view('customer.solutions',compact('active','user','solutions','categories','category_id'));
+        $sort[0] = "all";
+        $sort[1] = "All Solutions";
+        return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
     }
 
     public function show ($id){
@@ -58,7 +60,13 @@ class CustomerSolutionController extends Controller
         }
         $user = $this->userService->getUserById(auth()->id());
         $solution = $this->solutionService->getSolutionWithId($id);
-        return view('solution',compact('solution','user'));
+        $supporter = 0;
+        foreach ($solution->donations as $donation){
+            if ($donation->customer->id == auth()->id()){
+                $supporter = 1;
+            }
+        }
+        return view('solution',compact('solution','user','supporter'));
     }
 
     public function customer_donated()
@@ -77,26 +85,42 @@ class CustomerSolutionController extends Controller
         $categories = $this->categoryService->getActiveCategories();
         $category = $this->categoryService->getCategoryById($category_id);
         $category_name = $category->title;
-        return view('customer.solutions',compact('active','user','solutions','categories','category_id','category_name'));
+        $sort[0] = "category";
+        $sort [1] = $category_name;
+        return view('customer.solutions',compact('active','user','solutions','categories','category_id','category_name','sort'));
     }
 
     public function sort_by_date (){
         $active = 2;
         $user = $this->userService->getUserById(auth()->id());
-        $solutions = $this->solutionService->getSolutionWithDateSorting();
+        $solutions = $this->solutionService->getSolutionWithDateSorting(3);
         $categories = $this->categoryService->getActiveCategories();
         $category_id = 0;
-        $sort = "date";
+        $sort[0] = "sorting";
+        $sort [1] = "date";
         return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
     }
 
     public function sort_by_support (){
         $active = 2;
         $user = $this->userService->getUserById(auth()->id());
-        $solutions = $this->solutionService->getSolutionWithSupportSorting();
+        $solutions = $this->solutionService->getSolutionWithSupportSorting(3);
         $categories = $this->categoryService->getActiveCategories();
         $category_id = 0;
-        $sort = "support";
+        $sort[0] = "sorting";
+        $sort[1] = "support";
+        return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
+    }
+
+    public function search_solution (Request $request){
+        $data = $request->search;
+        $active = 2;
+        $user = $this->userService->getUserById(auth()->id());
+        $solutions = $this->solutionService->searchSolution($data,3);
+        $categories = $this->categoryService->getActiveCategories();
+        $category_id = 0;
+        $sort[0] = 'search';
+        $sort[1] = $data;
         return view('customer.solutions',compact('active','user','solutions','categories','category_id','sort'));
     }
 }

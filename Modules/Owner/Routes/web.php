@@ -35,6 +35,13 @@ Route::group(['middleware'=>'auth'],function (){
 
             Route::group(['prefix'=>'comments'],function (){
                 Route::post('/store','OwnerCommentController@store');
+                Route::post('/{comment_id}/delete','OwnerCommentController@destroy');
+            });
+
+            Route::group(['prefix'=>'location'],function (){
+                Route::post('/store','OwnerLocationController@store');
+                Route::get('/{solution_id}/edit','OwnerLocationController@edit');
+                Route::put('/{solution_id}/update','OwnerLocationController@update');
             });
 
             Route::group(['prefix'=>'reports'],function (){

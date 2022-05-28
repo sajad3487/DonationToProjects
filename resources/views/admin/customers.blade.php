@@ -87,6 +87,13 @@
                                                     <div class="col-lg-4">
                                                         <input type="text" name="tel" class="form-control" placeholder="Enter the phone number of user" required value="{{ old('tel') ?? ''}}" />
                                                     </div>
+                                                    <label class="col-lg-2 col-form-label text-right">Profile picture:</label>
+                                                    <div class="col-lg-4">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="file" id="customFile" required/>
+                                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <input type="number" name="user_type" value="1" class="d-none">
                                                 <div class="text-center">
@@ -154,7 +161,7 @@
                                                                     <div class="">
                                                                         @include('fragment.error')
                                                                         <div class="form-group row">
-                                                                            <div class="col-4 mx-auto">
+                                                                            <div class="col-6 mx-auto">
                                                                                 <label>File Browser</label>
                                                                                 <div></div>
                                                                                 <div class="custom-file">

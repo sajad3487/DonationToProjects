@@ -27,6 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="{{asset('plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css"/>
     <!--end::Page Vendors Styles-->
 
+    <link href="{{asset('plugins/custom/leaflet/leaflet.bundle.css')}}" rel="stylesheet" type="text/css"/>
 
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{asset('plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
@@ -192,16 +193,18 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class=" container ">
                         <div class="d-flex justify-content-between align-items-center pt-10 pb-10">
                             <div class="col-auto">
-                                <button type="button" class="btn btn-success py-5 px-20 " style="border-radius: 0px">
-                                    <h6 class="pt-2">
-                                        GOAL Cause {{$solution->goal_amount ?? 0}} $
-                                    </h6>
-                                </button>
-                                <button type="button" class="btn btn-dark py-5 px-20 " style="border-radius: 0px">
-                                    <h6 class="pt-2">
-                                        Achieved {{$solution->achieved_amount ?? 0}} $
-                                    </h6>
-                                </button>
+                                <div class="row">
+                                    <div class="bg-success py-5 px-20 " style="border-radius: 0px">
+                                        <h6 class="pt-2 text-white">
+                                            GOAL Cause {{$solution->goal_amount ?? 0}} $
+                                        </h6>
+                                    </div>
+                                    <div class="bg-dark py-5 px-20" style="border-radius: 0px">
+                                        <h6 class="pt-2 text-white">
+                                            Achieved {{$solution->achieved_amount ?? 0}} $
+                                        </h6>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-auto pt-5 text-center">
                                 <h1 class="font-weight-bolder text-light mb-0 display-3">
@@ -410,12 +413,26 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <h5>Comments</h5>
                                                 </a>
                                             </li>
+                                            <li class="nav-item mx-2">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7">
+                                                    <h5>Solution Provider</h5>
+                                                </a>
+                                            </li>
+                                            @if($solution->e_location != null && $solution->w_location != null)
+                                                <li class="nav-item mx-2">
+                                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_8">
+                                                        <h5>Location</h5>
+                                                    </a>
+                                                </li>
+                                            @endif
                                             @if(isset($user) && $user != null)
+                                                @if($supporter == 1)
                                             <li class="nav-item mx-2">
                                                 <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_6">
                                                     <h5>Reports</h5>
                                                 </a>
                                             </li>
+                                                    @endif
                                                 @endif
 
                                         </ul>
@@ -453,6 +470,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 </h6>
                                                 <p>
                                                     {{$solution->effect ?? ''}}
+                                                </p>
+                                                <h6 class="mt-5">
+                                                    Other Note
+                                                </h6>
+                                                <p>
+                                                    {{$solution->other_note ?? ''}}
                                                 </p>
                                             </div>
                                             <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
@@ -567,7 +590,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <!--begin::Editor-->
                                                     <form class="position-relative" action="{{url("customer/solutions/comments/store")}}" method="post" enctype="multipart/form-data">
                                                         @csrf
-                                                        <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="2" placeholder="Comment" required></textarea>
+                                                        <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="2" placeholder="You can write your comments here…" required></textarea>
                                                         <input type="number" name="owner_id" value="{{$solution->id}}" class="d-none">
                                                         <input type="text" name="type" value="solution_comment" class="d-none">
                                                         <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
@@ -579,8 +602,86 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <!--edit::Editor-->
                                                     @endif
                                             </div>
-                                            @if(isset($user) && $user != null)
-                                            <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel" aria-labelledby="kt_tab_pane_6">
+                                            <div class="tab-pane fade" id="kt_tab_pane_7" role="tabpanel" aria-labelledby="kt_tab_pane_7">
+                                                <div class="overflow-auto">
+                                                    <!--begin::Details-->
+                                                    <div class="d-flex mb-9">
+                                                        <!--begin: Pic-->
+                                                        <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+                                                            <div class="symbol symbol-50 symbol-lg-120">
+                                                                <img src="{{asset($solution->owner->profile_picture)}}" alt="image"/>
+                                                            </div>
+
+                                                            <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
+                                                                <span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Pic-->
+
+                                                        <!--begin::Info-->
+                                                        <div class="flex-grow-1">
+                                                            <!--begin::Title-->
+                                                            <div class="d-flex justify-content-between flex-wrap mt-1">
+                                                                <div class="d-flex mr-3">
+                                                                    <a class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{$solution->owner->name ?? ''}} {{$solution->owner->lname ?? ''}}</a>
+{{--                                                                    <a href="#"><i class="flaticon2-correct text-success font-size-h5"></i></a>--}}
+                                                                </div>
+
+                                                                <div class="my-lg-0 my-3">
+
+{{--                                                                    <a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a>--}}
+{{--                                                                    <a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">hire</a>--}}
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Title-->
+
+                                                            <!--begin::Content-->
+                                                            <div class="d-flex flex-wrap justify-content-between mt-1">
+                                                                <div class="d-flex flex-column flex-grow-1 pr-8">
+                                                                    <div class="d-flex flex-wrap mb-4">
+                                                                        <span class="label label-info label-inline mr-2">{{$solution->owner->level ?? ''}}</span>
+{{--                                                                        <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"><i class="flaticon2-new-email mr-2 font-size-lg"></i>jason@siastudio.com</a>--}}
+{{--                                                                        <a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"><i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>PR Manager </a>--}}
+{{--                                                                        <a href="#" class="text-dark-50 text-hover-primary font-weight-bold"><i class="flaticon2-placeholder mr-2 font-size-lg"></i>Melbourne</a>--}}
+                                                                    </div>
+
+                                                                    <span class="font-weight-bold text-dark-50">{{$solution->owner->description ?? ''}}</span>
+{{--                                                                    <span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>--}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="row ml-1 mt-1">
+                                                                <h6>
+                                                                    Resposible preson : {{$solution->responsible_person ?? $solution->owner->name." ".$solution->owner->lname}}
+                                                                </h6>
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Info-->
+                                                    </div>
+                                                    <!--end::Details-->
+                                                </div>
+                                            </div>
+                                            @if($solution->e_location != null && $solution->w_location != null)
+                                                <div class="tab-pane fade" id="kt_tab_pane_8" role="tabpanel" aria-labelledby="kt_tab_pane_6">
+                                                    <div class="overflow-auto col-6 mx-auto">
+                                                        <div id="kt_leaflet_1" style="height:300px;"></div>
+                                                        <a href="https://www.google.com/maps/dir//{{$solution->e_location}},{{$solution->w_location}}/{{'@'.$solution->e_location}},{{$solution->w_location}}" class="btn btn-light-primary mt-5" target="_blank">
+                                                            <i class="flaticon-pin"></i> Direction
+                                                        </a>
+                                                    </div>
+                                                    <div class="d-none">
+                                                        <div id="kt_leaflet_5" style="height:300px;"></div>
+
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="d-none" id="e_location_base" value="{{$solution->e_location ?? ''}}">
+                                                <input type="text" class="d-none" id="w_location_base" value="{{$solution->w_location ?? ''}}">
+
+                                            @endif
+                                        @if(isset($user) && $user != null)
+                                                @if($supporter == 1)
+
+                                                <div class="tab-pane fade" id="kt_tab_pane_6" role="tabpanel" aria-labelledby="kt_tab_pane_6">
                                                 <div class="overflow-auto">
                                                     <!--begin: Datatable-->
                                                     <table class="table table-separate table-head-custom table-checkable" id="kt_datatable1">
@@ -588,9 +689,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         <tr>
                                                             <th class="text-center">#</th>
                                                             <th class="text-center">Title</th>
-                                                            <th class="text-center">Report</th>
                                                             <th class="text-center">Date</th>
-                                                            <th class="text-center">File</th>
+                                                            <th class="text-center">View detail</th>
                                                         </tr>
                                                         </thead>
 
@@ -599,51 +699,66 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <tr>
                                                                 <td class="text-center">{{$report_key +1 ?? ''}}</td>
                                                                 <td class="text-center">{{$report->title ?? ''}}</td>
-                                                                <td class="text-center">{{$report->body ?? ''}}</td>
                                                                 <td class="text-center">{{$report->created_at ?? ''}}</td>
                                                                 <td class="text-center">
-                                                                    <a href="" data-toggle="modal" data-target="#report_media_{{$report->id}}" >
-                                                                        <i class="flaticon-download text-success mr-5"></i>
+                                                                    <a href="" class="btn btn-icon btn-light-success" data-toggle="modal" data-target="#report_media_{{$report->id}}" >
+                                                                        <i class="flaticon-eye"></i>
                                                                     </a>
+
                                                                 </td>
                                                             </tr>
                                                             <div class="modal fade" id="report_media_{{$report->id}}" role="dialog"  aria-hidden="true">
                                                                 <div class="modal-dialog modal-xl" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Media</h5>
+                                                                            <h5 class="modal-title">Report</h5>
+                                                                            <button type="button" class="btn btn-light-primary font-weight-bold ml-auto mr-10" onclick="printdiv({{$report_key}});">Print Report</button>
+
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body row mt-5">
-                                                                            @foreach($report->media_report as $media_report)
-                                                                                <div class="col-12 col-md-4">
-                                                                                    <div class="d-flex flex-column flex-center ">
-                                                                                        @if($media_report->media_type == "video")
-                                                                                            <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                                                        @elseif($media_report->media_type == "PDF")
-                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 border" style="background-image: url({{asset('media/icon/pdf.jpg')}})">
-                                                                                            </a>
-                                                                                        @elseif($media_report->media_type == "wordDocument")
-                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 border" style="background-image: url({{asset('media/icon/word.jpg')}})">
-                                                                                            </a>
-                                                                                        @else
-                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100" style="background-image: url({{asset($media_report->media_path)}})">
-                                                                                            </a>
-                                                                                    @endif
-                                                                                    <!--begin::Title-->
-                                                                                        <a href="{{url($media_report->media_path)}}" target="_blank" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$media_report->title ?? ''}}</a>
-                                                                                        <!--end::Title-->
+                                                                            <div class="col-12 col-md-8 px-10" id="print-this-{{$report_key}}">
+                                                                                <h4>
+                                                                                    {{$report->title ?? ''}}
+                                                                                </h4>
+                                                                                <p>
+                                                                                    {{$report->body ?? ''}}
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="col-12 col-md-4">
 
-                                                                                        <!--begin::Text-->
-                                                                                        <div class="font-weight-bold text-dark-50 font-size-sm pb-7">
-                                                                                            {{$media_report->caption ?? ''}}
+                                                                                <div class="row">
+                                                                                    @foreach($report->media_report as $media_report)
+                                                                                        <div class="col-12 col-md-12">
+                                                                                            <div class="d-flex  flex-center ">
+                                                                                                @if($media_report->media_type == "video")
+                                                                                                    <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded my-2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                                                @elseif($media_report->media_type == "PDF")
+                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2 border" style="background-image: url({{asset('media/icon/pdf.jpg')}})">
+                                                                                                    </a>
+                                                                                                @elseif($media_report->media_type == "wordDocument")
+                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2 border" style="background-image: url({{asset('media/icon/word.jpg')}})">
+                                                                                                    </a>
+                                                                                                @else
+                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2" style="background-image: url({{asset($media_report->media_path)}})">
+                                                                                                    </a>
+                                                                                            @endif
+                                                                                            <!--begin::Title-->
+                                                                                                <a href="{{url($media_report->media_path)}}" target="_blank" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$media_report->title ?? ''}}</a>
+                                                                                                <!--end::Title-->
+
+                                                                                                <!--begin::Text-->
+                                                                                                <div class="font-weight-bold text-dark-50 font-size-sm pb-7">
+                                                                                                    {{$media_report->caption ?? ''}}
+                                                                                                </div>
+                                                                                                <!--end::Text-->
+                                                                                            </div>
                                                                                         </div>
-                                                                                        <!--end::Text-->
-                                                                                    </div>
+                                                                                    @endforeach
                                                                                 </div>
-                                                                            @endforeach
+                                                                            </div>
                                                                         </div>
 
                                                                     </div>
@@ -656,7 +771,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <!--end: Datatable-->
                                                 </div>
                                             </div>
-
+                                                @endif
                                                 @endif
                                         </div>
 
@@ -719,7 +834,21 @@ License: You must have a valid license purchased only from themeforest(the above
     </g>
 </svg><!--end::Svg Icon--></span></div>
 <!--end::Scrolltop-->
+<script>
+    function printdiv(key)
+    {
+        var printContents = document.getElementById('print-this-'+key).innerHTML;
 
+        var myWindow = window.open('','','width=800,height=800');
+        myWindow.document.write(printContents);
+        myWindow.print();
+
+
+        // document.body.innerHTML = printContents;
+        // window.print();
+        // document.body.innerHTML = originalContents;
+    }
+</script>
 
 <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
 <!--begin::Global Config(global config for global JS scripts)-->
@@ -790,6 +919,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{asset('plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
 <script src="{{asset('js/scripts.bundle.js')}}"></script>
 <!--end::Global Theme Bundle-->
+<script src="{{asset('plugins/custom/leaflet/leaflet.bundle.js')}}"></script>
+<script src="{{asset('js/pages/features/maps/leaflet.js')}}"></script>
 
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>

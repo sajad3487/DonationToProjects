@@ -42,14 +42,41 @@
                                 <div class="card-toolbar">
                                     @if($solution->status == 1 )
                                         @if(isset($solution->main_image) && $solution->main_image != null)
-                                        <a href="{{url("owner/solutions/$solution->id/publish")}}" class="btn btn-warning font-weight-bold mr-2">Publish the Solution</a>
-                                            @else
+                                        <a href=""  data-toggle="modal" data-target="#publish_solution_{{$solution->id ?? ''}}" class="btn btn-warning font-weight-bold mr-2">Publish the Solution</a>
+                                            <div class="modal fade" id="publish_solution_{{$solution->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Publish the solution</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!--begin::Form-->
+                                                            <div class="card-body text-center">
+                                                                <h3 class="mb-4">Are you sure you want to publish "{{$solution->title ?? ''}}" ?</h3>
+                                                                <p class="my-4">You can't change the primary information after publishing the solution. You can change media, documents, and the location of the solution. </p>
+
+                                                                    <input type="number" class="d-none" name="user_id" value="{{$solution->id ?? ''}}">
+                                                                    <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                        Cancel
+                                                                    </button>
+                                                                    <a href="{{url("owner/solutions/$solution->id/publish")}}" type="submit" class="btn btn-success font-weight-bolder">
+                                                                        Publish
+                                                                    </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
                                             <button type="button" class="btn btn-warning" data-toggle="popover" data-trigger="click" title="Requirement for publishing" data-content="You should upload a photo for your solution before publishing that">
                                                 Publish the Solution
                                             </button>
                                         @endif
                                         @elseif ($solution->status == 2 )
-                                        <span class="bg-light-danger btn-sm text-danger font-weight-bold btn-upper btn-text">Waiting to confirm</span>
+                                        <span class="bg-light-danger btn-sm text-danger font-weight-bold btn-upper btn-text">Waiting to approval</span>
                                         @elseif ($solution->status == 3)
                                         <span class="bg-light-success btn-sm text-success font-weight-bold btn-upper btn-text">Published</span>
                                         @endif
@@ -95,6 +122,22 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item ">
+                                                <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_7" >
+                                                    <span class="nav-icon">
+                                                        <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Devices/Display1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                    <path d="M6,5 L18,5 C19.6568542,5 21,6.34314575 21,8 L21,17 C21,18.6568542 19.6568542,20 18,20 L6,20 C4.34314575,20 3,18.6568542 3,17 L3,8 C3,6.34314575 4.34314575,5 6,5 Z M5,17 L14,17 L9.5,11 L5,17 Z M16,14 C17.6568542,14 19,12.6568542 19,11 C19,9.34314575 17.6568542,8 16,8 C14.3431458,8 13,9.34314575 13,11 C13,12.6568542 14.3431458,14 16,14 Z" fill="#000000"/>
+                                                                </g>
+                                                            </svg><!--end::Svg Icon-->
+                                                        </span>
+                                                    </span>
+                                                    <span class="nav-text">
+                                                        Location
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
                                                 <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_3" >
                                                     <span class="nav-icon">
                                                         <span class="svg-icon "><!--begin::Svg Icon | path:assets/media/svg/icons/Devices/Display1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -110,6 +153,7 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                            @if($solution->status == 3)
                                             <li class="nav-item ">
                                                 <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_4" >
                                                     <span class="nav-icon ">
@@ -145,7 +189,7 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                            @if($solution->status == 3)
+
                                             <li class="nav-item ">
                                                 <a class="nav-link mx-2" data-toggle="tab" href="#kt_apps_contacts_view_tab_6" >
                                                     <span class="nav-icon ">
@@ -175,6 +219,17 @@
                                         <!--begin::Tab Content-->
                                         <div class="tab-pane active" id="kt_apps_contacts_view_tab_1" role="tabpanel">
                                             <div class="container">
+                                                @if($solution->status == 3)
+                                                    <div class="alert alert-custom alert-light-primary fade show py-2 px-6 mt-2 mb-0" role="alert">
+                                                        <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                                                        <div class="alert-text">The solution is published. You can't change the primary information about that. You can change media, documents, and the location of the solution.</div>
+                                                        <div class="alert-close">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                 <form  action="{{url("/owner/solutions/$solution->id/update")}}" method="post" class="p-5" enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')
@@ -182,14 +237,14 @@
                                                         @include('fragment.error')
                                                         <div class="form-group mt-1">
                                                             <label>Title</label>
-                                                            <input type="text" name="title" class="form-control"  placeholder="Enter title of the solution" value="{{$solution->title ?? ''}}"/>
+                                                            <input type="text" name="title" class="form-control" value="{{$solution->title ?? ''}}" @if($solution->status == 3) disabled @endif/>
                                                             <span class="form-text text-muted">Enter less than 250 character.</span>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-12 col-md-6">
                                                                 <div class="form-group mt-1">
                                                                     <label for="exampleSelect1">Category</label>
-                                                                    <select class="form-control" id="exampleSelect1" name="category_id" required>
+                                                                    <select class="form-control" id="exampleSelect1" name="category_id" @if($solution->status == 3) disabled @endif required>
                                                                         <option>Select a category for the solution</option>
                                                                         @foreach($categories as $category)
                                                                             <option @if($solution->category_id == $category->id) selected @endif value="{{$category->id ?? ''}}">{{$category->title ?? ''}}</option>
@@ -204,51 +259,63 @@
                                                                 <div class="form-group mt-1">
                                                                     <label for="example-number-input" class="">Goal:</label>
                                                                     <div class="">
-                                                                        <input class="form-control" type="number" name="goal_amount" id="example-number-input" value="{{$solution->goal_amount ?? ''}}"/>
+                                                                        <input class="form-control" type="number" name="goal_amount" id="example-number-input" value="{{$solution->goal_amount ?? ''}}" @if($solution->status == 3) disabled @endif/>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleInputPassword1">Brief description:</label>
-                                                            <input type="text" name="brief_description" class="form-control" value="{{$solution->brief_description ?? ''}}" placeholder="Enter the brief description of the solution"/>
+                                                            <input type="text" name="brief_description" class="form-control" value="{{$solution->brief_description ?? ''}}" placeholder="Enter the brief description of the solution" @if($solution->status == 3) disabled @endif/>
                                                             <span class="form-text text-muted">Enter less than 250 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleTextarea">Description:</label>
-                                                            <textarea class="form-control" name="description" rows="2">{{$solution->description ?? ''}}</textarea>
+                                                            <textarea class="form-control" name="description" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->description ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea1">Issue:</label>
-                                                            <textarea class="form-control" name="issue" rows="2">{{$solution->issue ?? ''}}</textarea>
+                                                            <label for="exampleTextarea1">What is the problem that we would like to solve?</label>
+                                                            <textarea class="form-control" name="issue" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->issue ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea2">Solution:</label>
-                                                            <textarea class="form-control" name="solution" rows="2">{{$solution->solution ?? ''}}</textarea>
+                                                            <label for="exampleTextarea2">What is our solution (including goals)?</label>
+                                                            <textarea class="form-control" name="solution" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->solution ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea3">The Function:</label>
-                                                            <textarea class="form-control" name="our_function" rows="2">{{$solution->our_function ?? ''}}</textarea>
+                                                            <label for="exampleTextarea3">What is our action? </label>
+                                                            <textarea class="form-control" name="our_function" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->our_function ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea4">Reason:</label>
-                                                            <textarea class="form-control"  name="reason" rows="2">{{$solution->reason ?? ''}}</textarea>
+                                                            <label for="exampleTextarea4">Why do we choose the above solution? </label>
+                                                            <textarea class="form-control"  name="reason" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->reason ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea5">Effect:</label>
-                                                            <textarea class="form-control" name="effect" rows="2">{{$solution->effect ?? ''}}</textarea>
+                                                            <label for="exampleTextarea5">What kind of impacts do we want to see? </label>
+                                                            <textarea class="form-control" name="effect" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->effect ?? ''}}</textarea>
                                                             <span class="form-text text-muted">Enter less than 5000 character.</span>
+                                                        </div>
+                                                        <div class="form-group mt-1">
+                                                            <label for="exampleTextarea5">Other Note </label>
+                                                            <textarea class="form-control" name="other_note" rows="2" @if($solution->status == 3) disabled @endif>{{$solution->other_note ?? ''}}</textarea>
+                                                            <span class="form-text text-muted">Enter less than 5000 character.</span>
+                                                        </div>
+                                                        <div class="form-group mt-1 col-12 col-md-6 p-0">
+                                                            <label>Responsible Person</label>
+                                                            <input type="text" name="responsible_person" class="form-control"  value="{{$solution->responsible_person ?? ''}}" @if($solution->status == 3) disabled @endif/>
+                                                            <span class="form-text text-muted">Enter less than 250 character.</span>
                                                         </div>
                                                     </div>
+                                                    @if($solution->status != 3)
                                                     <div class="card-footer text-center">
                                                         <button type="reset" class="btn btn-secondary">Cancel</button>
                                                         <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                                     </div>
+                                                        @endif
                                                 </form>
                                             </div>
                                         </div>
@@ -330,7 +397,7 @@
                                                             <td>{{$media->title ?? ''}}</td>
                                                             <td>{{$media->caption ?? ''}}</td>
                                                             <td>
-                                                                <a href="{{asset($media->media_path)}}" download="{{$media->title ?? ''}}">
+                                                                <a href="{{url($media->media_path)}}" target="_blank">
                                                                     <i class="flaticon-download text-success mr-5"></i>
                                                                 </a>
                                                                 <a href="" data-toggle="modal" data-target="#delete_solution_{{$media->id ?? ''}}">
@@ -375,6 +442,34 @@
 
                                         </div>
                                         <!--end::Tab Content-->
+                                        <!--begin::Tab Content-->
+                                        <div class="tab-pane" id="kt_apps_contacts_view_tab_7" role="tabpanel">
+                                            <!--begin::Forms Widget 11-->
+                                            <!--begin::Card-->
+                                            <div class="card card-custom gutter-b">
+                                                <div class="card-body">
+                                                    <div class=" col-12 @if($solution->e_location == null || $solution->w_location == null) d-none @endif">
+                                                        <div id="kt_leaflet_1" style="height:300px;"></div>
+                                                        <a href="{{url("owner/solutions/location/$solution->id/edit")}}" class="btn btn-light-warning font-weight-bold mr-5 mt-5 col-auto ml-auto">Change location</a>
+
+                                                    </div>
+                                                    <div class=" col-12  @if($solution->e_location != null && $solution->w_location != null) d-none @endif">
+                                                        <div id="kt_leaflet_5" style="height:300px;"></div>
+                                                        <form action="{{url("owner/solutions/location/store")}}" method="post">
+                                                            @csrf
+                                                            <input type="text" class="d-none" name="e_location" id="e_location" required>
+                                                            <input type="text" class="d-none" name="w_location" id="w_location" required>
+                                                            <input type="number" class="d-none" name="solution_id" value="{{$solution->id ?? ''}}" required>
+                                                            <div class="row">
+                                                                <button type="submit" class="btn btn-light-success font-weight-bold mr-5 mt-5 col-auto ml-auto">Save</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Card-->
+                                        </div>
+                                        <!--end::Tab Content-->
 
                                         <!--begin::Tab Content-->
                                         <div class="tab-pane" id="kt_apps_contacts_view_tab_3" role="tabpanel">
@@ -389,6 +484,7 @@
                                                         <a href="{{url($solution->main_image->media_path)}}" target="_blank" class="mt-2">
                                                             <div class="bgi-no-repeat bgi-size-cover rounded min-h-295px mt-5" style="background-image: url({{asset($solution->main_image->media_path)}})"></div>
                                                         </a>
+
                                                         <!--end::Image-->
 
                                                         <!--begin::Action-->
@@ -403,21 +499,22 @@
                                                                         </g>
                                                                     </svg><!--end::Svg Icon-->
                                                                 </span>
-                                                                Change main image
+                                                                Change main media
                                                             </a>
+                                                            <span class="form-text text-muted">It's required to publish the solution and it can be just an image</span>
+
                                                         </div>
                                                         <!--end::Action-->
                                                         <div class="modal fade" id="edit_main_image" role="dialog"  aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title">Main image</h5>
+                                                                        <h5 class="modal-title">Main media</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                             <i aria-hidden="true" class="ki ki-close"></i>
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body row">
-
                                                                         <div class="col-md-12">
                                                                             <form action="{{url("owner/solutions/media/".$solution->main_image->id."/update")}}" method="post" enctype="multipart/form-data">
                                                                                 @csrf
@@ -440,6 +537,7 @@
                                                                                             <input type="file" class="custom-file-input" name="file" id="customFile" required/>
                                                                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                         </div>
+                                                                                        <span class="form-text text-muted">Compatible file types: jpg, gif, png, bmp</span>
                                                                                     </div>
                                                                                     <input type="text" name="type" value="solution_main_image" class="d-none">
                                                                                     <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
@@ -449,9 +547,7 @@
                                                                                 </div>
                                                                             </form>
                                                                         </div>
-
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -477,13 +573,13 @@
                                                                         </g>
                                                                     </svg><!--end::Svg Icon-->
                                                                 </span>
-                                                                Upload more image
+                                                                Upload more media
                                                             </a>
                                                             <div class="modal fade" id="more_image" role="dialog"  aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Upload more image</h5>
+                                                                            <h5 class="modal-title">Upload more media</h5>
                                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
@@ -516,10 +612,14 @@
                                                                                                 <input type="file" class="custom-file-input" name="file" id="customFile"/>
                                                                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                                                                             </div>
+                                                                                            <span class="form-text text-muted">Compatible file types: jpg, gif, png, bmp</span>
+
                                                                                         </div>
                                                                                         <div class="form-group" id="input_video" style="display: none">
                                                                                             <label>Video link:</label>
                                                                                             <input type="text" name="video_link" class="form-control"  placeholder="Enter your video link"/>
+                                                                                            <span class="form-text text-muted">you should enter the embed link of video from Youtube</span>
+
                                                                                         </div>
 
                                                                                         <input type="text" name="type" value="solution_image" class="d-none">
@@ -626,14 +726,16 @@
                                                                                 </g>
                                                                             </svg><!--end::Svg Icon-->
                                                                         </span>
-                                                                        Select main image
+                                                                        Select main media
                                                                     </a>
+                                                                    <span class="form-text text-muted">It's required to publish the solution and it can be just an image</span>
+
                                                                 </div>
                                                                 <div class="modal fade" id="new_main_image" role="dialog"  aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title">Upload main image</h5>
+                                                                                <h5 class="modal-title">Upload main media</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <i aria-hidden="true" class="ki ki-close"></i>
                                                                                 </button>
@@ -748,16 +850,54 @@
 
                                                             <!--begin::Info-->
                                                             <div class="d-flex flex-column flex-row-fluid">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex align-items-center flex-wrap">
-                                                                    <div class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">{{$comment->user->name ?? ''}}</div>
-                                                                </div>
+                                                                <div class="row justify-content-between">
+                                                                    <div class="col-auto">
+                                                                        <!--begin::Info-->
+                                                                        <div class="d-flex align-items-center flex-wrap">
+                                                                            <div class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder pr-6">{{$comment->user->name ?? ''}}</div>
+                                                                        </div>
 
-                                                                <span class="text-dark-75 font-size-sm font-weight-normal pt-1">
-                                                                    {{$comment->body ?? ''}}
-                                                                </span>
-                                                                <!--end::Info-->
+                                                                        <span class="text-dark-75 font-size-sm font-weight-normal pt-1">
+                                                                        {{$comment->body ?? ''}}
+                                                                    </span>
+                                                                        <!--end::Info-->
+                                                                    </div>
+                                                                    <a href="" data-toggle="modal" data-target="#delete_comment_{{$comment->id ?? ''}}">
+                                                                        <i class="fas fa-trash-alt text-danger mr-5 col-auto mt-5"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="modal fade" id="delete_comment_{{$comment->id ?? ''}}" role="dialog"  aria-hidden="true">
+                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Remove the comment</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <!--begin::Form-->
+                                                                                <div class="card-body text-center">
+                                                                                    <h3 class="mb-4">Are you sure you want to delete the comment ?</h3>
+                                                                                    <p class="my-4">This solution will be remove immediately</p>
+
+                                                                                    <form action="{{url("owner/solutions/comments/$comment->id/delete")}}" method="post">
+                                                                                        @csrf
+                                                                                        <input type="number" class="d-none" name="user_id" value="{{$solution->id ?? ''}}">
+                                                                                        <button data-dismiss="modal" aria-label="Close" class="btn btn-light font-weight-bolder mr-5">
+                                                                                            Cancel
+                                                                                        </button>
+                                                                                        <button type="submit" class="btn btn-danger font-weight-bolder">
+                                                                                            Delete
+                                                                                        </button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+
                                                             <!--end::Info-->
                                                         </div>
                                                         <!--end::Item-->
@@ -772,7 +912,7 @@
                                                 <!--begin::Editor-->
                                                 <form class="position-relative" action="{{url("owner/solutions/comments/store")}}" method="post" enctype="multipart/form-data">
                                                     @csrf
-                                                    <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Comment" required></textarea>
+                                                    <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="You can write your comments here…" required></textarea>
                                                     <input type="number" name="owner_id" value="{{$solution->id}}" class="d-none">
                                                     <input type="text" name="type" value="solution_comment" class="d-none">
                                                     <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
@@ -789,7 +929,7 @@
                                         <!--end::Tab Content-->
 
 
-                                        <!--begin::Tab Content-->
+                                        <!--begin::Tab Content---------------------Report -->
                                         <div class="tab-pane p-5" id="kt_apps_contacts_view_tab_6" role="tabpanel">
                                             <div class="row">
                                                 <a href="" data-toggle="modal" data-target="#new_report" class="btn btn-light-warning font-weight-bold ml-auto mr-5">New Report</a>
@@ -1109,23 +1249,13 @@
             <!--end::Container-->
         </div>
         <!--end::Entry-->
-
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <div class=" container ">
-
-
-
-            </div>
-            <!--end::Container-->
-        </div>
     </div>
     <!--end::Content-->
 
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
-        })
+        });
 
         function changeTypeOfMedia() {
             var type = document.getElementById('media_type_selector').value ;
@@ -1158,7 +1288,6 @@
             }
         }
     </script>
-
 
 
 @endsection

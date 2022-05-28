@@ -35,6 +35,9 @@ Route::group(['middleware'=>'auth'],function (){
             Route::group(['prefix'=>'donate'],function (){
                 Route::post('/store','CustomerDonationController@store');
             });
+
+            Route::get('/search','CustomerSolutionController@search_solution');
+
         });
 
         Route::group(['prefix'=>'financial'],function (){

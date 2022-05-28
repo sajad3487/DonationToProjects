@@ -27,6 +27,7 @@ class CreateSolutionsTable extends Migration
             $table->text('our_function')->nullable();
             $table->text('reason')->nullable();
             $table->text('effect')->nullable();
+            $table->text('other_note')->nullable();
             $table->string('address')->nullable();
             $table->string('e_location')->nullable();
             $table->string('w_location')->nullable();

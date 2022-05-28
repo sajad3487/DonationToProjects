@@ -42,9 +42,9 @@
                                                                 <div class="flex-grow-1 mr-2 pt-4" >
                                                                     <!--begin::Title-->
                                                                     @if($message->owner_id == auth()->id())
-                                                                    <div class="font-weight-bolder">{{$message->receiver->name ?? ''}}</div>
+                                                                    <div class="font-weight-bolder">{{$message->receiver->name ?? ''}} {{$message->receiver->lname ?? ''}}</div>
                                                                     @else
-                                                                    <div class="font-weight-bolder">{{$message->sender->name ?? ''}}</div>
+                                                                    <div class="font-weight-bolder">{{$message->sender->name ?? ''}} {{$message->sender->lname ?? ''}}</div>
                                                                         @endif
                                                                     <!--end::Title-->
 
@@ -76,9 +76,9 @@
                                             <div class="card-header p-5 mx-5 row justify-content-between">
                                                 <div class="text-center flex-grow-1">
                                                     @if($message->owner_id == auth()->id())
-                                                    <div class="text-dark-75 font-weight-bold font-size-h5">{{$message_detail->receiver->name ?? ''}}</div>
+                                                    <div class="text-dark-75 font-weight-bold font-size-h5">{{$message_detail->receiver->name ?? ''}} {{$message_detail->receiver->lname ?? ''}}</div>
                                                     @else
-                                                    <div class="text-dark-75 font-weight-bold font-size-h5">{{$message_detail->sender->name ?? ''}}</div>
+                                                    <div class="text-dark-75 font-weight-bold font-size-h5">{{$message_detail->sender->name ?? ''}} {{$message_detail->sender->lname ?? ''}}</div>
                                                         @endif
                                                     <div>
                                                         {{--                                                            <span class="label label-sm label-dot label-success"></span>--}}

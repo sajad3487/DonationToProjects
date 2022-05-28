@@ -23,6 +23,7 @@ class Solution extends Model
         'our_function',
         'reason',
         'effect',
+        'other_note',
         'address',
         'e_location',
         'w_location',

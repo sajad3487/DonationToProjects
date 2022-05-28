@@ -36,6 +36,7 @@ class OwnerCommentController extends Controller
 
     public function destroy($id)
     {
-        //
+        $this->noteService->delete($id);
+        return back();
     }
 }

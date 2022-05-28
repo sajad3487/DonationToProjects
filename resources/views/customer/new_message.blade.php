@@ -17,7 +17,7 @@
                             <div class="card-header p-5 mx-5 row justify-content-between">
 
                                             <div class="text-center flex-grow-1">
-                                                <div class="text-dark-75 font-weight-bold font-size-h5">{{$target->name ?? ''}}</div>
+                                                <div class="text-dark-75 font-weight-bold font-size-h5">{{$target->name ?? ''}} {{$target->lname ?? ''}}</div>
                                                 <div>
                                                     {{--                                                            <span class="label label-sm label-dot label-success"></span>--}}
                                                     {{--                                                            <span class="font-weight-bold text-muted font-size-sm">Active</span>--}}

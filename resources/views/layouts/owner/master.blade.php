@@ -16,6 +16,7 @@
     <link href="{{asset('plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css"/>
     <!--end::Page Vendors Styles-->
 
+    <link href="{{asset('plugins/custom/leaflet/leaflet.bundle.css')}}" rel="stylesheet" type="text/css"/>
 
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{asset('plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css"/>
@@ -137,7 +138,8 @@
     <!--end::Page-->
 </div>
 <!--end::Main-->
-
+<input type="text" class="d-none" id="e_location_base" value="{{$solution->e_location ?? ''}}">
+<input type="text" class="d-none" id="w_location_base" value="{{$solution->w_location ?? ''}}">
 
 
 
@@ -217,6 +219,8 @@
 <script src="{{asset('js/scripts.bundle.js')}}"></script>
 <script src="{{asset('js/upload.js')}}"></script>
 <!--end::Global Theme Bundle-->
+<script src="{{asset('plugins/custom/leaflet/leaflet.bundle.js')}}"></script>
+<script src="{{asset('js/pages/features/maps/leaflet.js')}}"></script>
 
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>

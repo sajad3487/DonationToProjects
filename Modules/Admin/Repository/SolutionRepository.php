@@ -39,6 +39,7 @@ class SolutionRepository extends Repository
     public function getSolutionById ($id){
         return Solution::where('id',$id)
             ->with('medias')
+            ->with('owner')
             ->with('category')
             ->with('main_image')
             ->with('images')
@@ -102,8 +103,9 @@ class SolutionRepository extends Repository
             ->get();
     }
 
-    public function getAllSolutionWithDateSorting (){
-        return Solution::orderBy('created_at','DESC')
+    public function getAllSolutionWithDateSorting ($status){
+        return Solution::where('status',$status)
+            ->orderBy('created_at','DESC')
             ->with('medias')
             ->with('category')
             ->with('main_image')
@@ -119,8 +121,26 @@ class SolutionRepository extends Repository
     }
 
 
-    public function getAllSolutionWithSupportSorting (){
-        return Solution::orderBy('achieved_amount','DESC')
+    public function getAllSolutionWithSupportSorting ($status){
+        return Solution::where('status',$status)
+            ->orderBy('achieved_amount','DESC')
+            ->with('medias')
+            ->with('category')
+            ->with('main_image')
+            ->with('images')
+            ->with('comments')
+            ->with('comments.user')
+            ->with('reports')
+            ->with('reports.media_report')
+            ->with('donations')
+            ->with('donations.solution_provider')
+            ->with('donations.customer')
+            ->get();
+    }
+
+    public function searchSolutionWithStatus ($data,$status){
+        return Solution::where('title','like',"%{$data}%")
+            ->where('status',$status)
             ->with('medias')
             ->with('category')
             ->with('main_image')

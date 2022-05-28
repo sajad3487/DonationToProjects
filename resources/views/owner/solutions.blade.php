@@ -23,17 +23,29 @@
                                     <div class="card-body">
                                         <!--begin::Header-->
                                         <div class="d-flex flex-column flex-center">
+                                            @if(isset($solution->main_image))
                                             <!--begin::Image-->
                                             <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset($solution->main_image->media_path)}})"></div>
                                             <!--end::Image-->
+                                            @endif
 
                                             <!--begin::Title-->
-                                            <a href="#" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$solution->title ?? ''}}</a>
+                                            <a href="{{url("owner/solutions/$solution->id/edit")}}" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$solution->title ?? ''}}</a>
                                             <!--end::Title-->
 
                                             <!--begin::Text-->
-                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-7">{{$solution->created_at ?? ''}}</div>
+                                            <div class="font-weight-bold text-dark-50 font-size-sm">{{$solution->created_at ?? ''}}</div>
                                             <!--end::Text-->
+                                            @if($solution->status == 3)
+                                                <!--begin::Text-->
+                                                    <span class="label label-light-success label-inline mr-2 mt-3">Published</span>
+                                                    <!--end::Text-->
+                                                @elseif($solution->status == 1 || $solution->status == 2)
+                                                 <!--begin::Text-->
+                                                     <span class="label label-light-warning label-inline mr-2 mt-3">Pending</span>
+                                                     <!--end::Text-->
+
+                                            @endif
                                         </div>
                                         <!--end::Header-->
 
@@ -70,7 +82,7 @@
                                                     </g>
                                                     </svg><!--end::Svg Icon-->
                                                 </span>
-                                                <div class="font-weight-bolder text-primary ml-2">0 Donation</div>
+                                                <div class="font-weight-bolder text-primary ml-2">{{$solution->donations->count() ?? 0}} Supports</div>
                                             </div>
                                             <div class="d-flex align-items-center mr-7">
                                                 <span class="svg-icon svg-icon-gray-500"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group-chat.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

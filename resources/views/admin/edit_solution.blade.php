@@ -196,6 +196,12 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <div class="form-group mt-1">
+                                                                    <label for="exampleSelect1">What is the cost of these solutions? </label>
+                                                                    <input type="number" name="goal_amount" class="form-control" required value="{{$solution->goal_amount ?? 0}}"/>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group mt-1">
                                                             <label for="exampleInputPassword1">Brief description:</label>
@@ -206,28 +212,28 @@
                                                             <textarea class="form-control" name="description" rows="2">{{$solution->description ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea1">Issue:</label>
+                                                            <label for="exampleTextarea1">What is the problem that we would like to solve? </label>
                                                             <textarea class="form-control" name="issue" rows="2">{{$solution->issue ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea2">Solution:</label>
+                                                            <label for="exampleTextarea2">What is our solution?</label>
                                                             <textarea class="form-control" name="solution" rows="2">{{$solution->solution ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea3">The Function:</label>
+                                                            <label for="exampleTextarea3">What is our action?</label>
                                                             <textarea class="form-control" name="our_function" rows="2">{{$solution->our_function ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea4">Reason:</label>
+                                                            <label for="exampleTextarea4">Why do we choose the above solution? </label>
                                                             <textarea class="form-control"  name="reason" rows="2">{{$solution->reason ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="exampleTextarea5">Effect:</label>
+                                                            <label for="exampleTextarea5">What kind of impacts do we want to see? </label>
                                                             <textarea class="form-control" name="effect" rows="2">{{$solution->effect ?? ''}}</textarea>
                                                         </div>
                                                         <div class="form-group mt-1">
-                                                            <label for="address">Address:</label>
-                                                            <input type="text" name="address" class="form-control" id="address" placeholder="Enter the address" value="{{$solution->address ?? ''}}"/>
+                                                            <label for="exampleTextarea5">Other Note:</label>
+                                                            <textarea class="form-control" name="other_note" rows="2">{{$solution->other_note ?? ''}}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="card-footer text-center">
@@ -798,7 +804,7 @@
                                                 <!--begin::Editor-->
                                                 <form class="position-relative" action="{{url("admin/solutions/comments/store")}}" method="post" enctype="multipart/form-data">
                                                     @csrf
-                                                    <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="Comment" required></textarea>
+                                                    <textarea id="kt_forms_widget_11_input" name="body" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="You can write your comments here…" required></textarea>
                                                     <input type="number" name="owner_id" value="{{$solution->id}}" class="d-none">
                                                     <input type="text" name="type" value="solution_comment" class="d-none">
                                                     <div class="position-absolute top-0 right-0 mt-n1 mr-n2">

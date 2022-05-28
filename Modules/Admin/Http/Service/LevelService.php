@@ -14,7 +14,7 @@ class LevelService
     /**
      * @var SolutionService
      */
-    private $solutionRepo;
+    private $solutionService;
     /**
      * @var DonationService
      */
@@ -27,7 +27,7 @@ class LevelService
     )
     {
         $this->levelRepo = $levelRepository;
-        $this->solutionRepo = $solutionService;
+        $this->solutionService = $solutionService;
         $this->donationService = $donationService;
     }
 
@@ -70,7 +70,7 @@ class LevelService
 
     public function getOwnerLevels ($owner_id){
         $owner_levels = $this->levelRepo->getAllLevelsWithType ('owner_level');
-        $owner_solution = $this->solutionRepo->getSolutionsOfUser($owner_id);
+        $owner_solution = $this->solutionService->getSolutionsOfUser($owner_id);
         $owner_solution_number = $owner_solution->count();
         $owner_taken_donation = 0;
         foreach ($owner_solution as $solution){
