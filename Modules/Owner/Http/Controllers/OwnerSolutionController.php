@@ -85,7 +85,8 @@ class OwnerSolutionController extends Controller
     public function upload_media (Request $request){
         $data = $request->all();
         if (isset($request->video_link) && $request->video_link != null){
-            $data['media_path'] = $request->video_link;
+            $data['media_path'] = str_replace("https://www.youtube.com/watch?v=", "",$request->video_link);
+
             unset($data['video_link']);
         }elseif (isset($request->file)){
             $data['media_path'] =$this->mediaService->uploadMedia($request->file);

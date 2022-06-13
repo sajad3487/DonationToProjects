@@ -59,7 +59,7 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed " >
     <!--begin::Logo-->
     <a href="{{url('/')}}">
-        <img alt="Logo" src="{{asset('media/logo.png')}}" style="width: 40%"/>
+        <img alt="Logo" src="{{asset('media/logo-Recovered.png')}}" style="width: 40%"/>
     </a>
     <!--end::Logo-->
 

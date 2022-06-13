@@ -535,13 +535,14 @@
                                                                 @foreach($solution->images as $images_key=>$image)
                                                                     @if($image->media_type == "video")
                                                                         <div class="col-3 mb-3">
-                                                                            <div class="card card-custom overlay border">
+                                                                            <iframe style="width: 100%" src="https://www.youtube.com/embed/{{$image->media_path}}" class="rounded my-2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                                                            <div class="card card-custom overlay border mt-8">
                                                                                 <div class="card-body p-0">
                                                                                     <div class="overlay-wrapper">
-                                                                                        <img src="{{asset('media/icon/video.jpg')}}" alt="" class="w-100 h-130px rounded"/>
                                                                                     </div>
                                                                                     <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
-                                                                                        <a href="{{$image->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                        <a href="https://www.youtube.com/watch?v={{$image->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
                                                                                         <a href="" data-toggle="modal" data-target="#delete_image{{$image->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
                                                                                     </div>
                                                                                 </div>
@@ -715,7 +716,7 @@
                                                             <td>{{$donation->solution_provider->name ?? ''}}</td>
                                                             <td>{{$donation->amount ?? ''}}</td>
                                                             <td>
-                                                                <a href="{{url("customer/solutions/$donation->solution_id/show")}}" class="btn btn-light-info font-weight-bold mr-2" target="_blank">View</a>
+                                                                <a href="{{url("customer/solutions/$donation->solution_id/show")}}" class="btn btn-light-info font-weight-bold mr-2" target="_blank">View the solution</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -935,6 +936,10 @@
                                                                                                 <label for="exampleTextarea">Report body:</label>
                                                                                                 <textarea class="form-control" type="text" name="body" id="exampleTextarea" rows="6">{{$report->body ?? ''}}</textarea>
                                                                                             </div>
+                                                                                            <hr>
+                                                                                            <h6>
+                                                                                                Add more media
+                                                                                            </h6>
                                                                                             <div class="form-group mt-5 row">
                                                                                                 <div class="form-group col-md-6">
                                                                                                     <label for="report_add_media">Type of file:</label>
@@ -946,6 +951,7 @@
                                                                                                     </select>
                                                                                                 </div>
                                                                                                 <div class="col-md-6">
+
                                                                                                     <div class="form-group" id="report_add_input_file_{{$report->id}}">
                                                                                                         <label>File Browser:</label>
                                                                                                         <div></div>
@@ -963,20 +969,27 @@
                                                                                             <input type="text" name="type" value="solution_report" class="d-none">
                                                                                             <input type="text" name="media_of_report" value="report_media" class="d-none">
                                                                                             <input type="number" name="owner_id" value="{{$solution->id ?? ''}}" class="d-none">
+                                                                                            <div class="text-center">
+                                                                                                <button type="submit" class="btn btn-primary px-10">Save</button>
+                                                                                            </div>
                                                                                         </div>
                                                                                         <div class="col-4">
 
                                                                                             <div class="row">
                                                                                                 @foreach($report->media_report as $media_report)
                                                                                                     @if($media_report->media_type == "video")
-                                                                                                        <div class="col-6 mb-3">
-                                                                                                            <div class="card card-custom overlay border">
+                                                                                                        <div class="col-12 mb-3">
+                                                                                                            <iframe style="width: 100%" src="https://www.youtube.com/embed/{{$media_report->media_path}}" class="rounded my-2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                                                                                            <div class="card card-custom overlay border mt-8">
                                                                                                                 <div class="card-body p-0">
                                                                                                                     <div class="overlay-wrapper">
-                                                                                                                        <img src="{{asset('media/icon/video.jpg')}}" alt="" class="w-100 h-100px rounded"/>
+                                                                                                                        {{--                                                                                                                        <h6>--}}
+                                                                                                                        {{--                                                                                                                            {{$media_report->title ?? ''}}--}}
+                                                                                                                        {{--                                                                                                                        </h6>--}}
                                                                                                                     </div>
                                                                                                                     <div class="overlay-layer align-items-end justify-content-end pb-5 pr-5">
-                                                                                                                        <a href="{{$media_report->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
+                                                                                                                        <a href="https://www.youtube.com/watch?v={{$media_report->media_path}}" class="btn btn-clean btn-icon mr-2" target="_blank"><i class="flaticon-download icon-lg text-success"></i></a>
                                                                                                                         <a href="" data-toggle="modal" data-target="#delete_report_media_{{$media_report->id ?? ''}}" class="btn btn-clean btn-icon"><i class="flaticon2-rubbish-bin-delete-button icon-lg text-danger"></i></a>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -1068,10 +1081,8 @@
                                                                                                     </div>
 
                                                                                                 @endforeach
-                                                                                            </div>                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card-footer text-center">
-                                                                                        <button type="submit" class="btn btn-primary px-10">Save</button>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </form>
                                                                             </div>

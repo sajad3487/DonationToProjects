@@ -37,7 +37,7 @@ class OwnerReportController extends Controller
         $data['user_id'] = auth()->id();
         $report = $this->noteService->create($data);
         if (isset($request->video_link) && $request->video_link != null){
-            $media_data['media_path'] = $request->video_link;
+            $media_data['media_path'] = str_replace("https://www.youtube.com/watch?v=", "",$request->video_link);
             $media_data['type'] = $request->media_of_report;
             $media_data['owner_id'] = $report->id;
             $media_data['media_type'] = $request->media_type;
@@ -63,7 +63,7 @@ class OwnerReportController extends Controller
         unset($data['video_link']);
         $this->noteService->update ($data,$id);
         if (isset($request->video_link) && $request->video_link != null) {
-            $media_data['media_path'] =$request->video_link;
+            $media_data['media_path'] = str_replace("https://www.youtube.com/watch?v=", "",$request->video_link);
             $media_data['type'] = $request->media_of_report;
             $media_data['owner_id'] = $id;
             $media_data['media_type'] = $request->media_type;

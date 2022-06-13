@@ -4,7 +4,7 @@
 <!--begin::Head-->
 <head><base href="../../../">
     <meta charset="utf-8"/>
-    <title>Ivan</title>
+    <title>Pohon</title>
     <meta name="description" content="Login page example"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -28,7 +28,7 @@
     <link href="{{asset('/css/themes/layout/brand/dark.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('/css/themes/layout/aside/dark.css')}}" rel="stylesheet" type="text/css"/>        <!--end::Layout Themes-->
 
-    <link rel="shortcut icon" href="{{asset('/media/logos/favicon.ico')}}"/>
+    <link rel="shortcut icon" href="{{asset('/media/logos/logo-32.png')}}"/>
 
 </head>
 <!--end::Head-->
@@ -41,26 +41,23 @@
     <!--begin::Login-->
     <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
         <!--begin::Aside-->
-        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #74e2ff;">
+        <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #101b2a;">
             <!--begin::Aside Top-->
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <!--begin::Aside header-->
                 <a href="#" class="text-center mb-10">
-                    <img src="{{asset('/media/logos/logo-transperant-1.png')}}" class="max-h-70px" alt=""/>
+                    <img src="{{asset('/media/logos/logo.png')}}" class="max-h-150px" alt=""/>
                 </a>
                 <!--end::Aside header-->
 
                 <!--begin::Aside title-->
-                <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #b4005a;">
-                    Design your idea<br/>
 
-                </h3>
                 <!--end::Aside title-->
             </div>
             <!--end::Aside Top-->
 
             <!--begin::Aside Bottom-->
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset('/media/svg/illustrations/login-visual-4.svg')}})"></div>
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset('/media/svg/illustrations/login-visual-8.svg')}})"></div>
             <!--end::Aside Bottom-->
         </div>
         <!--begin::Aside-->
@@ -77,8 +74,8 @@
                         @csrf
                         <!--begin::Title-->
                         <div class="pb-13 pt-lg-0 pt-5">
-                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Ivan website</h3>
-                            <span class="text-muted font-weight-bold font-size-h4">New Here? <a href="{{url('/register')}}" id="kt_login_signup" class="text-primary font-weight-bolder">Create an Account</a></span>
+                            <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Pohon</h3>
+                            <span class="text-muted font-weight-bold font-size-h4">New Here? <a href="{{url('/choose_register')}}" id="kt_login_signup" class="text-primary font-weight-bolder">Create an Account</a></span>
                         </div>
                         <!--begin::Title-->
 

@@ -23,7 +23,7 @@ Route::get('/run-migrations', function () {
 
 
 
-Route::get('/designer_register', function (){
+Route::get('/provider_register', function (){
     return view('auth.designer_register');
 });
 
@@ -35,5 +35,8 @@ Route::get('/',function (){
     return redirect('customer');
 });
 
+Route::get('choose_register',function (){
+    return view('choose_register');
+});
 
 Route::get('solution/{solution_id}/view','SolutionController@view');

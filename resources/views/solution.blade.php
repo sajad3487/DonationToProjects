@@ -335,7 +335,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                     <div class="col-12 col-md-4">
                                                                         <div class="d-flex flex-column flex-center">
                                                                             @if($image->media_type == "video")
-                                                                                <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                                <iframe width="320" height="180" src="https://www.youtube.com/embed/{{$image->media_path}}" class="rounded" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{--                                                                                <iframe width="727" height="409" src="https://www.youtube.com/embed/{{$image->media_path}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--}}
                                                                                 @else
                                                                             <a href="{{url($image->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url({{asset($image->media_path)}})">
                                                                             </a>
@@ -584,6 +585,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                     <!--end::Bottom-->
                                                 @endforeach
                                                 @if(isset($user) && $user != null)
+                                                        @if($supporter == 1)
                                                     <div class="separator separator-solid mt-9 mb-4"></div>
                                                     <!--end::Separator-->
 
@@ -600,6 +602,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                         </div>
                                                     </form>
                                                     <!--edit::Editor-->
+                                                            @endif
                                                     @endif
                                             </div>
                                             <div class="tab-pane fade" id="kt_tab_pane_7" role="tabpanel" aria-labelledby="kt_tab_pane_7">
@@ -718,8 +721,43 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                                                             </button>
                                                                         </div>
+                                                                        <div class="row d-none">
+                                                                            <div id="print-this-{{$report_key}}">
+                                                                                <div class="px-10" >
+                                                                                    <h4>
+                                                                                        {{$report->title ?? ''}}
+                                                                                    </h4>
+                                                                                    <p>
+                                                                                        {{$report->body ?? ''}}
+                                                                                    </p>
+                                                                                    @foreach($report->media_report as $media_report)
+                                                                                        @if($media_report->media_type != "video" && $media_report->media_type != "wordDocument" && $media_report->media_type != "PDF")
+                                                                                            <img src="{{asset($media_report->media_path)}}" alt="" style="width: 100%"><br>
+                                                                                        @endif
+                                                                                    @endforeach
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="chrome-print-this-{{$report_key}}">
+                                                                                <div class="px-10" >
+                                                                                    <h4>
+                                                                                        {{$report->title ?? ''}}
+                                                                                    </h4>
+                                                                                    <p>
+                                                                                        {{$report->body ?? ''}}
+                                                                                    </p>
+                                                                                    @foreach($report->media_report as $media_report)
+                                                                                        @if($media_report->media_type != "video" && $media_report->media_type != "wordDocument" && $media_report->media_type != "PDF")
+                                                                                            <img src="{{asset($media_report->media_path)}}" alt="" style="width: 100%; display: block"><br>
+                                                                                        @endif
+                                                                                    @endforeach
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="modal-body row mt-5">
-                                                                            <div class="col-12 col-md-8 px-10" id="print-this-{{$report_key}}">
+
+                                                                            <div class="col-12 col-md-8 px-10" >
                                                                                 <h4>
                                                                                     {{$report->title ?? ''}}
                                                                                 </h4>
@@ -731,31 +769,36 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                                                                 <div class="row">
                                                                                     @foreach($report->media_report as $media_report)
-                                                                                        <div class="col-12 col-md-12">
-                                                                                            <div class="d-flex  flex-center ">
                                                                                                 @if($media_report->media_type == "video")
-                                                                                                    <iframe width="320" height="180" src="https://www.youtube.com/embed/Jzh4PYXUiKI" class="rounded my-2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                                                                @elseif($media_report->media_type == "PDF")
-                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2 border" style="background-image: url({{asset('media/icon/pdf.jpg')}})">
-                                                                                                    </a>
-                                                                                                @elseif($media_report->media_type == "wordDocument")
-                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2 border" style="background-image: url({{asset('media/icon/word.jpg')}})">
-                                                                                                    </a>
-                                                                                                @else
-                                                                                                    <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-180px w-100 m-2" style="background-image: url({{asset($media_report->media_path)}})">
-                                                                                                    </a>
-                                                                                            @endif
-                                                                                            <!--begin::Title-->
-                                                                                                <a href="{{url($media_report->media_path)}}" target="_blank" class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{$media_report->title ?? ''}}</a>
-                                                                                                <!--end::Title-->
+                                                                                                    <div class="col-12 col-md-12">
+                                                                                                        <div class="d-flex  flex-center ">
+                                                                                                            <iframe style="width: 100%" src="https://www.youtube.com/embed/{{$media_report->media_path}}" class="rounded my-2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                                                                        </div>
+                                                                                                    </div>
 
-                                                                                                <!--begin::Text-->
-                                                                                                <div class="font-weight-bold text-dark-50 font-size-sm pb-7">
-                                                                                                    {{$media_report->caption ?? ''}}
-                                                                                                </div>
-                                                                                                <!--end::Text-->
-                                                                                            </div>
-                                                                                        </div>
+                                                                                                @elseif($media_report->media_type == "PDF")
+                                                                                                    <div class="col-6 col-md-6 p-2">
+                                                                                                        <div class="d-flex  flex-center ">
+                                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-90px w-100 m-2 border" style="background-image: url({{asset('media/icon/pdf.jpg')}})">
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                @elseif($media_report->media_type == "wordDocument")
+                                                                                                    <div class="col-6 col-md-6 p-2">
+                                                                                                        <div class="d-flex  flex-center ">
+                                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-90px w-100 m-2 border" style="background-image: url({{asset('media/icon/word.jpg')}})">
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                @else
+                                                                                                    <div class="col-6 col-md-6 p-2">
+                                                                                                        <div class="d-flex  flex-center ">
+                                                                                                            <a href="{{url($media_report->media_path)}}" target="_blank" class="bgi-no-repeat bgi-size-cover rounded h-90px w-100 m-2" style="background-image: url({{asset($media_report->media_path)}})">
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                            @endif
+
                                                                                     @endforeach
                                                                                 </div>
                                                                             </div>
@@ -837,11 +880,36 @@ License: You must have a valid license purchased only from themeforest(the above
 <script>
     function printdiv(key)
     {
-        var printContents = document.getElementById('print-this-'+key).innerHTML;
+        let userAgent = navigator.userAgent;
+        let browserName;
 
-        var myWindow = window.open('','','width=800,height=800');
-        myWindow.document.write(printContents);
-        myWindow.print();
+        if(userAgent.match(/chrome|chromium|crios/i)){
+            var printContents = document.getElementById('chrome-print-this-'+key).innerHTML;
+            var myWindow = window.open('','','width=800,height=800');
+            myWindow.document.write(printContents);
+            setTimeout(function() {
+                myWindow.print();
+                myWindow.close();
+            }, 250);
+
+        }else if(userAgent.match(/firefox|fxios/i)){
+            var printContents = document.getElementById('print-this-'+key).innerHTML;
+            var myWindow = window.open('','','width=800,height=800');
+            myWindow.document.write(printContents);
+            myWindow.print();
+            myWindow.close();
+        }else{
+            var printContents = document.getElementById('chrome-print-this-'+key).innerHTML;
+            var myWindow = window.open('','','width=800,height=800');
+            myWindow.document.write(printContents);
+            setTimeout(function() {
+                myWindow.print();
+                myWindow.close();
+            }, 250);
+        }
+
+
+
 
 
         // document.body.innerHTML = printContents;

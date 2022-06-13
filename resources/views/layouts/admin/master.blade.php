@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed ">
     <!--begin::Logo-->
     <a href="{{url('/')}}">
-        <img alt="Logo" src="{{url('media/logos/logo-transperant-1.png')}}" style="width: 40%"/>
+        <img alt="Logo" src="{{url('media/logos/logo-Recovered.png')}}" style="width: 40%"/>
     </a>
     <!--end::Logo-->
 

@@ -6,7 +6,7 @@
         <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile  header-menu-layout-default ">
-                <img alt="Logo" src="{{asset('media/logos/logo.jpg')}}" style="width: 80%"/>
+                <img alt="Logo" src="{{asset('media/logos/logo-Recovered.png')}}" style="width: 100%; height: 50px" class="mt-2 ml-25"/>
             </div>
             <!--end::Header Menu-->
         </div>

@@ -37453,8 +37453,8 @@ button {
       color: #FFFFFF; }
   .btn.btn-primary.disabled, .btn.btn-primary:disabled {
     color: #FFFFFF;
-    background-color: #3699FF;
-    border-color: #3699FF; }
+    background-color: #101b2a;
+    border-color: #101b2a; }
     .btn.btn-primary.disabled i, .btn.btn-primary:disabled i {
       color: #FFFFFF; }
     .btn.btn-primary.disabled .svg-icon svg g [fill], .btn.btn-primary:disabled .svg-icon svg g [fill] {
